@@ -1,0 +1,27 @@
+﻿<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="Skin.css"/>
+    <title>Sign up page</title>
+</head>
+<body>
+    <div id="container">
+            <form action="Connect.php" method="post">
+            <div id="information">
+                <h1>I am </h1>
+                <input type="text" id="firstname" name="firstname"placeholder="First name" required/> <br>
+                <input type="text" id="lastname" name="lastname" placeholder="Last name" required/><br>
+                <input type="text" id="address" name="address" placeholder="Home Address" required/><br>
+                <input type="text" id="contactnumber" name="contactnumber" placeholder="Number"required/><br>
+                <input type="text" id="age" name="age" placeholder="Age" required/><br>
+                <p> I am a </p>
+                <input type="radio" id="Male" name="gender" value="M" >
+                <label for="Male">Male</label><br>
+                <input type="radio" id="Female" name="gender" value="F">
+                <label for="Female">Female</label><br>
+                <input type="submit" name="submit" id="button">
+            </div>
+            </form>
+    </div>
+</body>
+</html>

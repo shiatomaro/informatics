@@ -1,0 +1,11 @@
+RewriteEngine On
+
+RewriteRule ^login$ signin.php [L]
+RewriteRule ^system/index$ index.php [L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z0-9-/]+)$ index.php?p=$1 [L]
+RewriteRule ^error$ index.php?p=error [L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
