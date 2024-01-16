@@ -123,7 +123,7 @@ if(isset($_SESSION['userId'])){
 				<span class="sr-only">Next</span>
 			</a>
 		</div>
-	</div>
+</div>
     <!-- end section -->
     <div id="overviews" class="section wb">
 	<div class="container">

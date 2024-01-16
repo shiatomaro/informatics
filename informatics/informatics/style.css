@@ -850,11 +850,11 @@ a img.aligncenter {
 	color: #FFFFFF;
 }
 .box-slider .carousel-inner{
-	height: 50%;
+	height: 100%;
 }
 .box-slider .carousel-item{
-	height: 50%;
-	width: 50%;
+	height: 100%;
+	width: 100%;
 }
 
 
