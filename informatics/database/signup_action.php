@@ -23,10 +23,10 @@ function submitFormData()
     $stmt->bind_param("sss", $username, $email, $password_hash);
 
     // get params from POST request
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $confirmPassword = $_POST['confirmPassword'];
+    $username = isset($_POST['username']) ? $_POST['username'] : '';
+    $email = isset($_POST['email']) ? $_POST['email'] : '';
+    $password = isset($_POST['password']) ? $_POST['password'] : '';
+    $confirmPassword = isset($_POST['confirmPassword']) ? $_POST['confirmPassword'] : '';
     if ($password !== $confirmPassword) {
         header("Location: /informatics/signup.php?error=password_mismatch");
         exit();

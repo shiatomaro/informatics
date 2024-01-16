@@ -34,7 +34,8 @@
 
                 <div>
                     <p class="text-muted text-center">
-                        Already have an account? <em><a href="#" data-bs-dismiss="signupModal" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</em>
+                        Already have an account?
+                        <em><a href="#" data-bs-dismiss="signupModal" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</em>
                     </p>
                 </div>
             </div>

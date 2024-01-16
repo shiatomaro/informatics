@@ -64,7 +64,7 @@
 				<div class="collapse navbar-collapse" id="navbars-host">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
-						<li class="nav-item"><a class="nav-link login" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Log In</a></li>
+						<li class="nav-item"><a class="nav-link login" href="./login.php">Log In</a></li>
 						<li class="nav-item"><a class="nav-link">Contact Us</a></li>
 
 						<ul class="nav navbar-nav navbar-right mt-1 pb-1">
@@ -76,10 +76,6 @@
 			</div>
 		</nav>
 	</header>
-
-	<!-- LOGIN MODAL -->
-	<?php include_once("templates/login_modal.php"); ?>
-	<?php include_once("templates/signup_modal.php"); ?>
 
 	<!-- End header -->
 	<!-- Body, Slider -->

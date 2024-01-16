@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
+    <title>Log in</title>
     <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/custom.css">
 </head>
@@ -13,45 +13,33 @@
     <div class="p-5">
         <div class="card">
             <div class="card-body">
-                <h1 class="card-title text-center">Sign up</h1>
-
+                <h1 class="card-title text-center">Log in</h1>
                 <div class="container center">
                     <div class="alert alert-danger" role="alert" id="error" style="display:none;">
                     </div>
-                    <form method="post" action="database/signup_action.php">
+                    <form method="post" action="database/login_action.php">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            <input type="text" class="form-control" id="username" name="username">
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="confirmPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                            <input type="password" class="form-control" id="password" name="password">
                         </div>
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="showPassword">
                             <label class="form-check-label" for="showPassword">Show password</label>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+                        <button type="submit" class="btn btn-primary w-100">Login</button>
                     </form>
-                </div>
-
-                <div>
-                    <p class="text-muted text-center">
-                        Already have an account?
-                        <em><a href="#" data-bs-dismiss="signupModal" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</em>
-                    </p>
+                    <div>
+                        <p class="text-muted text-center">Don't have an account?
+                            <em><a href="./signup.php">Sign up</em>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
 
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -78,20 +66,11 @@
 
             // Check the error parameter and set the appropriate message
             switch (errorParam) {
-                case 'taken_username':
-                    errorMessage = 'Username is already taken. Please choose another one.';
-                    break;
-                case 'taken_email':
-                    errorMessage = 'Email address is already registered. Please use a different one.';
-                    break;
-                case 'password_mismatch':
-                    errorMessage = 'Password and confirm password do not match.';
-                    break;
-                case 'general':
-                    errorMessage = 'An unexpected error occurred. Please try again.';
+                case 'login_invalid':
+                    errorMessage = 'Invalid login credentials, please try again.';
                     break;
                 default:
-                    errorMessage = 'An error occurred. Please try again.';
+                    errorMessage = 'An unexpected error occurred. Please try again.';
                     break;
             }
 
