@@ -1,7 +1,7 @@
 <nav class="navbar bg-body-tertiary shadow" id="navbar">
     <div class="container-fluid">
         <div>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/informatics/main.php">
                 <img src="../images/icon.png" alt="Logo" width="64" height="64" class="d-inline-block align-text-top">
             </a>
         </div>

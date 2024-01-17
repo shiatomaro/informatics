@@ -2,7 +2,7 @@
 
 $routes = array(
     "index" => "/informatics/main.php",
-    "welcome" => "/informatics/welcome.php",
+    "system" => "/informatics/system",
     "login" => "/informatics/login.php",
     "signup" => "/informatics/signup.php",
 );

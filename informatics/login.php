@@ -2,7 +2,7 @@
 require './routes.php';
 session_start();
 if (isset($_SESSION['username'])) {
-    redirect('welcome');
+    redirect('system');
 }
 ?>
 

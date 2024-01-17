@@ -25,7 +25,7 @@ function submitFormData()
         if ($started) {
             $_SESSION['username'] = $dbUsername;
             $_SESSION['user_type'] = $user_type;
-            header("Location: /informatics/system/index.php");
+            header("Location: /informatics/system/");
         } else {
             header("Location: /informatics/login.php?error=");
         }
