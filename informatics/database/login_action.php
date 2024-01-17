@@ -10,10 +10,10 @@ function submitFormData()
     $password = isset($_POST['password']) ? $_POST['password'] : '';
 
     // Retrieve the hashed password from the database for the given username
-    $stmt = $conn->prepare("SELECT username, password_hash FROM users WHERE username = ?");
+    $stmt = $conn->prepare("SELECT username, password_hash, type FROM users WHERE username = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
-    $stmt->bind_result($dbUsername, $hashedPassword);
+    $stmt->bind_result($dbUsername, $hashedPassword, $user_type);
     $stmt->fetch();
     $stmt->close();
     $conn->close();
@@ -24,7 +24,8 @@ function submitFormData()
         $started = session_start();
         if ($started) {
             $_SESSION['username'] = $dbUsername;
-            header("Location: /informatics/welcome.php");
+            $_SESSION['user_type'] = $user_type;
+            header("Location: /informatics/system/index.php");
         } else {
             header("Location: /informatics/login.php?error=");
         }

@@ -1,81 +1,90 @@
-<?php 
-include("template/header.php");
-if(isset($_GET['p'])){
-	if(isset($_SESSION['user_type'])){
-		if($_SESSION['user_type'] == "Admin"){
-			if($_GET['p'] == "dashboard"){
-				echo '<title>Dashboard | Informatics Admission System</title>';
-				require_once 'template/dashboard.php';
-			}
-			if($_GET['p'] == "year-level"){
-				echo '<title>Manage Year Level | Informatics Admission System</title>';
-				require_once 'template/yearlevel.php';
-			}
-			if($_GET['p'] == "courses"){
-				echo '<title>Manage Course/Strand | Informatics Admission System</title>';
-				require_once 'template/courses.php';
-			}
-			if($_GET['p'] == "assign-course"){
-				echo '<title>Assign Course/Strand | Informatics Admission System</title>';
-				require_once 'template/assign_courses.php';
-			}
-			if($_GET['p'] == "student-admin"){
-				echo '<title>Manage Student Admin/Registrar | Informatics Admission System</title>';
-				require_once 'template/student_admin.php';
-			}
-			if($_GET['p'] == "app-form"){
-				echo '<title>Manage Student Information | Informatics Admission System</title>';
-				require_once 'template/application_form.php';
-			}
-			if($_GET['p'] == "requirements"){
-				echo '<title>Manage Requirements | Informatics Admission System</title>';
-				require_once 'template/requirements.php';
-			}
-			if($_GET['p'] == "evaluation"){
-				echo '<title>Manage Evaluation | Informatics Admission System</title>';
-				require_once 'template/evaluation.php';
-			}
-			if($_GET['p'] == "manage-user"){
-				echo '<title>Manage User | Informatics Admission System</title>';
-				require_once 'template/users.php';
-			}
-			if($_GET['p'] == "index"){
-				echo '<title>Dashboard | Informatics Admission System</title>';
-				require_once 'template/dashboard.php';
-			}else{
-				if( $_GET['p'] != "dashboard" && $_GET['p'] != "courses" && $_GET['p'] != "student-admin" && $_GET['p'] != "app-form" && $_GET['p'] != "requirements" && $_GET['p'] != "manage-user" && $_GET['p'] != "index" && $_GET['p'] != "profile" && $_GET['p'] != "evaluation" && $_GET['p'] != "year-level" && $_GET['p'] != "assign-course"){
-					require_once 'template/404.php';
-				}
-			}
-		}else{
-			if($_GET['p'] == "dashboard"){
-				echo '<title>Dashboard | Informatics Admission System</title>';
-				require_once 'template/dashboard.php';
-			}
-			if($_GET['p'] == "app-form"){
-				echo '<title>Manage Student Information | Informatics Admission System</title>';
-				require_once 'template/application_form.php';
-			}
-			if($_GET['p'] == "requirements"){
-				echo '<title>Manage Requirements | Informatics Admission System</title>';
-				require_once 'template/requirements.php';
-			}
-			if($_GET['p'] == "evaluation"){
-				echo '<title>Manage Evaluation | Informatics Admission System</title>';
-				require_once 'template/evaluation.php';
-			}
-			if($_GET['p'] == "index"){
-				echo '<title>Dashboard | Informatics Admission System</title>';
-				require_once 'template/dashboard.php';
-			}else{
-				if( $_GET['p'] != "dashboard" && $_GET['p'] != "app-form" && $_GET['p'] != "requirements" && $_GET['p'] != "index" && $_GET['p'] != "evaluation"){
-					require_once 'template/404.php';
-				}
-			}
-		}
-	}
-}else{
-	require_once 'template/404.php';
+<?php
+require '../routes.php';
+session_start();
+if (!isset($_SESSION['username'])) {
+	redirect('login');
 }
-include("template/footer.php");
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Informatics System</title>
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="./css/system.css">
+</head>
+
+<body>
+	<!-- Navbar -->
+	<nav class="navbar bg-body-tertiary shadow">
+		<div class="container-fluid">
+			<div>
+				<a class="navbar-brand" href="#">
+					<img src="../images/icon.png" alt="Logo" width="64" height="64" class="d-inline-block align-text-top">
+				</a>
+			</div>
+			<div>
+				<b>Admission System</b>
+			</div>
+			<div>
+				<a class="navbar-brand" href="#">
+					<?php
+					$username = $_SESSION['username'];
+					echo "<b>$username</b>";
+					?>
+					<img src="./img/undraw_rocket.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+				</a>
+				<a href='../database/logout_action.php'>Logout</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="row h-100">
+
+		<!-- Sidebar -->
+		<div class="col col-3 h-100 bg-secondary bg-gradient">
+			<ul class="nav flex-column">
+				<li class="nav-item">
+					<a class="nav-link" href="#">Dashboard</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Year Level</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Course / Strand</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Student Admin / Registrar</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Student Information</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Student Requirements</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Examination Results</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Student Evaluation</a>
+				</li>
+			</ul>
+		</div>
+
+		<!-- main content -->
+		<main class="col">
+			<?php include_once("./template/dashboard.php"); ?>
+		</main>
+	</div>
+
+	<!-- Bootstrap JS -->
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

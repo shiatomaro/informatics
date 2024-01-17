@@ -19,7 +19,7 @@
         // display a welcome message
         $username = $_SESSION['username'];
         echo "<p>Welcome, <b>$username!</b> You are now logged in.</h1><br>";
-        echo "<a href='./database/logout_action.php'>Logout</p>";
+        echo "<a href='./database/logout_action.php'>Logout</a>";
     }
     ?>
 </body>
