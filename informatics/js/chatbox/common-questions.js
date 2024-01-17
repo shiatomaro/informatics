@@ -8,6 +8,20 @@ const courses = `
 
 export const commonQuestions = [
     {
+        question: "How to Apply",
+        response: "Go to the menu and login, if you don't have an account you can sign up",
+        nextQuestions: [ {
+            question: "What to do when applying",
+            response: "There are three steps <br> First Step: Pass you requirements with your payment screenshot. <br> Second Step: Take a non-graded examination. <br> Third Step: Take a indentity",
+            nextQuestions: [],
+        }],
+    },
+    {
+        question: "What are the courses that you offer?",
+        response: "Currently, here are the courses that we offer: <br/>" + courses + "<br/><e>please follow the links for more details</e>",
+        nextQuestions: [],
+    },
+    {
         question: "What are the courses that you offer?",
         response: "Currently, here are the courses that we offer: <br/>" + courses + "<br/><e>please follow the links for more details</e>",
         nextQuestions: [],
