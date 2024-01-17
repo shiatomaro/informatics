@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,8 +25,6 @@
 	<link rel="shortcut icon" href="images/informatics.png" type="image/png" />
 	<link rel="apple-touch-icon" href="images/apple-touch-icon.jpg">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-	<!-- Site CSS -->
-	<link rel="stylesheet" href="style.css">
 	<!-- ALL VERSION CSS -->
 	<link rel="stylesheet" href="css/versions.css">
 	<!-- Responsive CSS -->
@@ -36,6 +35,10 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/chatbox.css">
+	<!-- Site CSS -->
+	<link rel="stylesheet" href="style.css">
+	<!-- Site CSS -->
+	<link rel="stylesheet" href="stylebetter.css">
 </head>
 
 <body class="host_version">
