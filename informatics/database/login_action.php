@@ -21,9 +21,13 @@ function submitFormData()
     // Verify the password
     if ($dbUsername && password_verify($password, $hashedPassword)) {
         // Password is correct, set session variables and redirect to a secured page
-        $_SESSION['username'] = $dbUsername;
-        echo "<h1>Hello there</h1>";
-        // Invalid credentials, redirect back to the login page with an error message
+        $started = session_start();
+        if ($started) {
+            $_SESSION['username'] = $dbUsername;
+            header("Location: /informatics/welcome.php");
+        } else {
+            header("Location: /informatics/login.php?error=");
+        }
     } else {
         // Invalid credentials, redirect back to the login page with an error message
         header("Location: /informatics/login.php?error=login_invalid");
