@@ -8,3 +8,19 @@ body {
 a.nav-link {
     color: white;
 }
+
+#sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+main#content {
+    overflow-y: auto;
+    height: 100vh;
+}
+
+#mainContainer {
+    width: 100vw;
+}
