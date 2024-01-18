@@ -16,10 +16,23 @@ $file_path = __DIR__ . '/' . $page . '.php';
 if (file_exists($file_path)) {
     // Include the requested PHP file
     require_once $file_path;
+    // header("Location: " . $page);
 } else {
     // Handle 404 error - File not found
     header("HTTP/1.0 404 Not Found");
     $title = "404 Not Found";
     include_once("./pages/404.php");
     echo "<h1>$uri_segments[0]</h1>";
+    echo "<h1>$request_uri</h1>";
+}
+
+switch ($request_uri) {
+    case '/':
+    case '/home':
+        header("Location: home");
+        break;
+    default:
+        header("HTTP/1.0 404 Not Found");
+        include_once("./pages/404.php");
+        break;
 }
