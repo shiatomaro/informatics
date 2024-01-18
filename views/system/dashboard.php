@@ -35,7 +35,7 @@ $acceptedDataPerCourse = array(
         <div class="col col-md-6">
             <?php
             extract($data);
-            require 'views/system/templates/dashboard_card.php';
+            require 'views/system/dashboard_card.php';
             ?>
         </div>
     <?php endforeach; ?>

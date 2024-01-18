@@ -7,13 +7,8 @@ if (!isset($_SESSION['username'])) {
 
 
 $url = parse_url($_SERVER['REQUEST_URI']);
-$path = str_replace('system/', '', $url['path']);
-$path = $path === '/system' ? '' : $path;
-if ($path !== '') {
-    header("Location: /system");
-} else {
-    $path = 'dashboard';
-}
+$path = substr($url['path'], strlen('system/'));
+$path = $path === '' ? '/dashboard' : $path;
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +16,7 @@ if ($path !== '') {
 
 <head>
     <?php require_once 'views/templates/head.php' ?>
-    <title>IAS | <?php echo strtoupper($path) ?></title>
+    <title>IAS | <?php echo substr(strtoupper($path), 1) ?></title>
     <!-- ChartJS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Custom CSS -->
@@ -31,13 +26,13 @@ if ($path !== '') {
 
 <body>
     <!-- Navbar -->
-    <?php require_once "views/system/navbar.php"; ?>
+    <?php require_once 'views/system/navbar.php'; ?>
 
     <div class="row h-100" id="mainContainer">
 
         <!-- Sidebar -->
         <div class="col col-3 h-100 bg-secondary bg-gradient" id="sidebar">
-            <?php require_once "views/system/sidebar.php"; ?>
+            <?php require_once 'views/system/sidebar.php'; ?>
         </div>
 
         <!-- main content -->
@@ -46,6 +41,9 @@ if ($path !== '') {
             switch ($path) {
                 case '/dashboard':
                     require_once 'views/system/dashboard.php';
+                    break;
+                case '/students':
+                    require_once 'views/system/students.php';
                     break;
                 default:
                     require_once 'views/system/dashboard.php';

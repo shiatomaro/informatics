@@ -12,6 +12,7 @@ $routes = [
     '/signup' => 'controllers/signup.php',
     '/system' => 'controllers/system.php',
     '/system/dashboard' => 'controllers/system.php',
+    '/system/students' => 'controllers/system.php',
 ];
 
 if (array_key_exists($path, $routes)) {
