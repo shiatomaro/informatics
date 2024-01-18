@@ -7,7 +7,7 @@
     </li>
     <li class="nav-item">
         <a class="nav-link" href="/courses">Course / Strand</a>
-    </li <li class="nav-item">
+    </li class="nav-item">
     <a class="nav-link" href="/administration">Student Admin / Registrar</a>
     </li>
     <li class="nav-item">
