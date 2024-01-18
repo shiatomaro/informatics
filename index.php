@@ -1,6 +1,7 @@
 <?php
+require('utils.php');
 
-require('functions.php');
+session_start();
 
 $uri = $_SERVER['REQUEST_URI'];
 $path = parse_url($uri)['path'];
@@ -9,10 +10,12 @@ $routes = [
     '/' => 'controllers/home.php',
     '/login' => 'controllers/login.php',
     '/signup' => 'controllers/signup.php',
+    '/system' => 'controllers/system.php',
+    '/system/dashboard' => 'controllers/system.php',
 ];
 
-if (array_key_exists($uri, $routes)) {
-    require $routes[$uri];
+if (array_key_exists($path, $routes)) {
+    require $routes[$path];
 } else {
     require "./views/404.php";
 }

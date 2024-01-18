@@ -2,11 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informatics | Sign Up</title>
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <?php require_once("views/templates/head.php"); ?>
+    <title>Informatics Admission | Sign Up</title>
 </head>
 
 <body style="height: 100vh;">
@@ -18,7 +15,7 @@
                 <div class="container center">
                     <div class="alert alert-danger" role="alert" id="error" style="display:none;">
                     </div>
-                    <form method="post" action="database/signup_action.php">
+                    <form method="post" action="actions/signup_action.php">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
                             <input type="text" class="form-control" id="username" name="username" required>
@@ -46,7 +43,7 @@
                 <div>
                     <p class="text-muted text-center">
                         Already have an account?
-                        <em><a href="/login">Log in</a></em>
+                        <em><a href="/login">Log in</a></em><br>
                         <a class="btn btn-secondary" href="/" role="button">Home</a>
                     </p>
                 </div>
@@ -55,10 +52,7 @@
 
     </div>
 
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- script to display error messages -->
-    <script src="./js/error_disp.js"></script>
+    <?php include 'views/templates/body_scripts.php'; ?>
 </body>
 
 </html>
