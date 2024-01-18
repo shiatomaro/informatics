@@ -46,7 +46,8 @@
                 <div>
                     <p class="text-muted text-center">
                         Already have an account?
-                        <em><a href="./login.php">Log in</a></em>
+                        <em><a href="/login">Log in</a></em>
+                        <a class="btn btn-secondary" href="/" role="button">Home</a>
                     </p>
                 </div>
             </div>

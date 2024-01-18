@@ -1,6 +1,7 @@
 <?php
-http_response_code(404);
+$request_uri = $_SERVER['REQUEST_URI'];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +18,8 @@ http_response_code(404);
         <div class="card">
             <div class="card-body text-center">
                 <h1>404 not found</h1>
-                <em class="text-muted">This is not the page you are looking for</em>
+                <em class="text-muted">This is not the page you are looking for</em><br />
+                <span class="text-info">Request URI: <?php echo "$request_uri" ?></span>
             </div>
         </div>
     </div>

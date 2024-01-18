@@ -12,17 +12,17 @@
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 	<!-- Custom CSS -->
-	<link rel="stylesheet" href="./css/home.css">
+	<link rel="stylesheet" href="css/home.css">
 	<title>Document</title>
 </head>
 
 <body>
 	<!-- Navbar -->
-	<?php require_once("./navbar.php") ?>
+	<?php require_once("views/home/navbar.php") ?>
 
 	<!-- Carousel -->
 	<section>
-		<?php include_once("./carousel.php") ?>
+		<?php include_once("views/home/carousel.php") ?>
 	</section>
 
 	<section class="row m-5">
@@ -32,7 +32,7 @@
 			<a class="btn btn-primary" href="#" role="button">Apply Now!</a>
 		</div>
 		<div class="d-hidden col-md-6 text-center">
-			<img class="d-inline-block h-100" src="../images/stock/7.jpg" alt="...">
+			<img class="d-inline-block h-100" src="images/stock/7.jpg" alt="...">
 		</div>
 	</section>
 
@@ -45,7 +45,7 @@
 
 	<section class="row m-5">
 		<div class="d-hidden col-md-6 text-center">
-			<img class="d-inline-block h-100" src="../images/stock/8.jpg" alt="...">
+			<img class="d-inline-block h-100" src="images/stock/8.jpg" alt="...">
 		</div>
 		<div class="col-md-6 text-end">
 			<h2>Our Founder</h2>

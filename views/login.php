@@ -34,8 +34,9 @@
                     </form>
                     <div>
                         <p class="text-muted text-center">Don't have an account?
-                            <em><a href="./signup.php">Sign up</em>
+                            <em><a href="/signup">Sign up</em>
                         </p>
+                        <a class="btn btn-secondary" href="/" role="button">Home</a>
                     </div>
                 </div>
             </div>

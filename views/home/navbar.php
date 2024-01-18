@@ -2,7 +2,7 @@
     <div class="container-fluid">
 
         <a class="navbar-brand" href="#">
-            <img src="../images/logo.png" alt="Informatics" width="200" height="80">
+            <img src="images/logo.png" alt="Informatics" width="200" height="80">
         </a>
 
         <!-- Toggle Icon -->
@@ -14,13 +14,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="/login">Log in</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/login.php">Login</a>
+                    <a class="nav-link" href="/signup">Sign Up</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact Us</a>
+                    <a class="nav-link" href="/contact">Contact Us</a>
                 </li>
             </ul>
         </div>
