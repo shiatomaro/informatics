@@ -1,11 +1,21 @@
 <?php
-	if (!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
-		$uri = 'https://';
-	} else {
-		$uri = 'http://';
-	}
-	$uri .= $_SERVER['HTTP_HOST'];
-	header('Location: '.$uri.'/dashboard/');
-	exit;
-?>
-Something is wrong with the XAMPP installation :-(
+require('utils.php');
+
+session_start();
+
+$uri = $_SERVER['REQUEST_URI'];
+$path = parse_url($uri)['path'];
+
+$routes = [
+    '/' => 'controllers/home.php',
+    '/login' => 'controllers/login.php',
+    '/signup' => 'controllers/signup.php',
+    '/system' => 'controllers/system.php',
+    '/system/dashboard' => 'controllers/system.php',
+];
+
+if (array_key_exists($path, $routes)) {
+    require $routes[$path];
+} else {
+    require "./views/404.php";
+}
