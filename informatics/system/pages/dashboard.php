@@ -32,7 +32,7 @@ $acceptedDataPerCourse = array(
 
     <!-- create a card for each item in the cardsData array -->
     <?php foreach ($cardsData as $title => $data) : ?>
-        <div class="col col-6">
+        <div class="col col-md-6">
             <?php
             extract($data);
             include './templates/dashboard_card.php';
