@@ -8,9 +8,11 @@ $path = parse_url($uri)['path'];
 
 $routes = [
     '/' => 'controllers/home.php',
+    '/home' => 'controllers/home.php',
     '/login' => 'controllers/login.php',
     '/signup' => 'controllers/signup.php',
     '/system' => 'controllers/system.php',
+    '/dashboard' => 'controllers/dashboard.php',
     '/system/dashboard' => 'controllers/system.php',
     '/system/students' => 'controllers/system.php',
 ];

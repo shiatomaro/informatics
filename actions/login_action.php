@@ -6,8 +6,8 @@ function submitFormData()
     $conn = getConn();
 
     // get params from POST request
-    $username = isset($_POST['username']) ? $_POST['username'] : '';
-    $password = isset($_POST['password']) ? $_POST['password'] : '';
+    $username = isset($_POST['username']) ? $conn->real_escape_string($_POST['username']) : '';
+    $password = isset($_POST['password']) ? $conn->real_escape_string($_POST['password']) : '';
 
     // Retrieve the hashed password from the database for the given username
     $stmt = $conn->prepare("SELECT username, password_hash, type FROM users WHERE username = ?");
@@ -24,8 +24,13 @@ function submitFormData()
         $started = session_start();
         if ($started) {
             $_SESSION['username'] = $dbUsername;
-            $_SESSION['user_type'] = $user_type;
-            header("Location: /system");
+            $_SESSION['user_type'] = strtolower($user_type);
+
+            if ($user_type === 'admin' || $user_type === 'registrar') {
+                header("Location: /system");
+            } else {
+                header("Location: /dashboard");
+            }
         } else {
             header("Location: /login?error=unexpected");
         }

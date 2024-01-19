@@ -5,6 +5,12 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
+// redirect user to the student dashboard if they do not have the right credentials
+$user_type = strtolower($_SESSION['user_type']);
+if ($user_type !== 'admin' && $user_type !== 'registrar') {
+    header("Location: /dashboard");
+    exit();
+}
 
 $url = parse_url($_SERVER['REQUEST_URI']);
 $path = substr($url['path'], strlen('system/'));

@@ -6,8 +6,6 @@
 	<title>Informatics Admission System</title>
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="css/system.css">
-	<!-- JQuery -->
-	<script src="js/jquery-3.7.1.min.js"></script>
 	<!-- Chart.js -->
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
