@@ -18,6 +18,7 @@ $acceptedDataPerCourse = array(
 );
 ?>
 
+<h1>Dashboard</h1>
 <div class="container row g-3">
     <?php
     // prepare cards data: 

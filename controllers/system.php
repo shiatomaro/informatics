@@ -31,15 +31,9 @@ $path = $path === '' ? '/dashboard' : $path;
 
 
 <body>
-    <!-- Navbar -->
-    <?php require_once 'views/system/navbar.php'; ?>
-
     <div class="row h-100" id="mainContainer">
-
         <!-- Sidebar -->
-        <div class="col col-2 h-100 bg-secondary bg-gradient" id="sidebar">
-            <?php require_once 'views/system/sidebar.php'; ?>
-        </div>
+        <?php require_once 'views/system/sidebar.php'; ?>
 
         <!-- main content -->
         <main class="col container-fluid p-3" id="content">
@@ -50,6 +44,9 @@ $path = $path === '' ? '/dashboard' : $path;
                     break;
                 case '/students':
                     require_once 'views/system/students.php';
+                    break;
+                case '/users':
+                    require_once 'views/system/users/users.php';
                     break;
                 default:
                     require_once 'views/system/dashboard.php';

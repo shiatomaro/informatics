@@ -1,6 +1,5 @@
 body {
     height: 100vh;
-    width: 100vw;
     border: 0;
     margin: 0;
 }
@@ -19,10 +18,6 @@ a.nav-link {
 main#content {
     overflow-y: auto;
     height: 100vh;
-}
-
-#navbar {
-    width: 100vw;
 }
 
 #mainContainer {

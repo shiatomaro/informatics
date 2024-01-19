@@ -1,3 +1,4 @@
+<h1>Student Records</h1>
 <table class="table table-hover">
     <thead>
         <tr>
