@@ -37,7 +37,7 @@ $path = $path === '' ? '/dashboard' : $path;
     <div class="row h-100" id="mainContainer">
 
         <!-- Sidebar -->
-        <div class="col col-3 h-100 bg-secondary bg-gradient" id="sidebar">
+        <div class="col col-2 h-100 bg-secondary bg-gradient" id="sidebar">
             <?php require_once 'views/system/sidebar.php'; ?>
         </div>
 

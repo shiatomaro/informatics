@@ -1,29 +1,16 @@
-<ul class="nav flex-column" id="sidebar">
+<ul class="nav flex-column p-2">
     <li class="nav-item">
         <a class="nav-link" href="/system/dashboard">Dashboard</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="/system/students">Students</a>
     </li>
+    <?php if (strtolower($_SESSION['user_type']) === 'admin') : ?>
+        <li class="nav-item">
+            <a class="nav-link" href="/system/users">Users</a>
+        </li>
+    <?php endif ?>
     <li class="nav-item">
-        <a class="nav-link" href="system/yearLevel">Year Level</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="system/courses">Course / Strand</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="system/administration">Student Admin / Registrar</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="system/studentInfo">Student Information</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="system/studentReqs">Student Requirements</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="system/examResults">Examination Results</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="system/evaluations">Student Evaluation</a>
+        <a class="nav-link" href="actions/logout_action.php">Log out</a>
     </li>
 </ul>
