@@ -25,7 +25,7 @@ if (isset($_SESSION['username'])) {
                 <div class="container center">
                     <div class="alert alert-danger" role="alert" id="error" style="display:none;">
                     </div>
-                    <form method="post" action="database/login_action.php">
+                    <form method="post" action="contollers/login/submitform.php">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
                             <input type="text" class="form-control" id="username" name="username">
