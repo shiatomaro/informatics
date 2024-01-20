@@ -36,7 +36,6 @@
                         <div>
                             <p class="text-muted text-center">Don't have an account?
                                 <em><a href="/signup">Sign up</em><br>
-                                <a class="btn btn-secondary" href="/" role="button">Home</a>
                             </p>
                         </div>
                     </div>
