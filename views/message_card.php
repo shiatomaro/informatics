@@ -1,3 +1,8 @@
+<?php
+require_once "utils.php";
+$queryParams = getQueryParams();
+?>
+
 <?php if (isset($queryParams['msg_content'])) : ?>
     <div class="<?= "card text-bg-" . $queryParams['msg_type']; ?>">
         <div class="card-body">

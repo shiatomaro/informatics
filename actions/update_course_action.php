@@ -5,7 +5,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn = getConn();
 
     // Prepare and bind the SQL statement
-    // $stmt = $conn->prepare("UPDATE users SET username = ?, email = ?, type = ?, status = ? WHERE id = ?");
     $stmt = $conn->prepare("UPDATE courses SET code = ?, name = ?, description = ?, instructor = ?, status = ? WHERE code = ?");
     $stmt->bind_param("ssssss", $course_code, $course_name, $course_desc, $course_inst, $course_status, $course_code);
 
@@ -26,7 +25,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($stmt->execute()) {
                 $msg_type = "success";
                 $msg_content = "Successfully updated the course!";
-                header("Location: /system/courses?code=$course_code&msg_type=$msg_type&msg_content=$msg_content");
             }
         } catch (mysqli_sql_exception $e) {
             // MySQL error code for duplicate entry
@@ -42,11 +40,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 $msg_content = "An unknown error has occured";
             }
-            header("Location: /system/courses?code=$course_code&msg_type=$msg_type&msg_content=$msg_content");
-        } finally {
-            $stmt->close();
-            $conn->close();
         }
     }
+    $stmt->close();
+    $conn->close();
+    header("Location: /system/courses?code=$course_code&msg_type=$msg_type&msg_content=$msg_content");
     exit();
 }
