@@ -41,11 +41,11 @@ $totalPages = ceil($totalrecords / $recordsPerPage);
         <tbody>
             <?php while ($row = $result->fetch_assoc()) : ?>
                 <tr>
-                    <th scope="row"><?= $row['username'] ?></th>
-                    <th><?= $row['email'] ?></th>
-                    <th><?= $row['type'] ?></th>
-                    <th><?= $row['created_at'] ?></th>
-                    <th><?= $row['status'] ?></th>
+                    <td scope="row"><?= $row['username'] ?></td>
+                    <td><?= $row['email'] ?></td>
+                    <td><?= $row['type'] ?></td>
+                    <td><?= $row['created_at'] ?></td>
+                    <td><?= $row['status'] ?></td>
                     <td><a class="btn btn-primary d-inline" href=<?= "/system/users?id={$row['id']}" ?> role="button">Edit</a>
                     </td>
                 </tr>

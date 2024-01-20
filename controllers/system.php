@@ -43,7 +43,7 @@ $path = $path === '' ? '/dashboard' : $path;
                     require_once 'views/system/dashboard.php';
                     break;
                 case '/students':
-                    require_once 'views/system/students.php';
+                    require_once 'views/system/students/students.php';
                     break;
                 case '/users':
                     require_once 'views/system/users/users.php';

@@ -1,3 +1,20 @@
+<?php
+require_once 'actions/db.php';
+require_once 'utils.php';
+
+$queryParams = getQueryParams();
+if (!isset($queryParams['studNum'])) {
+    header("Location: /system/users?page=1");
+    exit();
+}
+
+// fetch data from the database
+$conn = getConn();
+$sql = "SELECT * FROM student_information WHERE student_num = {$queryParams['studNum']}";
+$result = $conn->query($sql);
+$studInfo = $result->fetch_assoc();
+?>
+
 <div class="container">
     <div class="row">
         <div class="col">
@@ -10,10 +27,10 @@
 
     <section>
         <ul class="list-group">
-            <li class="list-group-item"><b>Student Number</b>: <?php echo "$studNum"; ?></li>
-            <li class="list-group-item"><b>Name</b>: <?php echo ""; ?></li>
-            <li class="list-group-item"><b>Course</b>: <?php echo ""; ?></li>
-            <li class="list-group-item"><b>Year Level</b>: <?php echo ""; ?></li>
+            <li class="list-group-item"><b>Student Number</b>: <?= $studInfo['student_num'] ?></li>
+            <li class="list-group-item"><b>Name</b>: <?= "{$studInfo['name_prefix']} {$studInfo['first_name']} {$studInfo['middle_name']} {$studInfo['last_name']} {$studInfo['name_suffix']}" ?></li>
+            <li class="list-group-item"><b>Course</b>: <?= $studInfo['course_id'] ?></li>
+            <li class="list-group-item"><b>Year Level</b>: <?= $studInfo['year_level'] ?></li>
         </ul>
     </section>
 
