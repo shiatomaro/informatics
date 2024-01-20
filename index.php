@@ -14,9 +14,10 @@ $routes = [
     '/system' => 'controllers/system.php',
     '/dashboard' => 'controllers/dashboard.php',
     '/system/dashboard' => 'controllers/system.php',
+    '/system/courses' => 'controllers/system.php',
+    '/system/courses/new' => 'controllers/system.php',
     '/system/students' => 'controllers/system.php',
     '/system/users' => 'controllers/system.php',
-    '/system/users/new' => 'controllers/system.php',
 ];
 
 if (array_key_exists($path, $routes)) {

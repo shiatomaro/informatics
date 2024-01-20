@@ -20,7 +20,7 @@ $sql = "SELECT student_num, name_prefix, first_name, middle_name, last_name, nam
 $result = $conn->query($sql);
 
 // Table pagination logic
-$totalrecords = $conn->query("SELECT COUNT(*) as total FROM users")->fetch_assoc()['total'];
+$totalrecords = $conn->query("SELECT COUNT(*) as total FROM student_information")->fetch_assoc()['total'];
 $totalPages = ceil($totalrecords / $recordsPerPage);
 ?>
 
@@ -48,6 +48,30 @@ $totalPages = ceil($totalrecords / $recordsPerPage);
             <?php endwhile ?>
         </tbody>
     </table>
+
+    <!-- Paginator -->
+    <div class="container">
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="<?= "page-link" . ($currentPage == 1 ? " disabled" : "") ?>" href=<?= "/system/students?page=" . ($currentPage - 1); ?> aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                <?php for ($i = 1; $i < $totalPages + 1; $i++) : ?>
+                    <li class="page-item"><a class="<?= "page-link" . ($i == $currentPage ? " active" : ""); ?>" href=<?= "/system/students?page=$currentPage"; ?>><?= $i ?></a></li>
+                <?php endfor ?>
+
+
+                <li class="page-item">
+                    <a class="<?= "page-link" . ($currentPage == $totalPages ? " disabled" : "") ?>" href=<?= "/system/students?page=" . ($currentPage + 1); ?> aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 <?php else : ?>
-    <h2>No student records dound</h2>
+    <h2>No student records found</h2>
 <?php endif ?>

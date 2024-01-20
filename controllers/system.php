@@ -42,6 +42,12 @@ $path = $path === '' ? '/dashboard' : $path;
                 case '/dashboard':
                     require_once 'views/system/dashboard.php';
                     break;
+                case '/courses':
+                    require_once 'views/system/courses/courses.php';
+                    break;
+                case '/courses/new':
+                    require_once 'views/system/courses/course_creation.php';
+                    break;
                 case '/students':
                     require_once 'views/system/students/students.php';
                     break;
