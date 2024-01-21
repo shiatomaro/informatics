@@ -64,7 +64,7 @@
 		</p>
 	</footer>
 
-	<?php include_once("views/templates/body_scripts.php"); ?>
+	<?php include_once "views/templates/body_scripts.php"; ?>
 </body>
 
 </html>

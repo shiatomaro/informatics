@@ -24,10 +24,16 @@
                         <a class="nav-link" href="/contact">Contact us</a>
                     </li>
                 <?php else : ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/system">System</a>
-                    </li>
-                    <li class="nav-item">
+                    <?php if ($_SESSION['user_type'] == 'student') : ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard">Dashboard</a>
+                        </li>
+                    <?php else : ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/system">System</a>
+                        </li>
+                    <?php endif ?>
+                    <li class="nav-item ms-3">
                         <a class="btn btn-secondary" href="actions/logout_action.php" role="button">Log out</a>
                     </li>
                 <?php endif ?>

@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="css/student_dashboard.css">
     <?php if ($path == "/examination") : ?>
         <link rel="stylesheet" href="css/exam.css">
+    <?php elseif ($path == "/application") : ?>
+        <link rel="stylesheet" href="css/application_form.css">
     <?php endif ?>
 </head>
 
@@ -42,7 +44,7 @@
             </main>
 
             <div class="mt-auto">
-                <?php require_once "views/student_dashboard/footer.php" ?>
+                <?php require_once "views/footer.php" ?>
             </div>
         </div>
     </div>

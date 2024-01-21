@@ -1,9 +1,7 @@
 <?php
-// check if user is logged in; if not, send them to the login page
-if (!isset($_SESSION['username'])) {
-    header("Location: /login");
-    exit();
-}
+
+require "controllers/credentials.php";
+requireCredentials();
 
 // redirect user to the student dashboard if they do not have the right credentials
 $user_type = strtolower($_SESSION['user_type']);
