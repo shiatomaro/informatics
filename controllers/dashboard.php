@@ -12,4 +12,8 @@ if ($user_type === 'admin' || $user_type === 'registrar') {
     exit();
 }
 
-require_once 'views/dashboard/index.php';
+$url = parse_url($_SERVER['REQUEST_URI']);
+$path = substr($url['path'], strlen('dashboard/'));
+$path = $path === '' ? '/' : $path;
+
+require_once "views/student_dashboard/dashboard.php";
