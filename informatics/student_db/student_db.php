@@ -46,7 +46,7 @@
                         Apply
                     </a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li href="application-form.php">
+                        <li href="./application-form.php">
                             <a href="#">Step 1: Fill Up Form and Payment</a>
                         </li>
                         <li>
