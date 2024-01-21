@@ -177,6 +177,16 @@ INSERT INTO `users` (`id`, `username`, `email`, `password_hash`, `type`, `create
 (17, 'asd3', 'asd12@gmail.com', '$2y$10$zJSHJ7SpvNJwSTTit6W2JuAs39WlU4FVbt41.Ms6tiPm2rjQpeuwW', 'student', '2024-01-17 00:15:03', 'active');
 
 --
+-- Application 'status' table
+--
+
+CREATE TABLE status (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    item_name VARCHAR(255) NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+--
 -- Indexes for dumped tables
 --
 

@@ -31,10 +31,9 @@
 <div class="zf-nameWrapper">
 <span> <input type="text" maxlength="255" name="Name_First" fieldType=7 placeholder=""/> <label>First Name</label>
  </span> 
- </span> </span>
 <span> <input type="text" maxlength="255" name="Name_Last" fieldType=7 placeholder=""/> <label>Last Name</label>
  </span> 
- </span> </span>
+
 <div class="zf-clearBoth"></div></div><p id="Name_error" class="zf-errorMessage" style="display:none;">Invalid value</p>
 </div><div class="zf-clearBoth"></div></li><!---------Name Ends Here----------> 
 <!---------Image Upload Starts Here---------->  

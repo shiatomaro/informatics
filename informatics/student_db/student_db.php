@@ -1,3 +1,11 @@
+<?php
+include('conn/conn.php');
+
+$sql = "SELECT * FROM status";
+$result = $conn->query($sql);
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -34,12 +42,55 @@
                 <h3>Informatics Northgate College</h3>
                <img src="informatics.png" alt="icon">
             </div>
-
+            <!-- Start of menu "coz Me-N-U is da best" - S  -->
             <ul class="list-unstyled components">
+                  <!-- Button for the tracker -->
 				<li>
-                    <a href="#">
+                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#tracker">
                     Tracker
                     </a>
+                <!-- Pop-up box for the tracker -->
+                <div class="modal fade" id="tracker" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Application Tracker</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;<h2>Status Tracker</h2>
+
+    <table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Item Name</th>
+        <th>Status</th>
+        <th>Created At</th>
+    </tr>
+
+    <?php
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . $row['id'] . "</td>";
+            echo "<td>" . $row['status'] . "</td>";
+            echo "<td>" . $row['created_at'] . "</td>";
+            echo "</tr>";
+        }
+    } else {
+        echo "<tr><td colspan='4'>No records found</td></tr>";
+    }
+    ?>
+</table></span>
+                </button>
+                </div>
+                <div class="modal-body">
+        ...
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+    </div>
+  </div>
+</div>
                 </li>
                 <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
