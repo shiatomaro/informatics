@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-center">
-        <b>Result: </b><span id="result_msg">Processing...</span>
+        <b>Similarity: </b><span id="result_msg">Processing...</span>
     </div>
 
     <script type="module" src="js/script.js"></script>

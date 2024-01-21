@@ -18,8 +18,9 @@ async function faceDetect(input_img, useTinyModel=false) {
 }
 
 // this function compares two images and returns a value, ranging from 0.0 to 1.0,
-//  that represents how similar the faces are.
-async function matchFace(input_image, reference_image) {
+// that represents how dissimilar the faces are. 0.0 means they are very similar and
+// 1.0 means they are very dissimilar.
+async function matchFace(input_image, reference_image, threshold=0.6) {
     let inputFaceDetect = await faceDetect(input_image);
     let referenceDetect = await faceDetect(reference_image);
 
@@ -36,8 +37,8 @@ async function matchFace(input_image, reference_image) {
     let faceMatcher = new faceapi.FaceMatcher(referenceDetect);
     
     // check if the input face detect matches the database image
-    const bestMatch = faceMatcher.findBestMatch(inputFaceDetect.descriptor);
-    return bestMatch.distance;
+    const bestMatch = faceMatcher.findBestMatch(inputFaceDetect.descriptor, threshold);
+    return bestMatch.distance <= threshold;
 }
 
 // this runs after the page has finished loading the images
@@ -45,10 +46,6 @@ $(document).ready(async () => {
     const inputImg = document.getElementById('inputImg');
     const dbImg = document.getElementById('dbImg');
     const result = await matchFace(inputImg, dbImg);
-    if (result) {
-        $("#result_msg").text(` match found! (${(result * 100).toFixed(2)}% match)`);
-    } else {
-        $("#result_msg").text(" the images do not match");
-    }
+    $("#result_msg").text( result ? "face matches! :D" : "face do not match :(");
     console.log("script finished running");
 });
