@@ -1,3 +1,8 @@
+<?php
+require_once "utils.php";
+// dd($_SESSION);
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -21,7 +26,8 @@
             <?php require_once "views/student_dashboard/sidebar.php" ?>
         </div>
         <div class="col d-flex flex-column">
-            <main class="container d-flex justify-content-center mt-3 mr-3">
+            <main class="container mt-3 mr-3">
+                <?php include "views/message_card.php" ?>
                 <?php
                 switch ($path) {
                     case '/application':
@@ -50,7 +56,7 @@
     </div>
     <?php require_once "views/templates/body_scripts.php" ?>
     <?php if ($path == "/examination") : ?>
-        <script src="js/exam.js"></script>
+        <script type="module" src="js/exam.js"></script>
     <?php endif ?>
 </body>
 
