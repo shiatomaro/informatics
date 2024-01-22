@@ -48,10 +48,6 @@ require_once "utils.php";
                 }
                 ?>
             </main>
-
-            <div class="mt-auto">
-                <?php require_once "views/footer.php" ?>
-            </div>
         </div>
     </div>
     <?php require_once "views/templates/body_scripts.php" ?>

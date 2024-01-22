@@ -1,3 +1,4 @@
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 <div class="templateWidth">
     <form action='_blank' name='form' method='POST' onSubmit='javascript:document.charset="UTF-8"; return ValidateAndSubmit();' accept-charset='UTF-8' enctype='multipart/form-data' id='form'><input type="hidden" name="zf_referrer_name" value=""><!-- To Track referrals , place the referrer name within the " " in the above hidden input field -->
         <input type="hidden" name="redirect" value="">
@@ -429,4 +430,5 @@
             <li class="form-fmFooter"><button class="form-submitColor">Submit</button></li>
         </ul>
     </form>
+</div>
 </div>

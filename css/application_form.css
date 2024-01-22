@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 input, input[type="text"], input[type="search"], isindex, textarea, button {
 	outline:none;
 	margin:0 auto;
