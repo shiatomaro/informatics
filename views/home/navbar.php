@@ -5,7 +5,7 @@
             <img src="images/logo.png" alt="Informatics" width="240" height="80">
         </a>
 
-        <ul class="navbar-nav justify-content-end flex-grow-1 flex-row pe-3 text-end">
+        <ul class="navbar-nav justify-content-end flex-grow-1 flex-row pe-3 text-end d-none d-md-flex">
             <?php if (!isset($_SESSION['username'])) : ?>
                 <li class="nav-item">
                     <a class="nav-link" href="/login">Log in</a>
