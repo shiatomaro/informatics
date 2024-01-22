@@ -4,9 +4,9 @@
             <a class="" href="/">
                 <img src="images/icon.png" alt="Logo" width="64" height="64" class="d-inline-block align-text-top">
             </a>
-            <b>Admission System</b>
+            <b class="text-light">Admission System</b>
         </div>
-        <div class="container container-flex">
+        <div class="container container-flex text-muted">
             <em>user: </em><b><?= $_SESSION['username']; ?></b><br>
             <em>role: </em><i><?= $_SESSION['user_type']; ?></i>
         </div>

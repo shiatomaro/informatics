@@ -1,0 +1,10 @@
+// this overrides bootstrap
+
+$primary: #3F5D70;
+$secondary: #B0D7EF;
+$tertiary: #70623F;
+$accent_1: #70623F;
+$accent_2: #B1D9F0;
+
+// Import Bootstrap
+@import "../bootstrap/scss/bootstrap.scss";
