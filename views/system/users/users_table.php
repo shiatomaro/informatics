@@ -18,6 +18,7 @@ $offset = ($currentPage - 1) * $recordsPerPage;
 $conn = getConn();
 $sql = "SELECT id, username, email, type, created_at, status FROM users LIMIT $recordsPerPage OFFSET $offset";
 $result = $conn->query($sql);
+$conn->close();
 
 // Table pagination logic
 $totalrecords = $conn->query("SELECT COUNT(*) as total FROM users")->fetch_assoc()['total'];

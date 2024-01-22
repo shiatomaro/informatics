@@ -12,6 +12,7 @@ if (!isset($queryParams['id'])) {
 $conn = getConn();
 $sql = "SELECT id, username, email, type, created_at, status FROM users WHERE id = {$queryParams['id']}";
 $result = $conn->query($sql);
+$conn->close();
 $userInfo = $result->fetch_assoc();
 ?>
 
