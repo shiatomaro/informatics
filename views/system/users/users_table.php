@@ -1,6 +1,5 @@
 <?php
 require_once 'actions/db.php';
-require_once 'utils.php';
 
 $queryParams = getQueryParams();
 if (!isset($queryParams['id']) && !isset($queryParams['page'])) {

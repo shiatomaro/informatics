@@ -94,10 +94,10 @@ $cardsData = array(
 ?>
 
 <h1>Dashboard</h1>
-<div class="container row g-3">
+<div class="container row g-3 mx-auto">
     <!-- create a card for each item in the cardsData array -->
     <?php foreach ($cardsData as $title => $data) : ?>
-        <div class="col col-md-6">
+        <div class="col-sm-12 col-md-6">
             <?php
             extract($data);
             require 'views/system/dashboard_card.php';
