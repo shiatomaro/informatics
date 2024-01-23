@@ -1,208 +1,202 @@
-<div class="templateWidth" id="myForm">
-    <form action='_blank' name='form' method='POST' onSubmit='javascript:document.charset="UTF-8"; return ValidateAndSubmit();' accept-charset='UTF-8' enctype='multipart/form-data' id='form'><input type="hidden" name="zf_referrer_name" value=""><!-- To Track referrals , place the referrer name within the " " in the above hidden input field -->
-        <input type="hidden" name="redirect" value="">
-        <input type="hidden" name="redirect" value="">
-        <div class="templateWrapper">
+<?php
+require_once "actions/db.php";
+require_once "utils.php";
+require_once "controllers/credentials.php";
+requireCredentials();
 
-            <!---------Start of Application---------->
-            <!---------Start of Header---------->
-            <ul class="header">
-                <li class="template-head">
-                    <h2 class="form-title">
-                        <em>Informatics Northgate College, Alabang Admission Application Form</em>
-                    </h2>
-                    <p class="form-desc">Fill-up form for admission</p>
-                    <div class="clearboth"></div>
-                </li>
-            </ul>
-            <!---------End of Header---------->
-            <!---------Start of Application Information "Note: 143 - S"---------->
-            <div class="form-wrapper top-align">
-                <ul>
-                    <!---------Name starts here "Note: I wanna be renamed, CHEEsedog - S"---------->
-                    <li class="form-fill-wrapper form-name form-namelarge">
-                        <label class="labelname">Student Name</label>
-                        <div class="form-container form-threeType">
-                            <div class="form-nameWrapper">
-                                <span> <input type="text" maxlength="255" name="Name_First" fieldType=7 placeholder="" /> <label>First Name</label>
-                                </span>
-                                <span> <input type="text" maxlength="255" name="Name_Middle" fieldType=7 placeholder="" /> <label>Middle Name</label>
-                                </span>
-                                <span> <input type="text" maxlength="255" name="Name_Last" fieldType=7 placeholder="" /> <label>Last Name</label>
-                                </span>
-                                <div class="clearboth"></div>
-                            </div>
-                            <p id="Name_error" class="errorMessage" style="display:none;">Invalid value</p>
-                        </div>
-                        <div class="clearboth"></div>
-                    </li><!---------Name Ends Here---------->
-                    <!---------Image Upload Starts Here---------->
-                    <li class="form-fill-wrapper"><label class="labelname">1x1 Picture
-                        </label>
-                        <div class="form-container">
-                            <input type="file" accept="image/*" name="Profile" checktype="c1" />
-                            <p id="ImageUpload_error" class="errorMessage" style="display:none;">Choose any file for this field.</p>
-                        </div>
-                        <div class="clearboth"></div>
-                    </li><!---------Image Upload Ends Here---------->
-                    <!--fileupload-->
-                    <!---------Additional Information---------->
-                    <li class="form-fill-wrapper form-name form-namelarge">
-                        <label class="labelname">Additional Information</label>
-                        <div class="form-container form-twoType">
-                            <div class="form-nameWrapper">
-                                <span> <input type="text" aria-hidden="true" name=" maxlength=" 255" name="Email-Address" fieldType=7 placeholder="" /> <label>Email Address</label>
-                                </span>
-                                </span> </span>
-                                <span> <input type="text" maxlength="255" name="Number" fieldType=7 placeholder="" /> <label>Contact Number</label>
-                                </span>
-                                </span> </span>
-                                <div class="clearboth"></div>
-                            </div>
-                            <p id="Name_error" class="errorMessage" style="display:none;">Invalid value</p>
-                        </div>
-                        <div class="form-container form-twoType">
-                            <div class="form-nameWrapper">
-                                <span> <input type="text" aria-hidden="true" name=" maxlength=" 255" name="Address" fieldType=7 placeholder="" /> <label>Present Address</label>
-                                </span>
-                                </span> </span>
-                                <span> <input type="text" maxlength="255" name="Citizenship" fieldType=7 placeholder="" /> <label>Citizenship</label>
-                                </span>
-                                </span> </span>
-                                <div class="clearboth"></div>
-                            </div>
-                            <p id="Name_error" class="errorMessage" style="display:none;">Invalid value</p>
-                        </div>
-                        <div class="form-container form-twoType">
-                            <div class="form-nameWrapper">
-                                <span> <input type="text" aria-hidden="true" name=" maxlength=" 255" name="Civil-Status" fieldType=7 placeholder="" /> <label>Civil Status</label>
-                                </span>
-                                </span> </span>
-                                <span> <input type="text" maxlength="255" name="RS-Status" fieldType=7 placeholder="" /> <label>Relationship Status</label>
-                                </span>
-                                </span> </span>
-                                <div class="clearboth"></div>
-                            </div>
-                            <p id="Name_error" class="errorMessage" style="display:none;">Invalid value</p>
-                        </div>
-                        <div class="clearboth"></div>
-                    </li>
-                    <!---------End of Additional Status, "Hehe comment lang ako, i got bored cleaning this - S"---------->
+$conn = getConn();
+$stmt = $conn->prepare("SELECT fname, mname, lname, email, contact_num, address, citizenship, civil_status, rs_status, occupation, med_cond, birthdate, sex, mother_fname, mother_mname, mother_lname, mother_contact, mother_occupation, father_fname, father_mname, father_lname, father_contact, father_occupation, guardian_fname, guardian_mname, guardian_lname, guardian_contact, guardian_occupation, grade_level, first_choice, second_choice, prev_school, img_profile_filename, img_payment_filename, img_birthcert_filename, img_form137_filename, img_form138_filename, img_goodmoral_filename, img_brgyclear_filename, img_transfercert_filename  FROM student_information WHERE user_id = ?");
+$stmt->bind_param("s", $_SESSION["user_id"]);
+$stmt->execute();
+$stmt->bind_result($db_fname, $db_mname, $db_lname, $db_email, $db_contact_num, $db_address, $db_citizenship, $db_civil_status, $db_rs_status, $db_occupation, $db_med_cond, $db_birthdate, $db_sex, $db_mother_fname, $db_mother_mname, $db_mother_lname, $db_mother_contact, $db_mother_occupation, $db_father_fname, $db_father_mname, $db_father_lname, $db_father_contact, $db_father_occupation, $db_guardian_fname, $db_guardian_mname, $db_guardian_lname, $db_guardian_contact, $db_guardian_occupation, $db_grade_level, $db_first_choice, $db_second_choice, $db_prev_school, $db_img_profile_filename, $db_img_payment_filename, $db_img_birthcert_filename, $db_img_form137_filename, $db_img_form138_filename, $db_img_goodmoral_filename, $db_img_brgyclear_filename, $db_img_transfercert_filename);
+$stmt->fetch();
 
-                    <!---------Date Starts Here---------->
-                    <li class="form-fill-wrapper zf-date"><label class="labelname">
-                            Date of birth
-                        </label>
-                        <div class="form-container">
-                            <span> <input type="text" name="DOB" checktype="c4" value="" maxlength="25" placeholder="" /><label>dd-MMM-yyyy</label> </span>
-                            <div class="clearboth"></div>
-                            <p id="Date_error" class="errorMessage" style="display:none;">Invalid value</p>
-                        </div>
-                        <div class="clearboth"></div>
-                    </li>
-                    <!---------Date Ends Here---------->
+$stmt->close();
+$conn->close();
+?>
 
-                    <!---------Start Of Gender "note: I was thinking if two lang or i should add more eh - Shia" ---------->
-                    <li class="form-gender form-fill-wrapper zf-sideBySide"><label class="labelname"> Sex Assigned at Birth
-                        </label>
-                        <div class="form-container">
-                            <div class="zf-overflow">
-                                <span class="zf-multiAttType">
-                                    <input class="form-genderBtnType" type="radio" id="Radio_1" name="Male" checktype="c1" value="Male">
-                                    <label for="Radio_1" class="form-genderChoice">Male</label> </span>
-                                <span class="zf-multiAttType">
-                                    <input class="form-genderBtnType" type="radio" id="Radio_2" name="Female" checktype="c1" value="Female">
-                                    <label for="Radio_2" class="form-genderChoice">Female</label> </span>
-                                <div class="clearboth"></div>
-                            </div>
-                            <p id="Radio_error" class="errorMessage" style="display:none;">Invalid value</p>
-                        </div>
-                        <div class="clearboth"></div>
-                    </li>
-                    <!---------End of gender, "Note: But you did said it wads okay na dalawa lang.. so I made it 'Sex assigned at birth' instead of 'gender' -Shia"---------->
-
-                    <!---------Mother, Father, and Guardian Info---------->
-                    <li class="form-fill-wrapper form-name form-namelarge"><label class="labelname">
-                            Mother
-                        </label>
-                        <div class="form-container form-twoType">
-                            <div class="form-nameWrapper">
-                                <span> <input type="text" maxlength="255" name="mother-name" fieldType=7 placeholder="" /> <label>Full Name</label>
-                                </span>
-                                </span> </span>
-                                <span> <input type="text" maxlength="255" name="mother-occupation" fieldType=7 placeholder="" /> <label>Occupation</label>
-                                </span>
-                                </span> </span>
-
-                                <div class="clearboth"></div>
-                            </div>
-                            <p id="Name_error" class="errorMessage" style="display:none;">Invalid value</p>
-                        </div>
-                        <div class="clearboth"></div>
-                    </li>
-
-                    <li class="form-fill-wrapper form-name form-namelarge"><label class="labelname">
-                            Father
-                        </label>
-                        <div class="form-container form-twoType">
-                            <div class="form-nameWrapper">
-                                <span> <input type="text" maxlength="255" name="father-name" fieldType=7 placeholder="" /> <label>Full Name</label>
-                                </span>
-                                </span> </span>
-                                <span> <input type="text" maxlength="255" name="father-occupation" fieldType=7 placeholder="" /> <label>Occupation</label>
-                                </span>
-                                </span> </span>
-                                <div class="clearboth"></div>
-                            </div>
-                            <p id="Name_error" class="errorMessage" style="display:none;">Invalid value</p>
-                        </div>
-                        <div class="clearboth"></div>
-                    </li>
-                    <li class="form-fill-wrapper form-name form-namelarge"><label class="labelname">
-                            Guardian
-                        </label>
-                        <div class="form-container form-twoType">
-                            <div class="form-nameWrapper">
-                                <span> <input type="text" maxlength="255" name="guardian-name" fieldType=7 placeholder="" /> <label>Full Name</label>
-                                </span>
-                                </span> </span>
-                                <span> <input type="text" maxlength="255" name="guardian-occupation" fieldType=7 placeholder="" /> <label>Occupation</label>
-                                </span>
-                                </span> </span>
-                                <div class="clearboth"></div>
-                            </div>
-                            <p id="Name_error" class="errorMessage" style="display:none;">Invalid value</p>
-                        </div>
-                        <div class="clearboth"></div>
-                    </li>
-                    <!---------End of Mother, Father, and Guardian Info But We Will Never End HAHA---------->
-
-                    <!---------Start of Education Questions---------->
-                    <!--- Start of Grade Level-->
-                    <li class="form-fill-wrapper zf-large">
-                        <label class="labelname">Grade level you're applying for</label>
-                        <div class="form-container">
-                            <select class="zf-form-sBox" name="grade-level" checktype="c1">
-                                <option selected="true" value="-Select-">-Grade level-</option>
-                                <option value="Grade11">Grade 11</option>
-                                <option value="Grade12">Grade 12</option>
-                                <option value="FIRSTYR">First year College</option>
-                                <option value="SECONDYR">Second year College</option>
-                                <option value="THIRDYR">Third year College</option>
-                                <option value="FOURTHYR">Fourth year College</option>
-                    </li>
-                    </select>
-                    <p id="Dropdown_error" class="errorMessage" style="display:none;">Invalid value</p>
+<div class="card text-primary bg-light p-3">
+    <div class="card-body">
+        <h4 class="card-title">Informatics Admission</h4>
+        <form action="actions/submit_application_action.php" method="post" enctype="multipart/form-data">
+            <h6>Student Name</h6>
+            <div class="row g-3">
+                <div class="mb-3 col-12 col-md-4">
+                    <input type="text" name="name-first" id="name-first" class="form-control" value="<?= $db_fname ?>" />
+                    <small>First Name</small>
+                    <small id="name-first-err" class="text-danger"></small>
+                </div>
+                <div class="mb-3 col-12 col-md-4">
+                    <input type="text" name="name-middle" id="name-middle" class="form-control" value="<?= $db_mname ?>" />
+                    <small>Middle Name</small>
+                    <small id="name-middle-err" class="text-danger"></small>
+                </div>
+                <div class="mb-3 col-12 col-md-4">
+                    <input type="text" name="name-last" id="name-last" class="form-control" value="<?= $db_lname ?>" />
+                    <small>Last Name</small>
+                    <small id="name-last-err" class="text-danger"></small>
+                </div>
             </div>
-            <div class="clearboth"></div>
-            <!-- End of Grade level, "Samedt i wanna graduate na - S"-->
 
-            <!--- Start of Course Choices-->
-            <li class="form-fill-wrapper zf-large">
-                <label class="labelname">Preffered Course/Strand</label>
-                <div class="form-container">
-                    <select class="zf-form-sBox" name="first-choice" checktype="c1">
-                        <option selected="true" value="-Select-">-First Choice-</option>
+            <div class="row g-3">
+                <div class="mb-3 col-12 col-md-6">
+                    <input type="text" name="email" id="email" class="form-control" value="<?= $db_email ?>" />
+                    <small>Email Address</small>
+                    <small id="email-err" class="text-danger"></small>
+                </div>
+                <div class="mb-3 col-12 col-md-6">
+                    <input type="text" name="contact-num" id="contact-num" class="form-control" value="<?= $db_contact_num ?>" />
+                    <small>Contact Number</small>
+                    <small id="contact-num-err" class="text-danger"></small>
+                </div>
+                <div class="mb-3 col-12">
+                    <input type="text" name="address" id="address" class="form-control" value="<?= $db_address ?>" />
+                    <small>Present Address</small>
+                    <small id="address-err" class="text-danger"></small>
+                </div>
+                <div class="mb-3 col-12 col-md-6">
+                    <input type="text" name="citizenship" id="citizenship" class="form-control" value="<?= $db_citizenship ?>" />
+                    <small>Citizenship</small>
+                    <small id="citizenship-err" class="text-danger"></small>
+                </div>
+                <div class="mb-3 col-12 col-md-6">
+                    <input type="text" name="civil-status" id="civil-status" class="form-control" value="<?= $db_civil_status ?>" />
+                    <small>Civil Status</small>
+                    <small id="civil-status-err" class="text-danger"></small>
+                </div>
+                <div class="mb-3 col-12 col-md-6">
+                    <input type="text" name="rs-status" id="rs-status" class="form-control" value="<?= $db_rs_status ?>" />
+                    <small>Relationship Status</small>
+                    <small id="rs-status-err" class="text-danger"></small>
+                </div>
+                <div class="mb-3 col-12 col-md-6">
+                    <input type="text" name="occupation" id="occupation" class="form-control" value="<?= $db_occupation ?>" />
+                    <small>Occupation</small>
+                    <small id="occupation-err" class="text-danger"></small>
+                </div>
+                <div class="mb-3 col-12">
+                    <h6>Does the student have any medical conditions?</h6>
+                    <textarea class="form-control" name="med-condition" id="medical-condition" rows="3"><?= $db_med_cond ?></textarea>
+                </div>
+            </div>
+
+            <div class="row g-3">
+                <div class="mb-3 col-12 col-md-4">
+                    <h6>Date of Birth</h6>
+                    <input class="form-control" type="text" id="datepicker" name="birthdate" value="<?= $db_birthdate ?>" />
+                </div>
+                <div class="mb-3 col-12 col-md-4">
+                    <h6>Sex assigned at Birth</h6>
+                    <select class="form-select" name="sex">
+                        <option <?= $db_sex == "male" ? "selected" : "" ?> value="male">Male</option>
+                        <option <?= $db_sex == "female" ? "selected" : "" ?> value="female">Female</option>
+                    </select>
+                </div>
+            </div>
+
+            <h6 class="mt-4">Mother's Information</h6>
+            <div class="row g-3">
+                <div class="mb-3 col-12 col-md-4">
+                    <input type="text" name="mother-name-first" id="mother-name-first" class="form-control" value="<?= $db_mother_fname ?>" />
+                    <small>Mother's First Name</small>
+                    <small id="mother-name-first-err" class="text-danger"></small>
+                </div>
+                <div class="mb-3 col-12 col-md-4">
+                    <input type="text" name="mother-name-middle" id="mother-name-middle" class="form-control" value="<?= $db_mother_mname ?>" />
+                    <small>Mother's Middle Name</small>
+                    <small id="mother-name-middle-err" class="text-danger"></small>
+                </div>
+                <div class="mb-3 col-12 col-md-4">
+                    <input type="text" name="mother-name-last" id="mother-name-last" class="form-control" value="<?= $db_mother_lname ?>" />
+                    <small>Mother's Name</small>
+                    <small id="mother-name-last-err" class="text-danger"></small>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="mb-3 col-12 col-md-4">
+                    <input type="text" name="mother-contact" id="mother-contact" class="form-control" value="<?= $db_mother_contact ?>" />
+                    <small>Mother's Contact Number</small>
+                    <small id="mother-contact-err" class="text-danger"></small>
+                </div>
+                <div class="mb-3 col-12 col-md-4">
+                    <input type="text" name="mother-occupation" id="mother-occupation" class="form-control" value="<?= $db_mother_occupation ?>" />
+                    <small>Mother's Occupation</small>
+                    <small id="mother-occupation-err" class="text-danger"></small>
+                </div>
+            </div>
+
+            <h6 class="mt-4">Father's Information</h6>
+            <div class="row g-3">
+                <div class="mb-3 col-12 col-md-4">
+                    <input type="text" name="father-name-first" id="father-name-first" class="form-control" value="<?= $db_father_occupation ?>" />
+                    <small>Father's First Name</small>
+                    <small id="father-name-first-err" class="text-danger"></small>
+                </div>
+                <div class="mb-3 col-12 col-md-4">
+                    <input type="text" name="father-name-middle" id="father-name-middle" class="form-control" value="<?= $db_father_mname ?>" />
+                    <small>Father's Middle Name</small>
+                    <small id="father-name-middle-err" class="text-danger"></small>
+                </div>
+                <div class="mb-3 col-12 col-md-4">
+                    <input type="text" name="father-name-last" id="father-name-last" class="form-control" value="<?= $db_father_lname ?>" />
+                    <small>Father's Name</small>
+                    <small id="father-name-last-err" class="text-danger"></small>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="mb-3 col-12 col-md-4">
+                    <input type="text" name="father-contact" id="father-contact" class="form-control" value="<?= $db_father_contact ?>" />
+                    <small>Father's Contact Number</small>
+                    <small id="father-contact-err" class="text-danger"></small>
+                </div>
+                <div class="mb-3 col-12 col-md-4">
+                    <input type="text" name="father-occupation" id="father-occupation" class="form-control" value="<?= $db_father_occupation ?>" />
+                    <small>Father's Occupation</small>
+                    <small id="father-occupation-err" class="text-danger"></small>
+                </div>
+            </div>
+
+            <h6 class="mt-4">Guardian's Information</h6>
+            <div class="row g-3" id="guardian-info">
+                <div class="mb-3 col-12 col-md-4">
+                    <input type="text" name="guardian-name-first" id="guardian-name-first" class="form-control" value="<?= $db_guardian_fname ?>" />
+                    <small>Guardian's First Name</small>
+                    <small id="guardian-name-first-err" class="text-danger"></small>
+                </div>
+                <div class="mb-3 col-12 col-md-4">
+                    <input type="text" name="guardian-name-middle" id="guardian-name-middle" class="form-control" value="<?= $db_guardian_mname ?>" />
+                    <small>Guardian's Middle Name</small>
+                    <small id="guardian-name-middle-err" class="text-danger"></small>
+                </div>
+                <div class="mb-3 col-12 col-md-4">
+                    <input type="text" name="guardian-name-last" id="guardian-name-last" class="form-control" value="<?= $db_guardian_lname ?>" />
+                    <small>Guardian's Name</small>
+                    <small id="guardian-name-last-err" class="text-danger"></small>
+                </div>
+                <div class="mb-3 col-12 col-md-4">
+                    <input type="text" name="guardian-contact" id="guardian-contact" class="form-control" value="<?= $db_guardian_contact ?>" />
+                    <small>Guardian's Contact Number</small>
+                    <small id="guardian-contact-err" class="text-danger"></small>
+                </div>
+            </div>
+
+            <div class="row g-3 mt-4">
+                <div class="mb-3 col-12 col-md-4">
+                    <h6>Grade level applying for</h6>
+                    <select class="form-select" name="grade-level">
+                        <option selected value="<?= $db_grade_level ?>"></option>
+                        <option value="Grade11">Grade 11</option>
+                        <option value="Grade12">Grade 12</option>
+                        <option value="FIRSTYR">First year College</option>
+                        <option value="SECONDYR">Second year College</option>
+                        <option value="THIRDYR">Third year College</option>
+                        <option value="FOURTHYR">Fourth year College</option>
+                    </select>
+                </div>
+                <div class="mb-3 col-12 col-md-4">
+                    <h6>Preferred Course/Strand</h6>
+                    <select class="form-select" name="choice-1">
+                        <option selected value="<?= $db_first_choice ?>"></option>
                         <option value="HUMMS">SHS: HUMMS</option>
                         <option value="ICT-Animation">SHS: ICT-Animation</option>
                         <option value="ICT-Programming">SHS: ICT-Programming</option>
@@ -211,222 +205,155 @@
                         <option value="BSIT">College: BSIT</option>
                         <option value="BSBA">College: BSBA</option>
                         <option value="BSCS">College: BSCS</option>
-            </li>
-            </select>
-            <p id="Dropdown_error" class="errorMessage" style="display:none;">Invalid value</p>
-        </div>
-        <div class="clearboth"></div>
-        <div class="form-container">
-            <select class="zf-form-sBox" name="second-choice" checktype="c1">
-                <option selected="true" value="-Select-">-Second Choice-</option>
-                <<option value="HUMMS">SHS: HUMMS</option>
-                    <option value="ICT-Animation">SHS: ICT-Animation</option>
-                    <option value="ICT-Programming">SHS: ICT-Programming</option>
-                    <option value="GAS">SHS: GAS</option>
-                    <option value="ABM">College: ABM</option>
-                    <option value="BSIT">College: BSIT</option>
-                    <option value="BSBA">College: BSBA</option>
-                    <option value="BSCS">College: BSCS</option>
-                    </li>
-            </select>
-            <p id="Dropdown_error" class="errorMessage" style="display:none;">Invalid value</p>
-        </div>
-        <div class="clearboth"></div>
-        <!-- End of Grade level, "Samedt i wanna graduate na - S"-->
-
-        <!-- Previous School-->
-        <div class="form-container">
-            <li class="form-fill-wrapper zf-large">
-                <label class="labelname">
-                    Previous School
-                </label>
-                <select class="zf-form-sBox" name="previous-school" checktype="c1">
-                    <option selected="true" value="-Select-">-Previous School Before Applying-</option>
-                    <!-- List of schools -->
-                    <option value="Anima Christi Center for Learning and Human Development">Anima Christi Center for Learning and Human Development</option>
-                    <option value="APEC">APEC</option>
-                    <option value="Bay View Academy">Bay View Academy</option>
-                    <option value="Christ Baptist Academy">Christ Baptist Academy</option>
-                    <option value="Christ the King School of Muntinlupa">Christ the King School of Muntinlupa</option>
-                    <option value="Christ the Living Intercessor Christian School">Christ the Living Intercessor Christian School</option>
-                    <option value="Colegio de Muntinlupa">Colegio de Muntinlupa</option>
-                    <option value="Colegio de Nuestra Señora de Guadalupe">Colegio de Nuestra Señora de Guadalupe</option>
-                    <option value="Cupang Senior High School">Cupang Senior High School</option>
-                    <option value="De La Salle Zobel School">De La Salle Zobel School</option>
-                    <option value="Divine Mercy School">Divine Mercy School</option>
-                    <option value="Emmanuel John Institute of Science And Technology, Inc.">Emmanuel John Institute of Science And Technology, Inc.</option>
-                    <option value="Far Eastern University Alabang">Far Eastern University Alabang</option>
-                    <option value="Facilities Management College">Facilities Management College</option>
-                    <option value="Holy Queen of La Salette School">Holy Queen of La Salette School</option>
-                    <option value="Infant Jesus Montessori School of Muntinlupa - Parkhomes">Infant Jesus Montessori School of Muntinlupa - Parkhomes</option>
-                    <option value="Kennedy International School of Business and Languages">Kennedy International School of Business and Languages</option>
-                    <option value="Lakewood School of Alabang">Lakewood School of Alabang</option>
-                    <option value="Le Sainte School">Le Sainte School</option>
-                    <option value="Liceo de Alabang, Inc.">Liceo de Alabang, Inc.</option>
-                    <option value="Liceo de Piccolo Santo">Liceo de Piccolo Santo</option>
-                    <option value="Living Light Academy">Living Light Academy</option>
-                    <option value="Lombosco Academy Foundation, Inc.">Lombosco Academy Foundation, Inc.</option>
-                    <option value="Lyceum of Alabang INC.">Lyceum of Alabang INC.</option>
-                    <option value="Maria Ferarri School">Maria Ferarri School</option>
-                    <option value="Maranatha Christian Academy - Bayanan">Maranatha Christian Academy - Bayanan</option>
-                    <option value="Mary Cause of our Joy Catholic School">Mary Cause of our Joy Catholic School</option>
-                    <option value="Mary, Mother of God Parochial School">Mary, Mother of God Parochial School</option>
-                    <option value="MBC-Sinai School">MBC-Sinai School</option>
-                    <option value="Miraculous Medal School">Miraculous Medal School</option>
-                    <option value="MIT International School">MIT International School</option>
-                    <option value="Muntinlupa Business High School">Muntinlupa Business High School</option>
-                    <option value="Muntinlupa Cosmopolitan School">Muntinlupa Cosmopolitan School</option>
-                    <option value="Muntinlupa Institute of Technology (MIT)">Muntinlupa Institute of Technology (MIT)</option>
-                    <option value="Muntinlupa National High School">Muntinlupa National High School</option>
-                    <option value="Muntinlupa Science High School">Muntinlupa Science High School</option>
-                    <option value="Our Lady of The Abandoned Catholic School">Our Lady of The Abandoned Catholic School</option>
-                    <option value="Our Lady of the Lake School">Our Lady of the Lake School</option>
-                    <option value="Pamantasan ng Lungsod ng Muntinlupa (PLMun)">Pamantasan ng Lungsod ng Muntinlupa (PLMun)</option>
-                    <option value="PAREF Ridgefield School">PAREF Ridgefield School</option>
-                    <option value="PAREF Rosemont School">PAREF Rosemont School</option>
-                    <option value="PAREF Southridge School">PAREF Southridge School</option>
-                    <option value="Pedro E. Diaz High School">Pedro E. Diaz High School</option>
-                    <option value="Ridgeview Academy">Ridgeview Academy</option>
-                    <option value="Sacred Heart Institute">Sacred Heart Institute</option>
-                    <option value="Santo Niño School of Muntinlupa">Santo Niño School of Muntinlupa</option>
-                    <option value="Servite School, Inc.">Servite School, Inc.</option>
-                    <option value="Soldier's Hills Elementary School">Soldier's Hills Elementary School</option>
-                    <option value="South Crest School">South Crest School</option>
-                    <option value="Southernside Montessori School">Southernside Montessori School</option>
-                    <option value="Spring Christian School">Spring Christian School</option>
-                    <option value="STI College (Alabang Branch)">STI College (Alabang Branch)</option>
-                    <option value="Sto. Domingo Pascual Academy, Inc.">Sto. Domingo Pascual Academy, Inc.</option>
-                    <option value="Sunshine Christian School of Muntinlupa">Sunshine Christian School of Muntinlupa</option>
-                    <option value="Theresiana de Montealegre Dame School">Theresiana de Montealegre Dame School</option>
-                    <option value="The Birthright School of Muntinlupa">The Birthright School of Muntinlupa</option>
-                    <option value="Tunasan National High School">Tunasan National High School</option>
-                    <option value="OM">Outside of Muntinlupa:</option>
-            </li>
-            <div class="form-container">
-                <span> <input type="text" name="SingleLine" checktype="c1" value="" maxlength="255" fieldType=1 placeholder="Others" /></span>
-                <p id="SingleLine_error" class="errorMessage" style="display:none;">Invalid value</p>
+                    </select>
+                    <small>First choce</small>
+                </div>
+                <div class="mb-3 col-12 col-md-4">
+                    <h6>&nbsp;</h6>
+                    <select class="form-select" name="choice-2">
+                        <option selected value="<?= $db_second_choice ?>"></option>
+                        <option value="HUMMS">SHS: HUMMS</option>
+                        <option value="ICT-Animation">SHS: ICT-Animation</option>
+                        <option value="ICT-Programming">SHS: ICT-Programming</option>
+                        <option value="GAS">SHS: GAS</option>
+                        <option value="ABM">College: ABM</option>
+                        <option value="BSIT">College: BSIT</option>
+                        <option value="BSBA">College: BSBA</option>
+                        <option value="BSCS">College: BSCS</option>
+                    </select>
+                    <small>Second Choice</small>
+                </div>
             </div>
-            <div class="clearboth"></div>
-            </select>
-            <p id="Dropdown_error" class="errorMessage" style="display:none;">Invalid value</p>
-        </div>
-        <div class="clearboth">
-            <!---------End of Educational Questions---------->
 
-            <!---------More Infomation---------->
-            <li class="form-fill-wrapper form-name form-namelarge">
-                <label class="labelname"> Occupation </label>
-                <div class="form-container">
-                    <span> <input type="text" name="student-occupation" checktype="c1" value="" maxlength="255" fieldType=1 placeholder="" /></span>
-                    <p id="SingleLine1_error" class="errorMessage" style="display:none;">Invalid value</p>
-                </div>
-                <div class="clearboth"></div>
-            </li>
-            <!---------Single Line Ends Here---------->
-            <!---------Multiple Line Starts Here---------->
-            <li class="form-fill-wrapper zf-large"><label class="labelname">
-                    Any medical condition to mention about the student?
-                </label>
-                <div class="form-container">
-                    <span> <textarea name="MultiLine" checktype="c1" maxlength="65535" placeholder=""></textarea> </span>
-                    <p id="MultiLine_error" class="errorMessage" style="display:none;">Invalid value</p>
-                </div>
-                <div class="clearboth"></div>
-            </li><!---------Multiple Line Ends Here----------><!---------File Upload Starts Here---------->
-
-            <!---------File Upload Starts Here---------->
-            <li class="form-fill-wrapper"><label class="labelname">Payment for Admission
-                </label>
-                <div class="form-container">
-                    <input type="file" name="payment" checktype="c1" />
-                    <p id="FileUpload_error" class="errorMessage" style="display:none;">Choose any file for this field.</p>
-                </div>
-                <div class="clearboth"></div>
-            </li><!---------File Upload Ends Here---------->
-            <!--Image Upload-->
-            <!---------File Upload Starts Here---------->
-            <li class="form-fill-wrapper"><label class="labelname">Birth Certificate
-                </label>
-                <div class="form-container">
-                    <input type="file" name="nso" checktype="c1" />
-                    <p id="FileUpload_error" class="errorMessage" style="display:none;">Choose any file for this field.</p>
-                </div>
-                <div class="clearboth"></div>
-            </li><!---------File Upload Ends Here---------->
-            <!--Image Upload-->
-            <!---------File Upload Starts Here---------->
-            <li class="form-fill-wrapper"><label class="labelname"> Form-138
-                </label>
-                <div class="form-container">
-                    <input type="file" name="form-138" checktype="c1" />
-                    <p id="FileUpload_error" class="errorMessage" style="display:none;">Choose any file for this field.</p>
-                </div>
-                <div class="clearboth"></div>
-            </li><!---------File Upload Ends Here---------->
-            <!---------File Upload Starts Here---------->
-            <li class="form-fill-wrapper"><label class="labelname">Form-137
-                </label>
-                <div class="form-container">
-                    <input type="file" name="form-137" checktype="c1" />
-                    <p id="FileUpload_error" class="errorMessage" style="display:none;">Choose any file for this field.</p>
-                </div>
-                <div class="clearboth"></div>
-            </li><!---------File Upload Ends Here---------->
-            <!--Image Upload-->
-
-            <!---------File Upload Starts Here---------->
-            <li class="form-fill-wrapper"><label class="labelname">Good Moral
-                </label>
-                <div class="form-container">
-                    <input type="file" name="good-moral" checktype="c1" />
-                    <p id="FileUpload_error" class="errorMessage" style="display:none;">Choose any file for this field.</p>
-                </div>
-                <div class="clearboth"></div>
-            </li><!---------File Upload Ends Here---------->
-            <!--Image Upload-->
-
-            <!---------File Upload Starts Here---------->
-            <li class="form-fill-wrapper"><label class="labelname">Baranggay Clearance
-                </label>
-                <div class="form-container">
-                    <input type="file" name="baranggay-clearance" checktype="c1" />
-                    <p id="FileUpload_error" class="errorMessage" style="display:none;">Choose any file for this field.</p>
-                </div>
-                <div class="clearboth"></div>
-            </li><!---------File Upload Ends Here---------->
-            <!--Image Upload-->
-
-            <!--Image Upload-->
-            <!---------File Upload Starts Here---------->
-            <li class="form-fill-wrapper"><label class="labelname">Previous School Transfer Certificate (If applicable)
-                </label>
-                <div class="form-container">
-                    <input type="file" name="transfer-certificate" checktype="c1" />
-                    <p id="FileUpload1_error" class="errorMessage" style="display:none;">Choose any file for this field.</p>
-                </div>
-                <div class="clearboth"></div>
-            </li><!---------File Upload Ends Here---------->
-            <!--Terms and conditions-->
-            <li class="form-fill-wrapper"><label class="labelname">
-                    Terms and Conditions
-                </label>
-                <div class="form-container">
-                    <div class="zf-termsContainer">
-                        <div class="zf-termsMsg zf-descFld">
-                            <p style="margin: 12pt 0px; line-height: 1.2; direction: ltr" class="zw-paragraph heading0"><span style="vertical-align: baseline">It is required for the student to clear an non-graded examination and an admission fee of 500 pesos to be admitted to the school.</span><br /></p>
-                            <div><span style="vertical-align: baseline">I agree with the terms and conditions of the school and declare that the information provided above is correct.</span> <br /></div>
-                        </div>
-                        <div class="form-termsAccept"><input class="form-checkBoxType form-flLeft" name="TermsConditions" type="checkbox"><label class="form-descFld">I accept the Terms and Conditions.</label></div>
+            <div class="row g-3">
+                <div class="mb-3 col-12 col-md-4">
+                    <h6>Previous School</h6>
+                    <select class="form-select collapse show" name="prev-school-dropdown" id="prev-school-collapse" aria-expanded="true">
+                        <option selected value="<?= $db_prev_school ?>"></option>
+                        <option value="Anima Christi Center for Learning and Human Development">Anima Christi Center for Learning and Human Development</option>
+                        <option value="APEC">APEC</option>
+                        <option value="Bay View Academy">Bay View Academy</option>
+                        <option value="Christ Baptist Academy">Christ Baptist Academy</option>
+                        <option value="Christ the King School of Muntinlupa">Christ the King School of Muntinlupa</option>
+                        <option value="Christ the Living Intercessor Christian School">Christ the Living Intercessor Christian School</option>
+                        <option value="Colegio de Muntinlupa">Colegio de Muntinlupa</option>
+                        <option value="Colegio de Nuestra Señora de Guadalupe">Colegio de Nuestra Señora de Guadalupe</option>
+                        <option value="Cupang Senior High School">Cupang Senior High School</option>
+                        <option value="De La Salle Zobel School">De La Salle Zobel School</option>
+                        <option value="Divine Mercy School">Divine Mercy School</option>
+                        <option value="Emmanuel John Institute of Science And Technology, Inc.">Emmanuel John Institute of Science And Technology, Inc.</option>
+                        <option value="Far Eastern University Alabang">Far Eastern University Alabang</option>
+                        <option value="Facilities Management College">Facilities Management College</option>
+                        <option value="Holy Queen of La Salette School">Holy Queen of La Salette School</option>
+                        <option value="Infant Jesus Montessori School of Muntinlupa - Parkhomes">Infant Jesus Montessori School of Muntinlupa - Parkhomes</option>
+                        <option value="Kennedy International School of Business and Languages">Kennedy International School of Business and Languages</option>
+                        <option value="Lakewood School of Alabang">Lakewood School of Alabang</option>
+                        <option value="Le Sainte School">Le Sainte School</option>
+                        <option value="Liceo de Alabang, Inc.">Liceo de Alabang, Inc.</option>
+                        <option value="Liceo de Piccolo Santo">Liceo de Piccolo Santo</option>
+                        <option value="Living Light Academy">Living Light Academy</option>
+                        <option value="Lombosco Academy Foundation, Inc.">Lombosco Academy Foundation, Inc.</option>
+                        <option value="Lyceum of Alabang INC.">Lyceum of Alabang INC.</option>
+                        <option value="Maria Ferarri School">Maria Ferarri School</option>
+                        <option value="Maranatha Christian Academy - Bayanan">Maranatha Christian Academy - Bayanan</option>
+                        <option value="Mary Cause of our Joy Catholic School">Mary Cause of our Joy Catholic School</option>
+                        <option value="Mary, Mother of God Parochial School">Mary, Mother of God Parochial School</option>
+                        <option value="MBC-Sinai School">MBC-Sinai School</option>
+                        <option value="Miraculous Medal School">Miraculous Medal School</option>
+                        <option value="MIT International School">MIT International School</option>
+                        <option value="Muntinlupa Business High School">Muntinlupa Business High School</option>
+                        <option value="Muntinlupa Cosmopolitan School">Muntinlupa Cosmopolitan School</option>
+                        <option value="Muntinlupa Institute of Technology (MIT)">Muntinlupa Institute of Technology (MIT)</option>
+                        <option value="Muntinlupa National High School">Muntinlupa National High School</option>
+                        <option value="Muntinlupa Science High School">Muntinlupa Science High School</option>
+                        <option value="Our Lady of The Abandoned Catholic School">Our Lady of The Abandoned Catholic School</option>
+                        <option value="Our Lady of the Lake School">Our Lady of the Lake School</option>
+                        <option value="Pamantasan ng Lungsod ng Muntinlupa (PLMun)">Pamantasan ng Lungsod ng Muntinlupa (PLMun)</option>
+                        <option value="PAREF Ridgefield School">PAREF Ridgefield School</option>
+                        <option value="PAREF Rosemont School">PAREF Rosemont School</option>
+                        <option value="PAREF Southridge School">PAREF Southridge School</option>
+                        <option value="Pedro E. Diaz High School">Pedro E. Diaz High School</option>
+                        <option value="Ridgeview Academy">Ridgeview Academy</option>
+                        <option value="Sacred Heart Institute">Sacred Heart Institute</option>
+                        <option value="Santo Niño School of Muntinlupa">Santo Niño School of Muntinlupa</option>
+                        <option value="Servite School, Inc.">Servite School, Inc.</option>
+                        <option value="Soldier's Hills Elementary School">Soldier's Hills Elementary School</option>
+                        <option value="South Crest School">South Crest School</option>
+                        <option value="Southernside Montessori School">Southernside Montessori School</option>
+                        <option value="Spring Christian School">Spring Christian School</option>
+                        <option value="STI College (Alabang Branch)">STI College (Alabang Branch)</option>
+                        <option value="Sto. Domingo Pascual Academy, Inc.">Sto. Domingo Pascual Academy, Inc.</option>
+                        <option value="Sunshine Christian School of Muntinlupa">Sunshine Christian School of Muntinlupa</option>
+                        <option value="Theresiana de Montealegre Dame School">Theresiana de Montealegre Dame School</option>
+                        <option value="The Birthright School of Muntinlupa">The Birthright School of Muntinlupa</option>
+                        <option value="Tunasan National High School">Tunasan National High School</option>
+                    </select>
+                    <div class="collapse" id="prev-school-collapse">
+                        <input type="text" name="prev-school-input" class="form-control" />
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="<?= $db_prev_school ?>" id="prev-school-checkbox" data-bs-toggle="collapse" data-bs-target="#prev-school-collapse">
+                        <label class="form-check-label" for="prev-school-checkbox">
+                            Outside of Muntinlupa
+                        </label>
                     </div>
                 </div>
-                <p class="errorMessage" elname="error" id="TermsConditions_error" style="display:none;">Invalid value</p>
-                <div class="clearBoth"></div>
-            </li>
+            </div>
 
-            </ul>
-        </div><!---------template Container Starts Here---------->
-        <ul>
-            <li class="form-fmFooter"><button class="form-submitColor">Submit</button></li>
-        </ul>
-</div><!-- 'templateWrapper' ends --></form>
-</div><!-- 'template' ends -->
+            <h6 class="mt-4">Images</h6>
+            <div class="row g-3">
+                <div class="mb-3 col-12 col-md-4">
+                    <h6>1x1 Photo</h6>
+                    <small><?= $db_img_profile_filename !== null ? $db_img_profile_filename : "no image uploaded"; ?></small>
+                    <input class="form-control" type="file" name="img-profile" accept="image/*">
+                </div>
+                <div class="mb-3 col-12 col-md-4">
+                    <h6>Proof of payment</h6>
+                    <small><?= $db_img_payment_filename !== null ? $db_img_payment_filename : "no image uploaded"; ?></small>
+                    <input class="form-control" type="file" name="img-payment" accept="image/*">
+                </div>
+                <div class="mb-3 col-12 col-md-4">
+                    <h6>Birth Certificate</h6>
+                    <small><?= $db_img_birthcert_filename !== null ? $db_img_birthcert_filename : "no image uploaded"; ?></small>
+                    <input class="form-control" type="file" name="img-birthcert" accept="image/*">
+                </div>
+                <div class="mb-3 col-12 col-md-4">
+                    <h6>Form-137</h6>
+                    <small><?= $db_img_form137_filename !== null ? $db_img_form137_filename : "no image uploaded"; ?></small>
+                    <input class="form-control" type="file" name="img-form137" accept="image/*">
+                </div>
+                <div class="mb-3 col-12 col-md-4">
+                    <h6>Form-138</h6>
+                    <small><?= $db_img_form138_filename !== null ? $db_img_form138_filename : "no image uploaded"; ?></small>
+                    <input class="form-control" type="file" name="img-form138" accept="image/*">
+                </div>
+                <div class="mb-3 col-12 col-md-4">
+                    <h6>Good Moral</h6>
+                    <small><?= $db_img_goodmoral_filename !== null ? $db_img_goodmoral_filename : "no image uploaded"; ?></small>
+                    <input class="form-control" type="file" name="img-goodmoral" accept="image/*">
+                </div>
+                <div class="mb-3 col-12 col-md-4">
+                    <h6>Baranggay Clearance</h6>
+                    <small><?= $db_img_brgyclear_filename !== null ? $db_img_brgyclear_filename : "no image uploaded"; ?></small>
+                    <input class="form-control" type="file" name="img-brgyclearance" accept="image/*">
+                </div>
+                <div class="mb-3 col-12 col-md-8">
+                    <h6>Previous School Transfer Certificate (if applicable)</h6>
+                    <small><?= $db_img_transfercert_filename !== null ? $db_img_transfercert_filename : "no image uploaded"; ?></small>
+                    <input class="form-control" type="file" name="img-transfercert" accept="image/*">
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Initialize Datepicker -->
+<script>
+    $(document).ready(function() {
+        $('#datepicker').datepicker();
+    });
+</script>

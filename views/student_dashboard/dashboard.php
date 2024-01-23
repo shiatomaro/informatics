@@ -16,7 +16,7 @@ require_once "utils.php";
     <?php if ($path == "/examination") : ?>
         <link rel="stylesheet" href="css/exam.css">
     <?php elseif ($path == "/application") : ?>
-        <link rel="stylesheet" href="css/application_form.css">
+        <link rel="stylesheet" href="bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
     <?php endif ?>
 </head>
 
@@ -27,7 +27,9 @@ require_once "utils.php";
         </div>
         <div class="col d-flex flex-column">
             <main class="container mt-3 mr-3">
-                <?php include "views/message_card.php" ?>
+                <div class="mb-3">
+                    <?php include "views/message_card.php" ?>
+                </div>
                 <?php
                 switch ($path) {
                     case '/application':
@@ -53,6 +55,9 @@ require_once "utils.php";
     <?php require_once "views/templates/body_scripts.php" ?>
     <?php if ($path == "/examination") : ?>
         <script type="module" src="js/exam.js"></script>
+    <?php elseif ($path == "/application") : ?>
+        <script src="js/app_validation.js"></script>
+        <script src="bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <?php endif ?>
 </body>
 
