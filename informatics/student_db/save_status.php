@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD
 include('/user/connection.php');
+=======
+include('conn/conn.php');
+>>>>>>> main
 
 $status = $_POST['status'];
 

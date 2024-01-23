@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 include('conn/conn.php');
 
@@ -5,6 +6,8 @@ $sql = "SELECT * FROM status";
 $result = $conn->query($sql);
 ?>
 
+=======
+>>>>>>> main
 
 <!DOCTYPE html>
 <html>

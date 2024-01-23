@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         try {
             if ($stmt->execute()) {
                 $msg_type = "success";
-                $msg_content = "Successfully updated the course!";
+                $msg_content = "Successfully created a new account!";
             }
         } catch (mysqli_sql_exception $e) {
             // MySQL error code for duplicate entry
@@ -47,6 +47,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $stmt->close();
     $conn->close();
-    header("Location: /signup?&msg_type=$msg_type&msg_content=$msg_content");
+    if ($msg_type === "success") {
+        header("Location: /dashboard");
+    } else {
+        header("Location: /signup?&msg_type=$msg_type&msg_content=$msg_content");
+    }
     exit();
 }

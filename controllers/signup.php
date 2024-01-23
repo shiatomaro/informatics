@@ -1,7 +1,9 @@
 <?php
 
-if (!isset($_SESSION['username'])) {
+require_once "controllers/credentials.php";
+
+if (!isLoggedIn()) {
     require_once "views/signup.php";
 } else {
-    header("Location: /system");
+    redirectToDashboard();
 }
