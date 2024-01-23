@@ -819,3 +819,12 @@ ol, ul {
 	overflow:hidden;
 	font-size: 13px;
 }
+
+#myForm {
+    height: 100vh; /* Adjust this value according to your needs */
+    overflow-y: auto;
+}
+
+#myForm::-webkit-scrollbar {
+    display: none;
+}
