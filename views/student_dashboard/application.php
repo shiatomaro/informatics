@@ -1,5 +1,4 @@
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-<div class="templateWidth">
+<div class="templateWidth" id="myForm">
     <form action='_blank' name='form' method='POST' onSubmit='javascript:document.charset="UTF-8"; return ValidateAndSubmit();' accept-charset='UTF-8' enctype='multipart/form-data' id='form'><input type="hidden" name="zf_referrer_name" value=""><!-- To Track referrals , place the referrer name within the " " in the above hidden input field -->
         <input type="hidden" name="redirect" value="">
         <input type="hidden" name="redirect" value="">
@@ -104,14 +103,14 @@
                     <!---------Date Ends Here---------->
 
                     <!---------Start Of Gender "note: I was thinking if two lang or i should add more eh - Shia" ---------->
-                    <li class="form-gender form-fill-wrapper form-sideBySide"><label class="labelname"> Sex Assigned at Birth
+                    <li class="form-gender form-fill-wrapper zf-sideBySide"><label class="labelname"> Sex Assigned at Birth
                         </label>
                         <div class="form-container">
-                            <div class="form-overflow">
-                                <span class="form-multiAttType">
+                            <div class="zf-overflow">
+                                <span class="zf-multiAttType">
                                     <input class="form-genderBtnType" type="radio" id="Radio_1" name="Male" checktype="c1" value="Male">
                                     <label for="Radio_1" class="form-genderChoice">Male</label> </span>
-                                <span class="form-multiAttType">
+                                <span class="zf-multiAttType">
                                     <input class="form-genderBtnType" type="radio" id="Radio_2" name="Female" checktype="c1" value="Female">
                                     <label for="Radio_2" class="form-genderChoice">Female</label> </span>
                                 <div class="clearboth"></div>
@@ -180,10 +179,10 @@
 
                     <!---------Start of Education Questions---------->
                     <!--- Start of Grade Level-->
-                    <li class="form-fill-wrapper form-large">
+                    <li class="form-fill-wrapper zf-large">
                         <label class="labelname">Grade level you're applying for</label>
                         <div class="form-container">
-                            <select class="form-form-sBox" name="grade-level" checktype="c1">
+                            <select class="zf-form-sBox" name="grade-level" checktype="c1">
                                 <option selected="true" value="-Select-">-Grade level-</option>
                                 <option value="Grade11">Grade 11</option>
                                 <option value="Grade12">Grade 12</option>
@@ -199,10 +198,10 @@
             <!-- End of Grade level, "Samedt i wanna graduate na - S"-->
 
             <!--- Start of Course Choices-->
-            <li class="form-fill-wrapper form-large">
+            <li class="form-fill-wrapper zf-large">
                 <label class="labelname">Preffered Course/Strand</label>
                 <div class="form-container">
-                    <select class="form-form-sBox" name="first-choice" checktype="c1">
+                    <select class="zf-form-sBox" name="first-choice" checktype="c1">
                         <option selected="true" value="-Select-">-First Choice-</option>
                         <option value="HUMMS">SHS: HUMMS</option>
                         <option value="ICT-Animation">SHS: ICT-Animation</option>
@@ -218,7 +217,7 @@
         </div>
         <div class="clearboth"></div>
         <div class="form-container">
-            <select class="form-form-sBox" name="second-choice" checktype="c1">
+            <select class="zf-form-sBox" name="second-choice" checktype="c1">
                 <option selected="true" value="-Select-">-Second Choice-</option>
                 <<option value="HUMMS">SHS: HUMMS</option>
                     <option value="ICT-Animation">SHS: ICT-Animation</option>
@@ -237,11 +236,11 @@
 
         <!-- Previous School-->
         <div class="form-container">
-            <li class="form-fill-wrapper form-large">
+            <li class="form-fill-wrapper zf-large">
                 <label class="labelname">
                     Previous School
                 </label>
-                <select class="form-form-sBox" name="previous-school" checktype="c1">
+                <select class="zf-form-sBox" name="previous-school" checktype="c1">
                     <option selected="true" value="-Select-">-Previous School Before Applying-</option>
                     <!-- List of schools -->
                     <option value="Anima Christi Center for Learning and Human Development">Anima Christi Center for Learning and Human Development</option>
@@ -325,7 +324,7 @@
             </li>
             <!---------Single Line Ends Here---------->
             <!---------Multiple Line Starts Here---------->
-            <li class="form-fill-wrapper form-large"><label class="labelname">
+            <li class="form-fill-wrapper zf-large"><label class="labelname">
                     Any medical condition to mention about the student?
                 </label>
                 <div class="form-container">
@@ -412,8 +411,8 @@
                     Terms and Conditions
                 </label>
                 <div class="form-container">
-                    <div class="form-termsContainer">
-                        <div class="form-termsMsg form-descFld">
+                    <div class="zf-termsContainer">
+                        <div class="zf-termsMsg zf-descFld">
                             <p style="margin: 12pt 0px; line-height: 1.2; direction: ltr" class="zw-paragraph heading0"><span style="vertical-align: baseline">It is required for the student to clear an non-graded examination and an admission fee of 500 pesos to be admitted to the school.</span><br /></p>
                             <div><span style="vertical-align: baseline">I agree with the terms and conditions of the school and declare that the information provided above is correct.</span> <br /></div>
                         </div>
@@ -429,6 +428,5 @@
         <ul>
             <li class="form-fmFooter"><button class="form-submitColor">Submit</button></li>
         </ul>
-    </form>
-</div>
-</div>
+</div><!-- 'templateWrapper' ends --></form>
+</div><!-- 'template' ends -->

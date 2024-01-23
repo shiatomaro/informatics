@@ -1,55 +1,83 @@
 @charset "UTF-8";
 
-input, input[type="text"], input[type="search"], isindex, textarea, button {
-	outline:none;
-	margin:0 auto;
-	padding:5px 10px;
-	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-    box-sizing: border-box;         /* Opera/IE 8+ */
+@charset "UTF-8";
+
+* {
+  box-sizing: border-box;
 }
 
-img, a {
-	border:0px;
-	outline:none;
-	text-decoration:none;
+body { 
+
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  position: center fixed;
 }
-img{
-	text-decoration:underline;
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
 }
-.form-flLeft {
-	float:left;
+
+input,
+input[type="text"],
+input[type="search"],
+isindex,
+textarea,
+button {
+  outline: none;
+  margin: 0 auto;
+  padding: 0.5rem 1rem;
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
 }
-.zf-flRight {
-	float:right;
-}
-.clearboth {
-	clear:both;
-}
-ol, ul {
+img {
+	text-decoration: underline;
+  }
+  .form-flLeft {
+	float: left;
+  }
+  .zf-flRight {
+	float: right;
+  }
+  .clearboth {
+	clear: both;
+  }
+  
+  ol,
+  ul {
 	list-style: none outside none;
-}
-.zf-normalText {
-	font-size:13px;
-	line-height:1.5;
-}
-.zf-smallText {
-	font-size:0.9em;
-	font-weight:normal;
-}
-.zf-smallHeading {
-	font-size:18px;
-}
-.zf-heading {
-	font-size:2em;
-}
-.zf-subHeading {
-	font-size:1.5em;
-}
-.zf-boldText, .zf-boldText a {
-	font-weight:bold;
-	text-decoration:none;
-}
+  }
+  
+  .zf-normalText {
+	font-size: 1rem;
+	line-height: 1.5;
+  }
+  .zf-smallText {
+	font-size: 0.9em;
+	font-weight: normal;
+  }
+  
+  .zf-smallHeading {
+	font-size: 1.5rem;
+  }
+  
+  .zf-heading {
+	font-size: 2rem;
+  }
+  .zf-subHeading {
+	font-size: 1.5rem;
+  }
+  
+  .zf-boldText,
+  .zf-boldText a {
+	font-weight: bold;
+	text-decoration: none;
+  }
 .zf-italicText {
 	font-style:italic;
 }
@@ -148,8 +176,9 @@ ol, ul {
 	padding:0 5px;
 }
 
-.form-overflow{ overflow:hidden;}
-
+.form-overflow {
+	overflow: hidden;
+  }
 /*****************template Header Starts Here****************/
 
 .header {
@@ -818,4 +847,12 @@ ol, ul {
 .note .form-descFld{
 	overflow:hidden;
 	font-size: 13px;
+}
+/****************Application scroll bar****************/
+#myForm {
+    height: 100vh; /* Adjust this value according to your needs */
+    overflow-y: auto;
+}
+#myForm::-webkit-scrollbar {
+    display: none;
 }
