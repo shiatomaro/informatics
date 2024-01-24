@@ -17,7 +17,7 @@ $conn->close();
 
 <div class="card text-primary bg-light p-3">
     <div class="card-body">
-        <h4 class="card-title">Informatics Admission</h4>
+        <h4 class="card-title">Informatics Admission Form</h4>
         <form action="actions/submit_application_action.php" method="post" enctype="multipart/form-data">
             <h6>Student Name</h6>
             <div class="row g-3">
@@ -81,11 +81,11 @@ $conn->close();
             </div>
 
             <div class="row g-3">
-                <div class="mb-3 col-12 col-md-4">
-                    <h6>Date of Birth</h6>
+                <div class="mb-3 col-12 col-md-6">
+                    <h6>Date of Birth (YYYY-MM-DD)</h6>
                     <input class="form-control" type="text" id="datepicker" name="birthdate" value="<?= $db_birthdate ?>" />
                 </div>
-                <div class="mb-3 col-12 col-md-4">
+                <div class="mb-3 col-12 col-md-6">
                     <h6>Sex assigned at Birth</h6>
                     <select class="form-select" name="sex">
                         <option <?= $db_sex == "male" ? "selected" : "" ?> value="male">Male</option>
@@ -354,6 +354,9 @@ $conn->close();
 <!-- Initialize Datepicker -->
 <script>
     $(document).ready(function() {
-        $('#datepicker').datepicker();
+        $('#datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+            startDate: '-16y',
+        });
     });
 </script>
