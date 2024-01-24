@@ -3,14 +3,22 @@ require_once 'actions/db.php';
 require_once 'utils.php';
 
 $queryParams = getQueryParams();
-if (!isset($queryParams['studNum'])) {
-    header("Location: /system/users?page=1");
+if (!isset($queryParams['user_id'])) {
+    header("Location: /system/student?page=1");
     exit();
 }
 
 // fetch data from the database
 $conn = getConn();
-$sql = "SELECT * FROM student_information WHERE student_num = {$queryParams['studNum']}";
+$user_id = $conn->real_escape_string($queryParams['user_id']);
+$sql = "
+    SELECT si.*, fc.name AS first_choice, sc.name AS second_choice, a.score AS exam_score
+    FROM student_information si
+    LEFT JOIN courses fc ON si.first_choice_course_id = fc.id
+    LEFT JOIN courses sc ON si.second_choice_course_id = sc.id
+    LEFT JOIN assessments a ON si.user_id = a.user_id
+    WHERE si.user_id = $user_id
+    ";
 $result = $conn->query($sql);
 $studInfo = $result->fetch_assoc();
 ?>
@@ -27,28 +35,18 @@ $studInfo = $result->fetch_assoc();
 
     <section>
         <ul class="list-group">
-            <li class="list-group-item"><b>Student Number</b>: <?= $studInfo['student_num'] ?></li>
-            <li class="list-group-item"><b>Name</b>: <?= "{$studInfo['name_prefix']} {$studInfo['first_name']} {$studInfo['middle_name']} {$studInfo['last_name']} {$studInfo['name_suffix']}" ?></li>
-            <li class="list-group-item"><b>Course</b>: <?= $studInfo['course_id'] ?></li>
+            <li class="list-group-item"><b>User ID</b>: <?= $studInfo['user_id'] ?></li>
+            <li class="list-group-item"><b>Name</b>: <?= "{$studInfo['fname']} {$studInfo['mname']} {$studInfo['lname']}" ?></li>
+            <li class="list-group-item"><b>First Choice</b>: <?= $studInfo['first_choice'] ?></li>
+            <li class="list-group-item"><b>Second Choice</b>: <?= $studInfo['second_choice'] ?></li>
             <li class="list-group-item"><b>Year Level</b>: <?= $studInfo['year_level'] ?></li>
+            <li class="list-group-item"><b>Exam Score</b>: <?= $studInfo['exam_score'] ?></li>
         </ul>
     </section>
 
     <section class="mt-3">
         <h2>Requirements</h2>
         <div class="accordion" id="accordionExample">
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Examination Results
-                    </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                    </div>
-                </div>
-            </div>
             <div class="accordion-item">
                 <h2 class="accordion-header">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
