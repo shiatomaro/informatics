@@ -43,7 +43,7 @@ $sql = "SELECT si.year_level, COUNT(sa.user_id) as count
         FROM student_applications sa
         LEFT JOIN student_information si ON sa.user_id = si.user_id
         WHERE sa.status = 'approved'
-        GROUP BY si.course_id";
+        GROUP BY si.first_choice";
 $result = $conn->query($sql);
 $labels = [];
 $data = [];
@@ -63,9 +63,8 @@ if ($result->num_rows > 0) {
 $sql = "SELECT c.name as course_name, COUNT(sa.user_id) as count 
         FROM student_applications sa
         LEFT JOIN student_information si ON sa.user_id = si.user_id
-        LEFT JOIN courses c ON si.course_id = c.id
         WHERE sa.status = 'approved'
-        GROUP BY si.course_id";
+        GROUP BY si.first_choice";
 $result = $conn->query($sql);
 $labels = [];
 $data = [];

@@ -5,10 +5,10 @@ require_once "controllers/credentials.php";
 requireCredentials();
 
 $conn = getConn();
-$stmt = $conn->prepare("SELECT fname, mname, lname, email, contact_num, address, citizenship, civil_status, rs_status, occupation, med_cond, birthdate, sex, mother_fname, mother_mname, mother_lname, mother_contact, mother_occupation, father_fname, father_mname, father_lname, father_contact, father_occupation, guardian_fname, guardian_mname, guardian_lname, guardian_contact, guardian_occupation, grade_level, first_choice, second_choice, prev_school, img_profile_filename, img_payment_filename, img_birthcert_filename, img_form137_filename, img_form138_filename, img_goodmoral_filename, img_brgyclear_filename, img_transfercert_filename  FROM student_information WHERE user_id = ?");
+$stmt = $conn->prepare("SELECT fname, mname, lname, email, contact_num, address, citizenship, civil_status, rs_status, occupation, med_cond, birthdate, sex, mother_fname, mother_mname, mother_lname, mother_contact, mother_occupation, father_fname, father_mname, father_lname, father_contact, father_occupation, guardian_fname, guardian_mname, guardian_lname, guardian_contact, guardian_occupation, year_level, first_choice, second_choice, prev_school, img_profile_filename, img_payment_filename, img_birthcert_filename, img_form137_filename, img_form138_filename, img_goodmoral_filename, img_brgyclear_filename, img_transfercert_filename  FROM student_information WHERE user_id = ?");
 $stmt->bind_param("s", $_SESSION["user_id"]);
 $stmt->execute();
-$stmt->bind_result($db_fname, $db_mname, $db_lname, $db_email, $db_contact_num, $db_address, $db_citizenship, $db_civil_status, $db_rs_status, $db_occupation, $db_med_cond, $db_birthdate, $db_sex, $db_mother_fname, $db_mother_mname, $db_mother_lname, $db_mother_contact, $db_mother_occupation, $db_father_fname, $db_father_mname, $db_father_lname, $db_father_contact, $db_father_occupation, $db_guardian_fname, $db_guardian_mname, $db_guardian_lname, $db_guardian_contact, $db_guardian_occupation, $db_grade_level, $db_first_choice, $db_second_choice, $db_prev_school, $db_img_profile_filename, $db_img_payment_filename, $db_img_birthcert_filename, $db_img_form137_filename, $db_img_form138_filename, $db_img_goodmoral_filename, $db_img_brgyclear_filename, $db_img_transfercert_filename);
+$stmt->bind_result($db_fname, $db_mname, $db_lname, $db_email, $db_contact_num, $db_address, $db_citizenship, $db_civil_status, $db_rs_status, $db_occupation, $db_med_cond, $db_birthdate, $db_sex, $db_mother_fname, $db_mother_mname, $db_mother_lname, $db_mother_contact, $db_mother_occupation, $db_father_fname, $db_father_mname, $db_father_lname, $db_father_contact, $db_father_occupation, $db_guardian_fname, $db_guardian_mname, $db_guardian_lname, $db_guardian_contact, $db_guardian_occupation, $db_year_level, $db_first_choice, $db_second_choice, $db_prev_school, $db_img_profile_filename, $db_img_payment_filename, $db_img_birthcert_filename, $db_img_form137_filename, $db_img_form138_filename, $db_img_goodmoral_filename, $db_img_brgyclear_filename, $db_img_transfercert_filename);
 $stmt->fetch();
 
 $stmt->close();
@@ -182,15 +182,15 @@ $conn->close();
 
             <div class="row g-3 mt-4">
                 <div class="mb-3 col-12 col-md-4">
-                    <h6>Grade level applying for</h6>
+                    <h6>Grade/Year level applying for</h6>
                     <select class="form-select" name="grade-level">
-                        <option selected value="<?= $db_grade_level ?>"></option>
-                        <option value="Grade11">Grade 11</option>
-                        <option value="Grade12">Grade 12</option>
-                        <option value="FIRSTYR">First year College</option>
-                        <option value="SECONDYR">Second year College</option>
-                        <option value="THIRDYR">Third year College</option>
-                        <option value="FOURTHYR">Fourth year College</option>
+                        <option selected value="<?= $db_year_level ?>"></option>
+                        <option value="G11">Grade 11</option>
+                        <option value="G12">Grade 12</option>
+                        <option value="YR1">First year College</option>
+                        <option value="YR2">Second year College</option>
+                        <option value="YR3">Third year College</option>
+                        <option value="YR4">Fourth year College</option>
                     </select>
                 </div>
                 <div class="mb-3 col-12 col-md-4">

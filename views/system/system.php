@@ -29,6 +29,9 @@ ob_start();
                 <?php require_once "views/system/sidebar.php" ?>
             </div>
             <main class="col container" id="content">
+                <div class="my-3">
+                    <?php require_once "views/message_card.php"; ?>
+                </div>
                 <?php
                 switch ($path) {
                     case '/dashboard':

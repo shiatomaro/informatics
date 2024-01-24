@@ -14,20 +14,10 @@
             <textarea class="form-control" name="course_desc" aria-label="Course Description" rows="3" placeholder="This course is about..."></textarea>
         </div>
         <div class="input-group mb-3">
-            <span class="input-group-text">Instructor</span>
-            <input type="text" class="form-control" aria-label="Instructor" placeholder="Dr. Who?" name="course_inst">
-        </div>
-        <div class="input-group mb-3">
             <span class="input-group-text">Course Status</span>
             <select class="form-control" name="course_status" aria-label="Course Status">
-                <option value="scheduled" selected>Scheduled</option>
                 <option value="open">Open</option>
                 <option value="closed">Closed</option>
-                <option value="canceled">Canceled</option>
-                <option value="waitlisted">Waitlisted</option>
-                <option value="completed">Completed</option>
-                <option value="in progress">In progress</option>
-                <option value="suspended">Suspended</option>
             </select>
         </div>
         <div class="d-flex justify-content-end">
