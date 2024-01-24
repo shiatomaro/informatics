@@ -16,6 +16,7 @@
 </head>
 
 <body style="height: 100vh;" class="m-0 p-0 overflow-hidden">
+    <?php require_once "views/student_dashboard/navbar.php" ?>
     <div class="d-flex h-100 w-100">
         <?php require_once "views/student_dashboard/sidebar.php" ?>
         <div class="col d-flex flex-column">

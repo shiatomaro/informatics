@@ -8,3 +8,8 @@ $accent_2: #B1D9F0;
 
 // Import Bootstrap
 @import "../bootstrap/scss/bootstrap.scss";
+
+.nav-link.active {
+    background-color: $primary;
+    color: white;
+}

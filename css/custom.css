@@ -11855,5 +11855,9 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.nav-link.active {
+  background-color: #3F5D70;
+  color: white;
+}
 
 /*# sourceMappingURL=custom.css.map */
