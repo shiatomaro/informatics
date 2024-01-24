@@ -8,8 +8,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn = getConn();
 
     // Prepare and bind the SQL statement
-    $stmt = $conn->prepare("INSERT INTO student_information (user_id, fname, mname, lname, email, contact_num, address, citizenship, civil_status, rs_status, occupation, med_cond, birthdate, sex, mother_fname, mother_mname, mother_lname, mother_contact, mother_occupation, father_fname, father_mname, father_lname, father_contact, father_occupation, guardian_fname, guardian_mname, guardian_lname, guardian_contact, guardian_occupation, year_level, first_choice_course_id, second_choice_course_id, prev_school, img_profile, img_profile_filename, img_payment, img_payment_filename, img_birthcert, img_birthcert_filename, img_form137, img_form137_filename, img_form138, img_form138_filename, img_goodmoral, img_goodmoral_filename, img_brgyclear, img_brgyclear_filename, img_transfercert, img_transfercert_filename) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-    $stmt->bind_param("issssssssssssssssssssssssssssssssssssssssssssssss", $user_id, $name_first, $name_middle, $name_last, $email, $contact_num, $address, $citizenship, $civil_status, $rs_status, $occupation, $med_condition, $birthdate, $sex, $mother_fname, $mother_mname, $mother_lname, $mother_contact, $mother_occupation, $father_fname, $father_mname, $father_lname, $father_contact, $father_occupation, $guardian_fname, $guardian_mname, $guardian_lname, $guardian_contact, $guardian_occupation, $year_level, $first_choice, $second_choice, $prev_school, $img_profile, $img_profile_filename, $img_payment, $img_payment_filename, $img_birthcert, $img_birthcert_filename, $img_form137, $img_form137_filename, $img_form138, $img_form137_filename, $img_goodmoral, $img_goodmoral_filename, $img_brgyclear, $img_brgyclear_filename, $img_transfercert, $img_transfercert_filename);
+    $stmt = $conn->prepare("INSERT INTO student_information (user_id, completed, fname, mname, lname, email, contact_num, address, citizenship, civil_status, rs_status, occupation, med_cond, birthdate, sex, mother_fname, mother_mname, mother_lname, mother_contact, mother_occupation, father_fname, father_mname, father_lname, father_contact, father_occupation, guardian_fname, guardian_mname, guardian_lname, guardian_contact, guardian_occupation, year_level, first_choice_course_id, second_choice_course_id, prev_school, img_profile, img_profile_filename, img_payment, img_payment_filename, img_birthcert, img_birthcert_filename, img_form137, img_form137_filename, img_form138, img_form138_filename, img_goodmoral, img_goodmoral_filename, img_brgyclear, img_brgyclear_filename, img_transfercert, img_transfercert_filename) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    $stmt->bind_param("isssssssssssssssssssssssssssssssssssssssssssssssss", $user_id, $completed, $name_first, $name_middle, $name_last, $email, $contact_num, $address, $citizenship, $civil_status, $rs_status, $occupation, $med_condition, $birthdate, $sex, $mother_fname, $mother_mname, $mother_lname, $mother_contact, $mother_occupation, $father_fname, $father_mname, $father_lname, $father_contact, $father_occupation, $guardian_fname, $guardian_mname, $guardian_lname, $guardian_contact, $guardian_occupation, $year_level, $first_choice, $second_choice, $prev_school, $img_profile, $img_profile_filename, $img_payment, $img_payment_filename, $img_birthcert, $img_birthcert_filename, $img_form137, $img_form137_filename, $img_form138, $img_form137_filename, $img_goodmoral, $img_goodmoral_filename, $img_brgyclear, $img_brgyclear_filename, $img_transfercert, $img_transfercert_filename);
 
     @session_start();
     $user_id = $_SESSION['user_id'];
@@ -80,6 +80,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $img_transfercert_filename = $conn->real_escape_string($_FILES["img-transfercert"]["name"]);
     $img_transfercert_filename = $img_transfercert_filename === "" ? null : $img_transfercert_filename;
 
+    $completed =
+        $name_first !== null &&
+        $name_middle !== null &&
+        $name_last !== null &&
+        $email !== null &&
+        $contact_num !== null &&
+        $address !== null &&
+        $citizenship !== null &&
+        $civil_status !== null &&
+        $rs_status !== null &&
+        $birthdate !== null &&
+        $sex !== null &&
+        $mother_fname !== null &&
+        $mother_mname !== null &&
+        $mother_lname !== null &&
+        $mother_contact !== null &&
+        $mother_occupation !== null &&
+        $father_fname !== null &&
+        $father_mname !== null &&
+        $father_lname !== null &&
+        $father_contact !== null &&
+        $father_occupation !== null &&
+        $guardian_fname !== null &&
+        $guardian_mname !== null &&
+        $guardian_lname !== null &&
+        $guardian_contact !== null &&
+        $year_level !== null &&
+        $first_choice !== null &&
+        $second_choice !== null &&
+        $prev_school !== null &&
+        $img_profile !== null &&
+        $img_payment !== null &&
+        $img_birthcert !== null &&
+        $img_form137 !== null &&
+        $img_form138 !== null &&
+        $img_goodmoral !== null &&
+        $img_brgyclear !== null &&
+        $img_transfercert !== null;
+
     // execute the prepared statement
     try {
         if ($stmt->execute()) {
@@ -116,8 +155,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $img_brgyclear_filename = $img_brgyclear_filename === null ? $db_img_brgyclear_filename : $img_brgyclear_filename;
             $img_transfercert_filename = $img_transfercert_filename === null ? $db_img_transfercert_filename : $img_transfercert_filename;
 
-            $stmt = $conn->prepare("UPDATE student_information SET fname = ?, mname = ?, lname = ?, email = ?, contact_num = ?, address = ?, citizenship = ?, civil_status = ?, rs_status = ?, occupation = ?, med_cond = ?, birthdate = ?, sex = ?, mother_fname = ?, mother_mname = ?, mother_lname = ?, mother_contact = ?, mother_occupation = ?, father_fname = ?, father_mname = ?, father_lname = ?, father_contact = ?, father_occupation = ?, guardian_fname = ?, guardian_mname = ?, guardian_lname = ?, guardian_contact = ?, guardian_occupation = ?, year_level = ?, first_choice_course_id = ?, second_choice_course_id = ?, prev_school = ?, img_profile = ?, img_profile_filename = ?, img_payment = ?, img_payment_filename = ?, img_birthcert = ?, img_birthcert_filename = ?, img_form137 = ?, img_form137_filename = ?, img_form138 = ?, img_form137_filename = ?, img_goodmoral = ?, img_goodmoral_filename = ?, img_brgyclear = ?, img_brgyclear_filename = ?, img_transfercert = ?, img_transfercert_filename = ? WHERE user_id = ?");
-            $stmt->bind_param("ssssssssssssssssssssssssssssssssssssssssssssssssi", $name_first, $name_middle, $name_last, $email, $contact_num, $address, $citizenship, $civil_status, $rs_status, $occupation, $med_condition, $birthdate, $sex, $mother_fname, $mother_mname, $mother_lname, $mother_contact, $mother_occupation, $father_fname, $father_mname, $father_lname, $father_contact, $father_occupation, $guardian_fname, $guardian_mname, $guardian_lname, $guardian_contact, $guardian_occupation, $year_level, $first_choice, $second_choice, $prev_school, $img_profile, $img_profile_filename, $img_payment, $img_payment_filename, $img_birthcert, $img_birthcert_filename, $img_form137, $img_form137_filename, $img_form138, $img_form137_filename, $img_goodmoral, $img_goodmoral_filename, $img_brgyclear, $img_brgyclear_filename, $img_transfercert, $img_transfercert_filename, $user_id);
+            $stmt = $conn->prepare("UPDATE student_information SET fname = ?, completed =?, mname = ?, lname = ?, email = ?, contact_num = ?, address = ?, citizenship = ?, civil_status = ?, rs_status = ?, occupation = ?, med_cond = ?, birthdate = ?, sex = ?, mother_fname = ?, mother_mname = ?, mother_lname = ?, mother_contact = ?, mother_occupation = ?, father_fname = ?, father_mname = ?, father_lname = ?, father_contact = ?, father_occupation = ?, guardian_fname = ?, guardian_mname = ?, guardian_lname = ?, guardian_contact = ?, guardian_occupation = ?, year_level = ?, first_choice_course_id = ?, second_choice_course_id = ?, prev_school = ?, img_profile = ?, img_profile_filename = ?, img_payment = ?, img_payment_filename = ?, img_birthcert = ?, img_birthcert_filename = ?, img_form137 = ?, img_form137_filename = ?, img_form138 = ?, img_form137_filename = ?, img_goodmoral = ?, img_goodmoral_filename = ?, img_brgyclear = ?, img_brgyclear_filename = ?, img_transfercert = ?, img_transfercert_filename = ? WHERE user_id = ?");
+            $stmt->bind_param("sssssssssssssssssssssssssssssssssssssssssssssssssi", $name_first, $completed, $name_middle, $name_last, $email, $contact_num, $address, $citizenship, $civil_status, $rs_status, $occupation, $med_condition, $birthdate, $sex, $mother_fname, $mother_mname, $mother_lname, $mother_contact, $mother_occupation, $father_fname, $father_mname, $father_lname, $father_contact, $father_occupation, $guardian_fname, $guardian_mname, $guardian_lname, $guardian_contact, $guardian_occupation, $year_level, $first_choice, $second_choice, $prev_school, $img_profile, $img_profile_filename, $img_payment, $img_payment_filename, $img_birthcert, $img_birthcert_filename, $img_form137, $img_form137_filename, $img_form138, $img_form137_filename, $img_goodmoral, $img_goodmoral_filename, $img_brgyclear, $img_brgyclear_filename, $img_transfercert, $img_transfercert_filename, $user_id);
 
             try {
                 if ($stmt->execute()) {
