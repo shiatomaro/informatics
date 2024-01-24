@@ -1,8 +1,3 @@
-<?php
-require_once "utils.php";
-// dd($_SESSION);
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -20,13 +15,11 @@ require_once "utils.php";
     <?php endif ?>
 </head>
 
-<body style="height: 100vh;" class="m-0 p-0">
+<body style="height: 100vh;" class="m-0 p-0 overflow-hidden">
     <div class="d-flex h-100 w-100">
-        <div class="col-3 h-100">
-            <?php require_once "views/student_dashboard/sidebar.php" ?>
-        </div>
+        <?php require_once "views/student_dashboard/sidebar.php" ?>
         <div class="col d-flex flex-column">
-            <main class="container mt-3 mr-3">
+            <main class="container mt-3 mr-3 overflow-auto">
                 <div class="mb-3">
                     <?php include "views/message_card.php" ?>
                 </div>
