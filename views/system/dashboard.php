@@ -29,7 +29,7 @@ if ($result->num_rows > 0) {
     $labels = [];
     $data = [];
     while ($row = $result->fetch_assoc()) {
-        $labels[] = $row['type'];
+        $labels[] = $row['status'];
         $data[] = (int)$row['count'];
     }
     $applicationsData = [
@@ -39,18 +39,19 @@ if ($result->num_rows > 0) {
 }
 
 // Get accepted applications, sorted per year level
-$sql = "SELECT si.year_level, COUNT(sa.user_id) as count 
+$sql = "SELECT si.year_level, COUNT(sa.user_id) as count
         FROM student_applications sa
         LEFT JOIN student_information si ON sa.user_id = si.user_id
         WHERE sa.status = 'approved'
-        GROUP BY si.first_choice";
+        GROUP BY si.year_level
+        ";
 $result = $conn->query($sql);
 $labels = [];
 $data = [];
 $acceptedPerYrLvl = [];
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $labels[] = $row['type'];
+        $labels[] = $row['year_level'];
         $data[] = (int)$row['count'];
     }
     $acceptedPerYrLvl = [
@@ -60,18 +61,19 @@ if ($result->num_rows > 0) {
 }
 
 // Get accepted applications, sorted per course
-$sql = "SELECT c.name as course_name, COUNT(sa.user_id) as count 
+$sql = "SELECT fc.name as course_name, COUNT(sa.user_id) as count 
         FROM student_applications sa
         LEFT JOIN student_information si ON sa.user_id = si.user_id
+        LEFT JOIN courses fc ON si.first_choice_course_id = fc.id
         WHERE sa.status = 'approved'
-        GROUP BY si.first_choice";
+        GROUP BY fc.name";
 $result = $conn->query($sql);
 $labels = [];
 $data = [];
 $acceptedPerCourse = [];
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $labels[] = $row['type'];
+        $labels[] = $row['course_name'];
         $data[] = (int)$row['count'];
     }
     $acceptedPerYrLvl = [
@@ -90,6 +92,7 @@ $cardsData = array(
     "Accepted (Per Year Level)" => $acceptedPerYrLvl,
     "Accepted (Per Course)" => $acceptedPerCourse
 );
+
 ?>
 
 <h1>Dashboard</h1>
