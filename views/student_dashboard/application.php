@@ -5,13 +5,23 @@ require_once "controllers/credentials.php";
 requireCredentials();
 
 $conn = getConn();
-$stmt = $conn->prepare("SELECT fname, mname, lname, email, contact_num, address, citizenship, civil_status, rs_status, occupation, med_cond, birthdate, sex, mother_fname, mother_mname, mother_lname, mother_contact, mother_occupation, father_fname, father_mname, father_lname, father_contact, father_occupation, guardian_fname, guardian_mname, guardian_lname, guardian_contact, guardian_occupation, year_level, first_choice, second_choice, prev_school, img_profile_filename, img_payment_filename, img_birthcert_filename, img_form137_filename, img_form138_filename, img_goodmoral_filename, img_brgyclear_filename, img_transfercert_filename  FROM student_information WHERE user_id = ?");
+
+// Get the already inputted data
+$stmt = $conn->prepare("SELECT si.fname, si.mname, si.lname, si.email, si.contact_num, si.address, si.citizenship, si.civil_status, si.rs_status, si.occupation, si.med_cond, si.birthdate, si.sex, si.mother_fname, si.mother_mname, si.mother_lname, si.mother_contact, si.mother_occupation, si.father_fname, si.father_mname, si.father_lname, si.father_contact, si.father_occupation, si.guardian_fname, si.guardian_mname, si.guardian_lname, si.guardian_contact, si.guardian_occupation, si.year_level, si.first_choice_course_id, fc.name AS first_choice, si.second_choice_course_id, sc.name AS second_choice, si.prev_school, si.img_profile_filename, si.img_payment_filename, si.img_birthcert_filename, si.img_form137_filename, si.img_form138_filename, si.img_goodmoral_filename, si.img_brgyclear_filename, si.img_transfercert_filename  
+FROM student_information si 
+JOIN courses fc ON si.first_choice_course_id = fc.id
+JOIN courses sc ON si.second_choice_course_id = sc.id
+WHERE si.user_id = ?
+");
 $stmt->bind_param("s", $_SESSION["user_id"]);
 $stmt->execute();
-$stmt->bind_result($db_fname, $db_mname, $db_lname, $db_email, $db_contact_num, $db_address, $db_citizenship, $db_civil_status, $db_rs_status, $db_occupation, $db_med_cond, $db_birthdate, $db_sex, $db_mother_fname, $db_mother_mname, $db_mother_lname, $db_mother_contact, $db_mother_occupation, $db_father_fname, $db_father_mname, $db_father_lname, $db_father_contact, $db_father_occupation, $db_guardian_fname, $db_guardian_mname, $db_guardian_lname, $db_guardian_contact, $db_guardian_occupation, $db_year_level, $db_first_choice, $db_second_choice, $db_prev_school, $db_img_profile_filename, $db_img_payment_filename, $db_img_birthcert_filename, $db_img_form137_filename, $db_img_form138_filename, $db_img_goodmoral_filename, $db_img_brgyclear_filename, $db_img_transfercert_filename);
+$stmt->bind_result($db_fname, $db_mname, $db_lname, $db_email, $db_contact_num, $db_address, $db_citizenship, $db_civil_status, $db_rs_status, $db_occupation, $db_med_cond, $db_birthdate, $db_sex, $db_mother_fname, $db_mother_mname, $db_mother_lname, $db_mother_contact, $db_mother_occupation, $db_father_fname, $db_father_mname, $db_father_lname, $db_father_contact, $db_father_occupation, $db_guardian_fname, $db_guardian_mname, $db_guardian_lname, $db_guardian_contact, $db_guardian_occupation, $db_year_level, $db_first_choice_id, $db_first_choice, $db_second_choice_id, $db_second_choice, $db_prev_school, $db_img_profile_filename, $db_img_payment_filename, $db_img_birthcert_filename, $db_img_form137_filename, $db_img_form138_filename, $db_img_goodmoral_filename, $db_img_brgyclear_filename, $db_img_transfercert_filename);
 $stmt->fetch();
-
 $stmt->close();
+
+// get the courses data
+$courses = $conn->query("SELECT id, name FROM courses")->fetch_all();
+
 $conn->close();
 ?>
 
@@ -196,30 +206,20 @@ $conn->close();
                 <div class="mb-3 col-12 col-md-4">
                     <h6>Preferred Course/Strand</h6>
                     <select class="form-select" name="choice-1">
-                        <option selected value="<?= $db_first_choice ?>"></option>
-                        <option value="HUMMS">SHS: HUMMS</option>
-                        <option value="ICT-Animation">SHS: ICT-Animation</option>
-                        <option value="ICT-Programming">SHS: ICT-Programming</option>
-                        <option value="GAS">SHS: GAS</option>
-                        <option value="ABM">College: ABM</option>
-                        <option value="BSIT">College: BSIT</option>
-                        <option value="BSBA">College: BSBA</option>
-                        <option value="BSCS">College: BSCS</option>
+                        <option selected value="<?= $db_first_choice_id ?>"><?= $db_first_choice ?></option>
+                        <?php foreach ($courses as $course) : ?>
+                            <option value="<?= $course[0] ?>"><?= $course[1] ?></option>
+                        <?php endforeach ?>
                     </select>
                     <small>First choce</small>
                 </div>
                 <div class="mb-3 col-12 col-md-4">
                     <h6>&nbsp;</h6>
                     <select class="form-select" name="choice-2">
-                        <option selected value="<?= $db_second_choice ?>"></option>
-                        <option value="HUMMS">SHS: HUMMS</option>
-                        <option value="ICT-Animation">SHS: ICT-Animation</option>
-                        <option value="ICT-Programming">SHS: ICT-Programming</option>
-                        <option value="GAS">SHS: GAS</option>
-                        <option value="ABM">College: ABM</option>
-                        <option value="BSIT">College: BSIT</option>
-                        <option value="BSBA">College: BSBA</option>
-                        <option value="BSCS">College: BSCS</option>
+                        <option selected value="<?= $db_second_choice_id ?>"><?= $db_second_choice ?></option>
+                        <?php foreach ($courses as $course) : ?>
+                            <option value="<?= $course[0] ?>"><?= $course[1] ?></option>
+                        <?php endforeach ?>
                     </select>
                     <small>Second Choice</small>
                 </div>
