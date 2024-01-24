@@ -15,7 +15,7 @@ $stmt->close();
 $conn->close();
 ?>
 
-<div class="card text-primary bg-light p-3">
+<div class="card text-primary bg-light p-3 mb-5">
     <div class="card-body">
         <h4 class="card-title">Informatics Admission Form</h4>
         <form action="actions/submit_application_action.php" method="post" enctype="multipart/form-data">
