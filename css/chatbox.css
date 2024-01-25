@@ -59,6 +59,7 @@
     max-height: 200px;
     overflow-y: auto;
     background-color: #f9f9f9;
+    border-radius: 2px;
 }
 
 .message {

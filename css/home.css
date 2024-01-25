@@ -1,8 +1,9 @@
 .carousel-item img {
     width: 100%;
-    max-height: 400px;
+    max-height: 450px;
     display: block;
     overflow: hidden;
+    justify-content: center;
 }
 
 footer {
@@ -21,8 +22,9 @@ footer a:hover {
 body {
     padding-top: 106px;
 }
+
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif; /* Use the Roboto font for the entire page */
 }
