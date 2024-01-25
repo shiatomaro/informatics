@@ -6,6 +6,24 @@
     <title>Facial Recog Test</title>
     <link rel="stylesheet" href="css/test.css">
     <script src="face-api.js/dist/face-api.js"></script>
+
+    <style>
+        #video-container {
+            overflow: hidden;
+            position: relative;
+            width: 400px;
+            /* Set the desired width */
+            height: 400px;
+            /* Set the desired height */
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -18,7 +36,10 @@
             </div>
         </div>
         <div class="card m-1">
-            <img src="images/face_detect/input_img.jpg" id="inputImg" class="card-img-top">
+            <div id="video-container">
+                <video id="video" playsinline autoplay muted></video>
+            </div>
+
             <div class="card-body">
                 <h4 class="card-title">Input Image</h4>
                 <p class="card-text">This is the input image from the user</p>
@@ -29,7 +50,7 @@
         <b>Similarity: </b><span id="result_msg">Processing...</span>
     </div>
 
-    <script type="module" src="js/script.js"></script>
+    <script type="module" src="js/face_recognition.js"></script>
 </body>
 
 </html>
