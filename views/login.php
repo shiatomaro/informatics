@@ -3,9 +3,9 @@
 
 <head>
     <?php require_once 'views/templates/head.php'; ?>
+    <link rel="stylesheet" href="css/home.css">
     <title>Informatics Admission | Log In</title>
 </head>
-
 <body style="height: 100vh;">
     <div class="d-flex row justify-content-center pt-5 mx-2">
         <div class="col col-md-6">
@@ -14,7 +14,7 @@
 
                     <div class="container d-flex align-items-center">
                         <h1 class="card-title">Log in</h1>
-                        <a class="btn btn-secondary ms-auto" href="/" role="button">Home</a>
+                        <a class="btn btn-secondary ms-auto" href="/" role="button" id="home-button"> <img src="images/icons/back-icon.png" class="back-icon"></a>
                     </div>
 
                     <div class="container">
@@ -31,11 +31,11 @@
                                 <input type="checkbox" class="form-check-input" id="showPassword">
                                 <label class="form-check-label" for="showPassword">Show password</label>
                             </div>
-                            <button type="submit" class="btn btn-primary w-100">Login</button>
+                            <button type="submit" class="btn btn-primary w-100" id="logrete">Login</button>
                         </form>
                         <div>
                             <p class="text-muted text-center">Don't have an account?
-                                <em><a href="/signup">Sign up</em><br>
+                                <em><a href="/signup" class="link">Sign up</em><br>
                             </p>
                         </div>
                     </div>

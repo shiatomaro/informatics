@@ -28,3 +28,50 @@ body {
     padding: 0;
     font-family: 'Roboto', sans-serif; /* Use the Roboto font for the entire page */
 }
+/****SIGN UP AND LOG IN ****/
+
+h1 {
+    font-size: 2em; /* Default font size for h1 */ 
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 2em; /* Adjust font size for smaller screens */
+    }
+}
+
+/* Media query for medium-sized screens */
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+    h1 {
+        text-align: center;
+        font-size: 2.5em; /* Adjust font size for medium-sized screens */
+    }
+}
+#home-button {
+    background-color: transparent;
+    border: none;
+}
+.back-icon {
+    max-width: 50px;
+    height: 2.4em;
+
+}
+.card {
+    background-color: #5b95eb;
+    color: rgb(255, 255, 255);
+    box-shadow: 5px 5px 10px rgba(50, 50, 50, 0.2);
+    display: flex;
+    justify-content: center;
+
+}
+.link {
+    color: rgb(254, 255, 255);
+    text-decoration: none;
+    font-size: 1.1em;
+}
+#logrete {
+    color: aliceblue;
+    background-color:  #4f5154;
+    border: none;
+}

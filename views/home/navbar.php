@@ -1,7 +1,12 @@
+<head>
+<title></title>
+<link rel="stylesheet" href="css/navbar.css">
+</head>
+<body>
 <nav class="navbar bg-secondary text-primary bg-gradient shadow fixed-top">
     <div class="container-fluid">
         <!-- NAVBAR -->
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" href="/" id="navbar">
             <img src="images/logo.png" alt="Informatics" width="240" height="80">
         </a>
 
@@ -9,9 +14,6 @@
             <?php if (!isset($_SESSION['username'])) : ?>
                 <li class="nav-item">
                     <a class="nav-link" href="/login">Log in</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link ms-2" href="/signup">Sign up</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link ms-2" href="/contact">Contact us</a>
@@ -79,3 +81,4 @@
         </div>
     </div>
 </nav>
+</body>
