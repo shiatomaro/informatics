@@ -7,7 +7,7 @@ requireCredentials();
 $conn = getConn();
 
 // Get the already inputted data
-$stmt = $conn->prepare("SELECT si.fname, si.mname, si.lname, si.email, si.contact_num, si.address, si.citizenship, si.civil_status, si.rs_status, si.occupation, si.med_cond, si.birthdate, si.sex, si.mother_fname, si.mother_mname, si.mother_lname, si.mother_contact, si.mother_occupation, si.father_fname, si.father_mname, si.father_lname, si.father_contact, si.father_occupation, si.guardian_fname, si.guardian_mname, si.guardian_lname, si.guardian_contact, si.guardian_occupation, si.year_level, si.first_choice_course_id, fc.name AS first_choice, si.second_choice_course_id, sc.name AS second_choice, si.prev_school, si.img_profile_filename, si.img_payment_filename, si.img_birthcert_filename, si.img_form137_filename, si.img_form138_filename, si.img_goodmoral_filename, si.img_brgyclear_filename, si.img_transfercert_filename  
+$stmt = $conn->prepare("SELECT si.fname, si.mname, si.lname, si.email, si.contact_num, si.address, si.citizenship, si.civil_status, si.rs_status, si.occupation, si.med_cond, si.birthdate, si.sex, si.mother_fname, si.mother_mname, si.mother_lname, si.mother_contact, si.mother_occupation, si.father_fname, si.father_mname, si.father_lname, si.father_contact, si.father_occupation, si.guardian_fname, si.guardian_mname, si.guardian_lname, si.guardian_contact, si.year_level, si.first_choice_course_id, fc.name AS first_choice, si.second_choice_course_id, sc.name AS second_choice, si.prev_school, si.img_profile_filename, si.img_payment_filename, si.img_birthcert_filename, si.img_form137_filename, si.img_form138_filename, si.img_goodmoral_filename, si.img_brgyclear_filename, si.img_transfercert_filename  
 FROM student_information si 
 JOIN courses fc ON si.first_choice_course_id = fc.id
 JOIN courses sc ON si.second_choice_course_id = sc.id
@@ -15,7 +15,7 @@ WHERE si.user_id = ?
 ");
 $stmt->bind_param("s", $_SESSION["user_id"]);
 $stmt->execute();
-$stmt->bind_result($db_fname, $db_mname, $db_lname, $db_email, $db_contact_num, $db_address, $db_citizenship, $db_civil_status, $db_rs_status, $db_occupation, $db_med_cond, $db_birthdate, $db_sex, $db_mother_fname, $db_mother_mname, $db_mother_lname, $db_mother_contact, $db_mother_occupation, $db_father_fname, $db_father_mname, $db_father_lname, $db_father_contact, $db_father_occupation, $db_guardian_fname, $db_guardian_mname, $db_guardian_lname, $db_guardian_contact, $db_guardian_occupation, $db_year_level, $db_first_choice_id, $db_first_choice, $db_second_choice_id, $db_second_choice, $db_prev_school, $db_img_profile_filename, $db_img_payment_filename, $db_img_birthcert_filename, $db_img_form137_filename, $db_img_form138_filename, $db_img_goodmoral_filename, $db_img_brgyclear_filename, $db_img_transfercert_filename);
+$stmt->bind_result($db_fname, $db_mname, $db_lname, $db_email, $db_contact_num, $db_address, $db_citizenship, $db_civil_status, $db_rs_status, $db_occupation, $db_med_cond, $db_birthdate, $db_sex, $db_mother_fname, $db_mother_mname, $db_mother_lname, $db_mother_contact, $db_mother_occupation, $db_father_fname, $db_father_mname, $db_father_lname, $db_father_contact, $db_father_occupation, $db_guardian_fname, $db_guardian_mname, $db_guardian_lname, $db_guardian_contact, $db_year_level, $db_first_choice_id, $db_first_choice, $db_second_choice_id, $db_second_choice, $db_prev_school, $db_img_profile_filename, $db_img_payment_filename, $db_img_birthcert_filename, $db_img_form137_filename, $db_img_form138_filename, $db_img_goodmoral_filename, $db_img_brgyclear_filename, $db_img_transfercert_filename);
 $stmt->fetch();
 $stmt->close();
 
@@ -138,7 +138,7 @@ $conn->close();
             <h6 class="mt-4">Father's Information</h6>
             <div class="row g-3">
                 <div class="mb-3 col-12 col-md-4">
-                    <input type="text" name="father-name-first" id="father-name-first" class="form-control" value="<?= $db_father_occupation ?>" />
+                    <input type="text" name="father-name-first" id="father-name-first" class="form-control" value="<?= $db_father_fname ?>" />
                     <small>Father's First Name</small>
                     <small id="father-name-first-err" class="text-danger"></small>
                 </div>
@@ -194,7 +194,28 @@ $conn->close();
                 <div class="mb-3 col-12 col-md-4">
                     <h6>Grade/Year level applying for</h6>
                     <select class="form-select" name="grade-level">
-                        <option selected value="<?= $db_year_level ?>"></option>
+                        <option selected value="<?= $db_year_level ?>">
+                            <?php switch ($db_year_level) {
+                                case "G11":
+                                    echo "Grade 11";
+                                    break;
+                                case "G12":
+                                    echo "Grade 12";
+                                    break;
+                                case "YR1":
+                                    echo "First year College";
+                                    break;
+                                case "YR2":
+                                    echo "Second year College";
+                                    break;
+                                case "YR3":
+                                    echo "Third year College";
+                                    break;
+                                case "YR4":
+                                    echo "Fourth year College";
+                                    break;
+                            } ?>
+                        </option>
                         <option value="G11">Grade 11</option>
                         <option value="G12">Grade 12</option>
                         <option value="YR1">First year College</option>
@@ -226,10 +247,10 @@ $conn->close();
             </div>
 
             <div class="row g-3">
-                <div class="mb-3 col-12 col-md-4">
+                <div class="mb-3 col-12">
                     <h6>Previous School</h6>
                     <select class="form-select collapse show" name="prev-school-dropdown" id="prev-school-collapse" aria-expanded="true">
-                        <option selected value="<?= $db_prev_school ?>"></option>
+                        <option selected value="<?= $db_prev_school ?>"><?= $db_prev_school ?></option>
                         <option value="Anima Christi Center for Learning and Human Development">Anima Christi Center for Learning and Human Development</option>
                         <option value="APEC">APEC</option>
                         <option value="Bay View Academy">Bay View Academy</option>
@@ -292,7 +313,7 @@ $conn->close();
                         <input type="text" name="prev-school-input" class="form-control" />
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="<?= $db_prev_school ?>" id="prev-school-checkbox" data-bs-toggle="collapse" data-bs-target="#prev-school-collapse">
+                        <input class="form-check-input" type="checkbox" id="prev-school-checkbox" data-bs-toggle="collapse" data-bs-target="#prev-school-collapse">
                         <label class="form-check-label" for="prev-school-checkbox">
                             Outside of Muntinlupa
                         </label>
@@ -305,41 +326,49 @@ $conn->close();
                 <div class="mb-3 col-12 col-md-4">
                     <h6>1x1 Photo</h6>
                     <small><?= $db_img_profile_filename !== null ? $db_img_profile_filename : "no image uploaded"; ?></small>
+                    <input type="text" name="img-profile-filename" value="<?= $db_img_profile_filename ?>" hidden>
                     <input class="form-control" type="file" name="img-profile" accept="image/*">
                 </div>
                 <div class="mb-3 col-12 col-md-4">
                     <h6>Proof of payment</h6>
                     <small><?= $db_img_payment_filename !== null ? $db_img_payment_filename : "no image uploaded"; ?></small>
+                    <input type="text" name="img-payment-filename" value="<?= $db_img_payment_filename ?>" hidden>
                     <input class="form-control" type="file" name="img-payment" accept="image/*">
                 </div>
                 <div class="mb-3 col-12 col-md-4">
                     <h6>Birth Certificate</h6>
                     <small><?= $db_img_birthcert_filename !== null ? $db_img_birthcert_filename : "no image uploaded"; ?></small>
+                    <input type="text" name="img-birthcert-filename" value="<?= $db_img_birthcert_filename ?>" hidden>
                     <input class="form-control" type="file" name="img-birthcert" accept="image/*">
                 </div>
                 <div class="mb-3 col-12 col-md-4">
                     <h6>Form-137</h6>
                     <small><?= $db_img_form137_filename !== null ? $db_img_form137_filename : "no image uploaded"; ?></small>
+                    <input type="text" name="img-form137-filename" value="<?= $db_img_form137_filename ?>" hidden>
                     <input class="form-control" type="file" name="img-form137" accept="image/*">
                 </div>
                 <div class="mb-3 col-12 col-md-4">
                     <h6>Form-138</h6>
                     <small><?= $db_img_form138_filename !== null ? $db_img_form138_filename : "no image uploaded"; ?></small>
+                    <input type="text" name="img-form138-filename" value="<?= $db_img_form138_filename ?>" hidden>
                     <input class="form-control" type="file" name="img-form138" accept="image/*">
                 </div>
                 <div class="mb-3 col-12 col-md-4">
                     <h6>Good Moral</h6>
                     <small><?= $db_img_goodmoral_filename !== null ? $db_img_goodmoral_filename : "no image uploaded"; ?></small>
+                    <input type="text" name="img-goodmoral-filename" value="<?= $db_img_goodmoral_filename ?>" hidden>
                     <input class="form-control" type="file" name="img-goodmoral" accept="image/*">
                 </div>
                 <div class="mb-3 col-12 col-md-4">
                     <h6>Baranggay Clearance</h6>
                     <small><?= $db_img_brgyclear_filename !== null ? $db_img_brgyclear_filename : "no image uploaded"; ?></small>
+                    <input type="text" name="img-brgyclear-filename" value="<?= $db_img_brgyclear_filename ?>" hidden>
                     <input class="form-control" type="file" name="img-brgyclearance" accept="image/*">
                 </div>
                 <div class="mb-3 col-12 col-md-8">
                     <h6>Previous School Transfer Certificate (if applicable)</h6>
                     <small><?= $db_img_transfercert_filename !== null ? $db_img_transfercert_filename : "no image uploaded"; ?></small>
+                    <input type="text" name="img-transfercert-filename" value="<?= $db_img_transfercert_filename ?>" hidden>
                     <input class="form-control" type="file" name="img-transfercert" accept="image/*">
                 </div>
             </div>
