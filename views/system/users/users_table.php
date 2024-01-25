@@ -1,6 +1,5 @@
 <?php
 require_once 'actions/db.php';
-require_once 'utils.php';
 
 $queryParams = getQueryParams();
 if (!isset($queryParams['id']) && !isset($queryParams['page'])) {
@@ -22,6 +21,7 @@ $result = $conn->query($sql);
 // Table pagination logic
 $totalrecords = $conn->query("SELECT COUNT(*) as total FROM users")->fetch_assoc()['total'];
 $totalPages = ceil($totalrecords / $recordsPerPage);
+$conn->close();
 ?>
 
 <?php if ($result->num_rows > 0) : ?>

@@ -3,7 +3,7 @@ require_once 'actions/db.php';
 require_once 'utils.php';
 
 $queryParams = getQueryParams();
-if (!isset($queryParams['id']) && !isset($queryParams['page'])) {
+if (!isset($queryParams['user_id']) && !isset($queryParams['page'])) {
     header("Location: /system/students?page=1");
     $currentPage = 1;
     exit();
@@ -16,7 +16,14 @@ $offset = ($currentPage - 1) * $recordsPerPage;
 
 // fetch data from the database
 $conn = getConn();
-$sql = "SELECT student_num, name_prefix, first_name, middle_name, last_name, name_suffix, course_id, year_level FROM student_information LIMIT $recordsPerPage OFFSET $offset";
+$sql = "
+    SELECT si.user_id, si.fname, si.mname, si.lname, fc.name AS first_choice, sc.name AS second_choice, si.year_level 
+    FROM student_information si
+    LEFT JOIN courses fc ON si.first_choice_course_id = fc.id
+    LEFT JOIN courses sc ON si.second_choice_course_id = sc.id
+    LIMIT $recordsPerPage 
+    OFFSET $offset
+    ";
 $result = $conn->query($sql);
 
 // Table pagination logic
@@ -29,21 +36,23 @@ $totalPages = ceil($totalrecords / $recordsPerPage);
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">Student Number</th>
+                <th scope="col">User ID</th>
                 <th scope="col">Full Name</th>
-                <th scope="col">Course</th>
                 <th scope="col">Year Level</th>
+                <th scope="col">Second Choice Course</th>
+                <th scope="col">First Choice Course</th>
                 <th scope="col">Info</th>
             </tr>
         </thead>
         <tbody>
             <?php while ($row = $result->fetch_assoc()) : ?>
                 <tr>
-                    <td scope="row"><?= $row['student_num']; ?></td>
-                    <td scope="row"><?= "{$row['name_prefix']} {$row['first_name']} {$row['middle_name']} {$row['last_name']} {$row['name_suffix']}"; ?></td>
-                    <td scope="row"><?= $row['course_id']; ?></td>
+                    <td scope="row"><?= $row['user_id']; ?></td>
+                    <td scope="row"><?= "{$row['fname']} {$row['mname']} {$row['lname']}"; ?></td>
                     <td scope="row"><?= $row['year_level']; ?></td>
-                    <td><a class="btn btn-primary d-inline" href=<?= "/system/students?studNum={$row['student_num']}" ?> role="button">info</a></td>
+                    <td scope="row"><?= $row['first_choice']; ?></td>
+                    <td scope="row"><?= $row['second_choice']; ?></td>
+                    <td><a class="btn btn-primary d-inline" href=<?= "/system/students?user_id={$row['user_id']}" ?> role="button">info</a></td>
                 </tr>
             <?php endwhile ?>
         </tbody>

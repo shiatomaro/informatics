@@ -4,7 +4,7 @@ $queryParams = getQueryParams();
 ?>
 
 <div class="container">
-    <?php if (isset($queryParams['code'])) : ?>
+    <?php if (isset($queryParams['id'])) : ?>
         <?php include 'views/system/courses/course_info.php'; ?>
     <?php else : ?>
         <?php include 'views/system/courses/courses_table.php'; ?>

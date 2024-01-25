@@ -9,6 +9,7 @@
 	<title>Informatics Admission</title>
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="css/home.css">
+	<link rel="stylesheet" href="css/chatbox.css">
 </head>
 
 <body>
@@ -21,14 +22,16 @@
 	</section>
 
 	<section class="row m-5">
-		<div class="col-md-6">
+		<div class="col col-md-6">
 			<h2>Welcome to Informatics Northgate Admission Website!</h2>
 			<p>Informatics College Northgate, Indo China Drive informatics is one of the pioneers of online learning in the Philippines. We have been using online platforms to teach and give certifications since the early 2000s when we launched Purple Train. Long before the pandemic began, students of Informatics College have been receiving a blended form of education: online learning and traditional face-to-face school setup. Learn more about our globally recognized and award-winning digital learning resources and online learning management system.</p>
-			<a class="btn btn-primary" href="/signup" role="button">Apply Now!</a>
+			<div class="container-fluid text-end">
+				<a class="btn btn-primary" href="/signup" role="button">Apply Now!</a>
+			</div>
 		</div>
-		<div class="d-hidden col-md-6 text-center">
-			<img class="d-inline-block h-100" src="images/stock/7.jpg" alt="...">
-		</div>
+		<div class="d-none d-md-block col-md-6 text-center">
+		<iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FInfo.Alabang%2Fvideos%2F1045685993249773%2F&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+	</div>
 	</section>
 
 	<section class="m-5">
@@ -39,7 +42,7 @@
 	</section>
 
 	<section class="row m-5">
-		<div class="d-hidden col-md-6 text-center">
+		<div class="d-none d-md-block col-md-6 text-center">
 			<img class="d-inline-block h-100" src="images/stock/8.jpg" alt="...">
 		</div>
 		<div class="col-md-6 text-end">
@@ -64,7 +67,8 @@
 		</p>
 	</footer>
 
-	<?php include_once("views/templates/body_scripts.php"); ?>
+	<?php include_once "views/templates/body_scripts.php"; ?>
+	<?php include_once("views/home/chatbox.php") ?>
 </body>
 
 </html>

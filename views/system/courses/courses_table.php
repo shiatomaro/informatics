@@ -3,7 +3,7 @@ require_once 'actions/db.php';
 require_once 'utils.php';
 
 $queryParams = getQueryParams();
-if (!isset($queryParams['code']) && !isset($queryParams['page'])) {
+if (!isset($queryParams['id']) && !isset($queryParams['page'])) {
     header("Location: /system/courses?page=1");
     $currentPage = 1;
     exit();
@@ -16,7 +16,7 @@ $offset = ($currentPage - 1) * $recordsPerPage;
 
 // fetch data from the database
 $conn = getConn();
-$sql = "SELECT code, name, instructor, status FROM courses LIMIT $recordsPerPage OFFSET $offset";
+$sql = "SELECT id, code, name, status FROM courses LIMIT $recordsPerPage OFFSET $offset";
 $result = $conn->query($sql);
 
 // Table pagination logic
@@ -36,7 +36,6 @@ $totalPages = ceil($totalrecords / $recordsPerPage);
             <tr>
                 <th scope="col">Code</th>
                 <th scope="col">Name</th>
-                <th scope="col">Instructor</th>
                 <th scope="col">Status</th>
                 <th scope="col"></th>
             </tr>
@@ -46,9 +45,8 @@ $totalPages = ceil($totalrecords / $recordsPerPage);
                 <tr>
                     <td scope="row"><?= $row['code'] ?></td>
                     <td><?= $row['name'] ?></td>
-                    <td><?= $row['instructor'] ?></td>
                     <td><?= $row['status'] ?></td>
-                    <td><a class="btn btn-primary d-inline" href=<?= "/system/courses?code={$row['code']}" ?> role="button">Edit</a>
+                    <td><a class="btn btn-primary d-inline" href=<?= "/system/courses?id={$row['id']}" ?> role="button">Edit</a>
                     </td>
                 </tr>
             <?php endwhile ?>

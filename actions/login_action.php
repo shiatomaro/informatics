@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn = getConn();
 
     // Retrieve the hashed password from the database for the given username
-    $stmt = $conn->prepare("SELECT username, password_hash, type FROM users WHERE username = ?");
+    $stmt = $conn->prepare("SELECT id, username, password_hash, type FROM users WHERE username = ?");
     $stmt->bind_param("s", $username);
 
     // fetch the data from the form
@@ -14,13 +14,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // fetch the data from the database
     $stmt->execute();
-    $stmt->bind_result($dbUsername, $hashedPassword, $user_type);
+    $stmt->bind_result($userId, $dbUsername, $hashedPassword, $user_type);
     $stmt->fetch();
 
     if ($dbUsername && password_verify($password, $hashedPassword)) {
         $started = session_start();
         if ($started) {
             $_SESSION['username'] = $dbUsername;
+            $_SESSION['user_id'] = $userId;
             $_SESSION['user_type'] = strtolower($user_type);
 
             if ($user_type === 'admin' || $user_type === 'registrar') {
