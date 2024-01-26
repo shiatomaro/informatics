@@ -21,6 +21,15 @@ $sql = "
     ";
 $result = $conn->query($sql);
 $studInfo = $result->fetch_assoc();
+$conn->close();
+$img_profile = base64_encode($studInfo['img_profile']);
+$img_payment = base64_encode($studInfo['img_payment']);
+$img_birthcert = base64_encode($studInfo['img_birthcert']);
+$img_form137 = base64_encode($studInfo['img_form137']);
+$img_form138 = base64_encode($studInfo['img_form138']);
+$img_goodmoral = base64_encode($studInfo['img_goodmoral']);
+$img_brgyclear = base64_encode($studInfo['img_brgyclear']);
+$img_transfercert = base64_encode($studInfo['img_transfercert']);
 ?>
 
 <div class="container">
@@ -46,43 +55,104 @@ $studInfo = $result->fetch_assoc();
 
     <section class="mt-3">
         <h2>Requirements</h2>
-        <div class="accordion" id="accordionExample">
+        <div class="accordion" id="requirementsAccordion">
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Form137
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-profile">
+                        Profile Photo
                     </button>
                 </h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div id="collapse-profile" class="accordion-collapse collapse" data-bs-parent="#requirementsAccordion">
                     <div class="accordion-body">
-                        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        <img src="data:image/jpeg;base64,<?= $img_profile ?>">
                     </div>
                 </div>
             </div>
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Form138
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-payment">
+                        Payment
                     </button>
                 </h2>
-                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div id="collapse-payment" class="accordion-collapse collapse" data-bs-parent="#requirementsAccordion">
                     <div class="accordion-body">
-                        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        <img src="data:image/jpeg;base64,<?= $img_payment ?>">
                     </div>
                 </div>
             </div>
             <div class="accordion-item">
                 <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                        Student Evaluation
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-birthcert">
+                        Birth Certificate
                     </button>
                 </h2>
-                <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div id="collapse-birthcert" class="accordion-collapse collapse" data-bs-parent="#requirementsAccordion">
                     <div class="accordion-body">
-                        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        <img src="data:image/jpeg;base64,<?= $img_birthcert ?>">
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-form137">
+                        Form 137
+                    </button>
+                </h2>
+                <div id="collapse-form137" class="accordion-collapse collapse" data-bs-parent="#requirementsAccordion">
+                    <div class="accordion-body">
+                        <img src="data:image/jpeg;base64,<?= $img_form137 ?>">
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-form138">
+                        Form 138
+                    </button>
+                </h2>
+                <div id="collapse-form138" class="accordion-collapse collapse" data-bs-parent="#requirementsAccordion">
+                    <div class="accordion-body">
+                        <img src="data:image/jpeg;base64,<?= $img_form138 ?>">
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-goodmoral">
+                        Good Moral
+                    </button>
+                </h2>
+                <div id="collapse-goodmoral" class="accordion-collapse collapse" data-bs-parent="#requirementsAccordion">
+                    <div class="accordion-body">
+                        <img src="data:image/jpeg;base64,<?= $img_goodmoral ?>">
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-brgyclear">
+                        Baranggay Clearance
+                    </button>
+                </h2>
+                <div id="collapse-brgyclear" class="accordion-collapse collapse" data-bs-parent="#requirementsAccordion">
+                    <div class="accordion-body">
+                        <img src="data:image/jpeg;base64,<?= $img_brgyclear ?>">
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-transfercert">
+                        Transfer Certificate
+                    </button>
+                </h2>
+                <div id="collapse-transfercert" class="accordion-collapse collapse" data-bs-parent="#requirementsAccordion">
+                    <div class="accordion-body">
+                        <img src="data:image/jpeg;base64,<?= $img_transfercert ?>">
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
 </div>
