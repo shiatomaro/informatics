@@ -1,12 +1,7 @@
-<head>
-<title></title>
-<link rel="stylesheet" href="css/navbar.css">
-</head>
-<body>
-<nav class="navbar bg-secondary text-primary bg-gradient shadow fixed-top">
+<nav class="navbar text-primary bg-gradient shadow fixed-top" id="navbar">
     <div class="container-fluid">
         <!-- NAVBAR -->
-        <a class="navbar-brand" href="/" id="navbar">
+        <a class="navbar-brand" href="/">
             <img src="images/logo.png" alt="Informatics" width="240" height="80">
         </a>
 
@@ -81,4 +76,3 @@
         </div>
     </div>
 </nav>
-</body>

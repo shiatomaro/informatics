@@ -7,7 +7,7 @@
 }
 
 footer {
-    background-color: #666666;
+    background-color: #424242;
     color: whitesmoke;
 }
 
@@ -16,7 +16,7 @@ footer a {
 }
 
 footer a:hover {
-    color:aqua;
+    color:rgb(255, 242, 0);
 }
 
 body {

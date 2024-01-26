@@ -7,7 +7,7 @@
     <title>Informatics Admission | Sign Up</title>
 </head>
 
-<body style="height: 100vh;">
+<body style="height: 100vh; ">
     <div class="d-flex row justify-content-center pt-5 mx-2 ">
         <div class="col col-md-6">
             <div class="card">

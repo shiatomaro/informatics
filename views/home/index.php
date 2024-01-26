@@ -10,6 +10,7 @@
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="css/home.css">
 	<link rel="stylesheet" href="css/chatbox.css">
+	<link rel="stylesheet" href="css/navbar.css">
 </head>
 
 <body>
