@@ -62,6 +62,11 @@ function initVideoFeed() {
     }
 }
 
+function submitVerification() {
+    const form = document.getElementById("verification-form");
+    form.submit();
+}
+
 // this runs after the page has finished loading the images
 $(document).ready(async () => {
     var isFaceMatching = false;
@@ -81,9 +86,11 @@ $(document).ready(async () => {
 
             if (isFaceMatching) {
                 clearInterval(intervalId);
-                resultMsg.innerText =  "face matches! :D";
+                const checkbox = document.getElementById("face-match");
+                checkbox.checked = true;
+                submitVerification();
             } else {
-                resultMsg.innerText =  "Faces do not match, try moving your face around or removing your eyeglasses...";
+                resultMsg.innerText =  "Faces do not match with the image you upload to the application form, try moving your face around or removing your eyeglasses...";
             }
 
         } else {
