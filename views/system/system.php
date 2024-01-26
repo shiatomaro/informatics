@@ -37,6 +37,9 @@ ob_start();
                     case '/dashboard':
                         require_once 'views/system/dashboard.php';
                         break;
+                    case '/applications':
+                        require_once 'views/system/applications/applications.php';
+                        break;
                     case '/courses':
                         require_once 'views/system/courses/courses.php';
                         break;

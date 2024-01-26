@@ -18,8 +18,6 @@ $userInfo = $result->fetch_assoc();
 
 <h1>User `<em><?= $userInfo["username"] ?></em>` Infomation</h1>
 
-<?php include_once "views/message_card.php" ?>
-
 <div class="container pt-3">
     <section>
         <form method="post" action="actions/update_userinfo_action.php">
