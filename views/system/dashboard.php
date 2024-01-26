@@ -82,6 +82,27 @@ if ($result->num_rows > 0) {
     ];
 }
 
+// Get accepted applications, sorted by previous school
+$sql = "SELECT si.prev_school, COUNT(sa.user_id) as count 
+        FROM student_applications sa
+        LEFT JOIN student_information si ON sa.user_id = si.user_id
+        WHERE sa.status = 'approved'
+        GROUP BY si.prev_school";
+$result = $conn->query($sql);
+$labels = [];
+$data = [];
+$acceptedPerPrevSchool = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $labels[] = $row['prev_school'];
+        $data[] = (int)$row['count'];
+    }
+    $acceptedPerPrevSchool = [
+        'labels' => $labels,
+        'data' => $data,
+    ];
+}
+
 $conn->close();
 
 // prepare cards data: 
@@ -90,7 +111,8 @@ $cardsData = array(
     "Users" => $usersData,
     "Applications" => $applicationsData,
     "Accepted (Per Year Level)" => $acceptedPerYrLvl,
-    "Accepted (Per Course)" => $acceptedPerCourse
+    "Accepted (Per Course)" => $acceptedPerCourse,
+    "Accepted (Per Previous School)" => $acceptedPerPrevSchool
 );
 
 ?>
