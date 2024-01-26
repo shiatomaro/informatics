@@ -1,7 +1,7 @@
 <!-- chatbox container -->
 <div id="floating-chat" class="closed" >
     <div id="chat-header">
-                Chat
+    Frequent Questions
         <button id="close-chat-btn">
             <i class="fa-solid fa-xmark"></i>
         </button>

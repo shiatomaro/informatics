@@ -8,10 +8,10 @@
         <ul class="navbar-nav justify-content-end flex-grow-1 flex-row pe-3 text-end d-none d-md-flex">
             <?php if (!isset($_SESSION['username'])) : ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Log in</a>
+                    <a class="nav-link" href="/login" id="nav-menu">Log in</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link ms-2" href="/contact">Contact us</a>
+                    <a class="nav-link ms-2" href="/contact"  id="nav-menu">Contact us</a>
                 </li>
             <?php else : ?>
                 <?php if ($_SESSION['user_type'] == 'student') : ?>

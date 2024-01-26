@@ -37,9 +37,6 @@
                                 <label for="confirmPassword" class="form-label">Password</label>
                                 <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
                             </div>
-                            <div class="d-flex justify-content-center">
-                                <button type="submit" class="btn btn-primary w-100" id="logrete">Create Account</button>
-                            </div>
                         </form>
                     </div>
 

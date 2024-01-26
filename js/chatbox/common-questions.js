@@ -22,11 +22,6 @@ export const commonQuestions = [
         nextQuestions: [],
     },
     {
-        question: "What are the courses that you offer?",
-        response: "Currently, here are the courses that we offer: <br/>" + courses + "<br/><e>please follow the links for more details</e>",
-        nextQuestions: [],
-    },
-    {
         question: "Is there an admission fee?",
         response: "Yes, there is an admission fee of ₱500.",
         nextQuestions: 

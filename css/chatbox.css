@@ -8,6 +8,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
 }
 
 #floating-chat.open {
@@ -47,11 +48,12 @@
 }
 
 #chat-header {
-    background-color: #4C5A7D;
+    background-color: #5b95eb;
     color: #fff;
     padding: 10px;
     text-align: center;
     overflow: hidden;
+    border-radius: 10px 10px 0 0;
 }
 
 #chat-body {
@@ -59,7 +61,7 @@
     max-height: 200px;
     overflow-y: auto;
     background-color: #f9f9f9;
-    border-radius: 2px;
+    border-radius: 10px;
 }
 
 .message {
@@ -83,7 +85,7 @@
 }
 
 .user-message {
-    background-color: #4C5A7D;
+    background-color: #5b95eb;
     color: #fff;
     margin-left: auto;
 }
@@ -109,7 +111,7 @@
 }
 
 #send-btn {
-    background-color: #4C5A7D;
+    background-color: #5b95eb;
     color: #fff;
     border: none;
     padding: 8px 12px;

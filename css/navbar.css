@@ -1,6 +1,9 @@
 #navbar {
     background-color: #4c8ae6;
-}
-.nav-items {
     color: white;
+}
+#nav-menu {
+    color: white;
+    font-family: 'Arial', sans-serif; 
+    font-size: 1.2em;
 }
