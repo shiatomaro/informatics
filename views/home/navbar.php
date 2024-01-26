@@ -11,7 +11,7 @@
                     <a class="nav-link" href="/login" id="nav-menu">Log in</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link ms-2" href="/contact"  id="nav-menu">Contact us</a>
+                    <a class="nav-link ms-2" id="nav-menu" href="#footer">Contact us</a>
                 </li>
             <?php else : ?>
                 <?php if ($_SESSION['user_type'] == 'student') : ?>
@@ -52,10 +52,7 @@
                             <a class="nav-link" href="/login">Log in</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/signup">Sign up</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/contact">Contact us</a>
+                            <a class="nav-link" href="#footer" >Contact us</a>
                         </li>
                     <?php else : ?>
                         <?php if ($_SESSION['user_type'] == 'student') : ?>

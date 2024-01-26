@@ -12,7 +12,7 @@
             <img src="images/home_carousel/slide2.jpg" class="d-block" alt="...">
         </div>
         <div class="carousel-item">
-            <img src="images/home_carousel/slide3.jpg" class="d-block" alt="...">
+            <img src="images/home_carousel/slide4.jpg" class="d-block" alt="...">
         </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">

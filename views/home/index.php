@@ -21,7 +21,6 @@
 	<section>
 		<?php include_once("views/home/carousel.php") ?>
 	</section>
-
 	<section class="row m-5">
 		<div class="col col-md-6">
 			<h2>Welcome to Informatics Northgate Admission Website!</h2>
@@ -31,10 +30,9 @@
 			</div>
 		</div>
 		<div class="d-none d-md-block col-md-6 text-center">
-		<iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FInfo.Alabang%2Fvideos%2F1045685993249773%2F&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
-	</div>
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/ctGIrKOpf8I?si=Xl7w1-EwlZQvx4ja" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>	</div>
+			</div>
 	</section>
-
 	<section class="m-5">
 		<h1>Our History</h1>
 		<p>
@@ -42,22 +40,8 @@
 		</p>
 	</section>
 
-	<section class="row m-5">
-		<div class="d-none d-md-block col-md-6 text-center">
-			<img class="d-inline-block h-100" src="images/stock/8.jpg" alt="...">
-		</div>
-		<div class="col-md-6 text-end">
-			<h2>Our Founder</h2>
-			<em>Leonardo Riingen</em>
-			<p>
-				Leonardo Riingen is an entrepreneur who has already contributed immensely to improving information technology (IT) training and education in the Philippines. Riingen came up with the idea that an Information Technology training should be made available to people. When you think of Informatics, "the computer school in the mall ", Riingen is the man behind it. That is the innovative and creative, if not a proactive way of making business and fulfilling his dream of making IT accessible to the people. Utilizing his education in U.K., he applied the ladderized program in IT, patterned after the British education system, to allow students to learn skills and make them immediately employable. Also, he designed and customized IT training programs and curriculum for companies and government offices to give learners a comprehensive, organization-wide IT training. To make the IT education and training that his schools offer at par with international standards, his schools boast of international courses validated by the world's leading IT qualification awarding bodies; and maintains affiliations with IT industry technology frontrunners.
-			</p>
-			<i class="text-muted">Reference: UST 400 Alumni</i>
-		</div>
-	</section>
 
-
-	<footer class="text-center mb-0 py-3">
+	<footer class="text-center mb-0 py-3" id="footer">
 		<p>
 			Indo China Drive, Northgate Cyberzone Filinvest Corporate City, Alabang Muntinlupa City, Metro Manila
 			<br />
