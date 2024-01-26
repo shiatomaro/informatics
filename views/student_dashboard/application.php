@@ -20,7 +20,7 @@ $stmt->fetch();
 $stmt->close();
 
 // get the courses data
-$courses = $conn->query("SELECT id, name FROM courses")->fetch_all();
+$courses = $conn->query("SELECT id, name FROM courses WHERE status = 'open'")->fetch_all();
 
 $conn->close();
 ?>

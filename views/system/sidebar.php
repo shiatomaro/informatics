@@ -4,6 +4,9 @@
             <a class="nav-link" href="/system/dashboard">Dashboard</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="/system/applications">Applications</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="/system/courses">Courses</a>
         </li>
         <li class="nav-item">
