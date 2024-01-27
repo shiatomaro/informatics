@@ -1,26 +1,5 @@
 import { commonQuestions } from "./common-questions.js";
 
-// add event listener for the chatbox open button
-document.getElementById('show-chat-btn').addEventListener('click', function () {
-    toggleChatBox();
-});
-
-// add event listener for the chatbox close button
-document.getElementById('close-chat-btn').addEventListener('click', function () {
-    toggleChatBox();
-});
-
-// add event listener for the send message button
-document.getElementById('send-btn').addEventListener('click', function () {
-    sendUserMessage('user');
-});
-
-// Add event listener for "Enter" key press
-document.getElementById('chat-input').addEventListener('keydown', function (event) {
-    if (event.key === 'Enter') {
-        sendUserMessage('user');
-    }
-});
 
 function toggleChatBox() {
     // toggle chatbox
@@ -105,4 +84,28 @@ function scrollChatBox() {
     requestAnimationFrame(animateScroll);
 }
 
-displayCommonQuestions(commonQuestions);
+$(document).ready(() => {
+    // add event listener for the chatbox open button
+    document.getElementById('show-chat-btn').addEventListener('click', function () {
+        toggleChatBox();
+    });
+
+    // add event listener for the chatbox close button
+    document.getElementById('close-chat-btn').addEventListener('click', function () {
+        toggleChatBox();
+    });
+
+    // add event listener for the send message button
+    document.getElementById('send-btn').addEventListener('click', function () {
+        sendUserMessage('user');
+    });
+
+    // Add event listener for "Enter" key press
+    document.getElementById('chat-input').addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            sendUserMessage('user');
+        }
+    });
+
+    displayCommonQuestions(commonQuestions);
+});
