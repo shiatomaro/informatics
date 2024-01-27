@@ -38,11 +38,10 @@ if ($result->num_rows > 0) {
     ];
 }
 
-// Get accepted applications, sorted per year level
+// Get applications, sorted per year level
 $sql = "SELECT si.year_level, COUNT(sa.user_id) as count
         FROM student_applications sa
         LEFT JOIN student_information si ON sa.user_id = si.user_id
-        WHERE sa.status = 'approved'
         GROUP BY si.year_level
         ";
 $result = $conn->query($sql);
@@ -60,12 +59,11 @@ if ($result->num_rows > 0) {
     ];
 }
 
-// Get accepted applications, sorted per course
+// Get applications, sorted per course
 $sql = "SELECT fc.name as course_name, COUNT(sa.user_id) as count 
         FROM student_applications sa
         LEFT JOIN student_information si ON sa.user_id = si.user_id
         LEFT JOIN courses fc ON si.first_choice_course_id = fc.id
-        WHERE sa.status = 'approved'
         GROUP BY fc.name";
 $result = $conn->query($sql);
 $labels = [];
@@ -76,17 +74,16 @@ if ($result->num_rows > 0) {
         $labels[] = $row['course_name'];
         $data[] = (int)$row['count'];
     }
-    $acceptedPerYrLvl = [
+    $acceptedPerCourse = [
         'labels' => $labels,
         'data' => $data,
     ];
 }
 
-// Get accepted applications, sorted by previous school
+// Get applications, sorted by previous school
 $sql = "SELECT si.prev_school, COUNT(sa.user_id) as count 
         FROM student_applications sa
         LEFT JOIN student_information si ON sa.user_id = si.user_id
-        WHERE sa.status = 'approved'
         GROUP BY si.prev_school";
 $result = $conn->query($sql);
 $labels = [];
@@ -110,9 +107,9 @@ $conn->close();
 $cardsData = array(
     "Users" => $usersData,
     "Applications" => $applicationsData,
-    "Accepted (Per Year Level)" => $acceptedPerYrLvl,
-    "Accepted (Per Course)" => $acceptedPerCourse,
-    "Accepted (Per Previous School)" => $acceptedPerPrevSchool
+    "Applications (Per Year Level)" => $acceptedPerYrLvl,
+    "Applications (Per Course)" => $acceptedPerCourse,
+    "Applications (Per Previous School)" => $acceptedPerPrevSchool,
 );
 
 ?>
