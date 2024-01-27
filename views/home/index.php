@@ -30,8 +30,9 @@
 			</div>
 		</div>
 		<div class="d-none d-md-block col-md-6 text-center">
-		<iframe width="560" height="315" src="https://www.youtube.com/embed/ctGIrKOpf8I?si=Xl7w1-EwlZQvx4ja" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>	</div>
-			</div>
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/ctGIrKOpf8I?si=Xl7w1-EwlZQvx4ja" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+		</div>
+		</div>
 	</section>
 	<section class="m-5">
 		<h1>Our History</h1>
@@ -48,7 +49,7 @@
 			Info.northgate@informatics.com.ph
 			<br />
 			Landline: 8774-24-74 || Mobile: 09695385212 <BR>
-			All Rights Reserved Copyright © 2024 | <a href="#"> Researchers </a>
+			All Rights Reserved Copyright © 2024
 		</p>
 	</footer>
 
