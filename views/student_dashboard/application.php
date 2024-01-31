@@ -327,7 +327,7 @@ $conn->close();
                     <h6>1x1 Photo</h6>
                     <small><?= $db_img_profile_filename !== null ? $db_img_profile_filename : "no image uploaded"; ?></small>
                     <input type="text" name="img-profile-filename" value="<?= $db_img_profile_filename ?>" hidden>
-                    <input class="form-control" type="file" name="img-profile" accept="image/*">
+                    <input class="form-control" type="file" name="img-profile" accept="image/*" required>
                 </div>
                 <div class="mb-3 col-12 col-md-4">
                     <h6>Proof of payment</h6>
