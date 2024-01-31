@@ -9,11 +9,11 @@ $conn = getConn();
 // Get the already inputted data
 $stmt = $conn->prepare("SELECT si.fname, si.mname, si.lname, si.email, si.contact_num, si.address, si.citizenship, si.civil_status, si.rs_status, si.occupation, si.med_cond, si.birthdate, si.sex, si.mother_fname, si.mother_mname, si.mother_lname, si.mother_contact, si.mother_occupation, si.father_fname, si.father_mname, si.father_lname, si.father_contact, si.father_occupation, si.guardian_fname, si.guardian_mname, si.guardian_lname, si.guardian_contact, si.year_level, si.first_choice_course_id, fc.name AS first_choice, si.second_choice_course_id, sc.name AS second_choice, si.prev_school, si.img_profile_filename, si.img_payment_filename, si.img_birthcert_filename, si.img_form137_filename, si.img_form138_filename, si.img_goodmoral_filename, si.img_brgyclear_filename, si.img_transfercert_filename  
 FROM student_information si 
-JOIN courses fc ON si.first_choice_course_id = fc.id
-JOIN courses sc ON si.second_choice_course_id = sc.id
+LEFT JOIN courses fc ON si.first_choice_course_id = fc.id
+LEFT JOIN courses sc ON si.second_choice_course_id = sc.id
 WHERE si.user_id = ?
 ");
-$stmt->bind_param("s", $_SESSION["user_id"]);
+$stmt->bind_param("i", $_SESSION["user_id"]);
 $stmt->execute();
 $stmt->bind_result($db_fname, $db_mname, $db_lname, $db_email, $db_contact_num, $db_address, $db_citizenship, $db_civil_status, $db_rs_status, $db_occupation, $db_med_cond, $db_birthdate, $db_sex, $db_mother_fname, $db_mother_mname, $db_mother_lname, $db_mother_contact, $db_mother_occupation, $db_father_fname, $db_father_mname, $db_father_lname, $db_father_contact, $db_father_occupation, $db_guardian_fname, $db_guardian_mname, $db_guardian_lname, $db_guardian_contact, $db_year_level, $db_first_choice_id, $db_first_choice, $db_second_choice_id, $db_second_choice, $db_prev_school, $db_img_profile_filename, $db_img_payment_filename, $db_img_birthcert_filename, $db_img_form137_filename, $db_img_form138_filename, $db_img_goodmoral_filename, $db_img_brgyclear_filename, $db_img_transfercert_filename);
 $stmt->fetch();
@@ -32,17 +32,17 @@ $conn->close();
             <h6>Student Name</h6>
             <div class="row g-3">
                 <div class="mb-3 col-12 col-md-4">
-                    <input type="text" name="name-first" id="name-first" class="form-control" value="<?= $db_fname ?>" />
+                    <input type="text" name="name-first" id="name-first" class="form-control" value="<?= $db_fname ?>" required />
                     <small>First Name</small>
                     <small id="name-first-err" class="text-danger"></small>
                 </div>
                 <div class="mb-3 col-12 col-md-4">
-                    <input type="text" name="name-middle" id="name-middle" class="form-control" value="<?= $db_mname ?>" />
+                    <input type="text" name="name-middle" id="name-middle" class="form-control" value="<?= $db_mname ?>" required />
                     <small>Middle Name</small>
                     <small id="name-middle-err" class="text-danger"></small>
                 </div>
                 <div class="mb-3 col-12 col-md-4">
-                    <input type="text" name="name-last" id="name-last" class="form-control" value="<?= $db_lname ?>" />
+                    <input type="text" name="name-last" id="name-last" class="form-control" value="<?= $db_lname ?>" required />
                     <small>Last Name</small>
                     <small id="name-last-err" class="text-danger"></small>
                 </div>
@@ -50,27 +50,27 @@ $conn->close();
 
             <div class="row g-3">
                 <div class="mb-3 col-12 col-md-6">
-                    <input type="text" name="email" id="email" class="form-control" value="<?= $db_email ?>" />
+                    <input type="text" name="email" id="email" class="form-control" value="<?= $db_email ?>" required />
                     <small>Email Address</small>
                     <small id="email-err" class="text-danger"></small>
                 </div>
                 <div class="mb-3 col-12 col-md-6">
-                    <input type="text" name="contact-num" id="contact-num" class="form-control" value="<?= $db_contact_num ?>" />
+                    <input type="text" name="contact-num" id="contact-num" class="form-control" value="<?= $db_contact_num ?>" required />
                     <small>Contact Number</small>
                     <small id="contact-num-err" class="text-danger"></small>
                 </div>
                 <div class="mb-3 col-12">
-                    <input type="text" name="address" id="address" class="form-control" value="<?= $db_address ?>" />
+                    <input type="text" name="address" id="address" class="form-control" value="<?= $db_address ?>" required />
                     <small>Present Address</small>
                     <small id="address-err" class="text-danger"></small>
                 </div>
                 <div class="mb-3 col-12 col-md-6">
-                    <input type="text" name="citizenship" id="citizenship" class="form-control" value="<?= $db_citizenship ?>" />
+                    <input type="text" name="citizenship" id="citizenship" class="form-control" value="<?= $db_citizenship ?>" required />
                     <small>Citizenship</small>
                     <small id="citizenship-err" class="text-danger"></small>
                 </div>
                 <div class="mb-3 col-12 col-md-6">
-                    <input type="text" name="civil-status" id="civil-status" class="form-control" value="<?= $db_civil_status ?>" />
+                    <input type="text" name="civil-status" id="civil-status" class="form-control" value="<?= $db_civil_status ?>" required />
                     <small>Civil Status</small>
                     <small id="civil-status-err" class="text-danger"></small>
                 </div>
@@ -93,11 +93,11 @@ $conn->close();
             <div class="row g-3">
                 <div class="mb-3 col-12 col-md-6">
                     <h6>Date of Birth (YYYY-MM-DD)</h6>
-                    <input class="form-control" type="text" id="datepicker" name="birthdate" value="<?= $db_birthdate ?>" />
+                    <input class="form-control" type="text" id="datepicker" name="birthdate" value="<?= $db_birthdate ?>" required />
                 </div>
                 <div class="mb-3 col-12 col-md-6">
                     <h6>Sex assigned at Birth</h6>
-                    <select class="form-select" name="sex">
+                    <select class="form-select" name="sex" required>
                         <option <?= $db_sex == "male" ? "selected" : "" ?> value="male">Male</option>
                         <option <?= $db_sex == "female" ? "selected" : "" ?> value="female">Female</option>
                     </select>
@@ -193,7 +193,7 @@ $conn->close();
             <div class="row g-3 mt-4">
                 <div class="mb-3 col-12 col-md-4">
                     <h6>Grade/Year level applying for</h6>
-                    <select class="form-select" name="grade-level">
+                    <select class="form-select" name="grade-level" required>
                         <option selected value="<?= $db_year_level ?>">
                             <?php switch ($db_year_level) {
                                 case "G11":
@@ -226,7 +226,7 @@ $conn->close();
                 </div>
                 <div class="mb-3 col-12 col-md-4">
                     <h6>Preferred Course/Strand</h6>
-                    <select class="form-select" name="choice-1">
+                    <select class="form-select" name="choice-1" required>
                         <option selected value="<?= $db_first_choice_id ?>"><?= $db_first_choice ?></option>
                         <?php foreach ($courses as $course) : ?>
                             <option value="<?= $course[0] ?>"><?= $course[1] ?></option>
@@ -236,7 +236,7 @@ $conn->close();
                 </div>
                 <div class="mb-3 col-12 col-md-4">
                     <h6>&nbsp;</h6>
-                    <select class="form-select" name="choice-2">
+                    <select class="form-select" name="choice-2" required>
                         <option selected value="<?= $db_second_choice_id ?>"><?= $db_second_choice ?></option>
                         <?php foreach ($courses as $course) : ?>
                             <option value="<?= $course[0] ?>"><?= $course[1] ?></option>
