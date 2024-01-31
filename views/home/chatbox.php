@@ -1,7 +1,7 @@
 <!-- chatbox container -->
-<div id="floating-chat" class="closed" >
+<div id="floating-chat" class="closed">
     <div id="chat-header">
-    Frequent Questions
+        Frequent Questions
         <button id="close-chat-btn">
             <i class="fa-solid fa-xmark"></i>
         </button>
@@ -19,5 +19,3 @@
 <button id="show-chat-btn" class="floating-btn">
     <i><img src="images/icons/chatbox.png" class="icon"><i>
 </button>
-
-<script src="js/chatbox/chatbox.js" type="module"></script>

@@ -55,6 +55,7 @@
 
 	<?php include_once "views/templates/body_scripts.php"; ?>
 	<?php include_once("views/home/chatbox.php") ?>
+	<script src="js/chatbox/chatbox.js" type="module"></script>
 </body>
 
 </html>
