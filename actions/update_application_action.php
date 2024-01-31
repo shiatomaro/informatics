@@ -131,15 +131,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $prev_school_input = $_POST['prev-school-input'] !== '' ? $_POST['prev-school-input'] : null;
     $prev_school = $prev_school_input !== null ? $prev_school_input : $prev_school_dropdown;
 
-    // get the filenames and set it to null if it's an empty string
-    $img_profile_filename = $img_profile !== null ? $_FILES["img-profile"]["name"] : $db_img_profile_filename;
-    $img_payment_filename = $img_payment !== null ? $_FILES["img-transfercert"]["name"] : $db_img_payment_filename;
-    $img_birthcert_filename = $img_birthcert !== null ? $_FILES["img-brgyclearance"]["name"] : $db_img_birthcert_filename;
-    $img_form137_filename = $img_form137 !== null ? $_FILES["img-goodmoral"]["name"] : $db_img_form137_filename;
-    $img_form138_filename = $img_form138 !== null ? $_FILES["img-form138"]["name"] : $db_img_form138_filename;
-    $img_goodmoral_filename = $img_goodmoral !== null ? $_FILES["img-form137"]["name"] : $db_img_goodmoral_filename;
-    $img_brgyclear_filename = $img_brgyclear !== null ? $_FILES["img-birthcert"]["name"] : $db_img_brgyclear_filename;
-    $img_transfercert_filename = $img_transfercert !== null ? $_FILES["img-payment"]["name"] : $db_img_transfercert_filename;
     // fetch the images from the form
     $img_profile = $_FILES["img-profile"]["tmp_name"] !== "" ? file_get_contents($_FILES["img-profile"]["tmp_name"]) : $db_img_profile;
     $img_payment = $_FILES["img-payment"]["tmp_name"] !== "" ? file_get_contents($_FILES["img-payment"]["tmp_name"]) : $db_img_payment;
@@ -149,6 +140,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $img_goodmoral = $_FILES["img-goodmoral"]["tmp_name"] !== "" ? file_get_contents($_FILES["img-goodmoral"]["tmp_name"]) : $db_img_goodmoral;
     $img_brgyclear = $_FILES["img-brgyclearance"]["tmp_name"] !== "" ? file_get_contents($_FILES["img-brgyclearance"]["tmp_name"]) : $db_img_brgyclear;
     $img_transfercert = $_FILES["img-transfercert"]["tmp_name"] !== "" ? file_get_contents($_FILES["img-transfercert"]["tmp_name"]) : $db_img_transfercert;
+    // get the filenames and set it to null if it's an empty string
+    $img_profile_filename = $_FILES["img-profile"]["name"] !== "" ? $_FILES["img-profile"]["name"] : $db_img_profile_filename;
+    $img_payment_filename = $_FILES["img-transfercert"]["name"] !== "" ? $_FILES["img-transfercert"]["name"] : $db_img_payment_filename;
+    $img_birthcert_filename = $_FILES["img-brgyclearance"]["name"] !== "" ? $_FILES["img-brgyclearance"]["name"] : $db_img_birthcert_filename;
+    $img_form137_filename = $_FILES["img-goodmoral"]["name"] !== "" ? $_FILES["img-goodmoral"]["name"] : $db_img_form137_filename;
+    $img_form138_filename = $_FILES["img-form138"]["name"] !== "" ? $_FILES["img-form138"]["name"] : $db_img_form138_filename;
+    $img_goodmoral_filename = $_FILES["img-form137"]["name"] !== "" ? $_FILES["img-form137"]["name"] : $db_img_goodmoral_filename;
+    $img_brgyclear_filename = $_FILES["img-birthcert"]["name"] !== "" ? $_FILES["img-birthcert"]["name"] : $db_img_brgyclear_filename;
+    $img_transfercert_filename = $_FILES["img-payment"]["name"] !== "" ? $_FILES["img-payment"]["name"] : $db_img_transfercert_filename;
 
     // image validation
     foreach ($_FILES as $file) {
@@ -175,8 +175,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sex !== null &&
         $year_level !== null &&
         $first_choice !== null &&
-        $second_choice !== null &&
-        $img_profile_filename !== null;
+        $second_choice !== null;
 
     // execute the prepared statement
     try {
