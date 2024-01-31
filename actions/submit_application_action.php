@@ -116,14 +116,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $img_brgyclear = $_FILES["img-brgyclearance"]["tmp_name"] !== "" ? file_get_contents($_FILES["img-brgyclearance"]["tmp_name"]) : null;
     $img_transfercert = $_FILES["img-transfercert"]["tmp_name"] !== "" ? file_get_contents($_FILES["img-transfercert"]["tmp_name"]) : null;
     // get the filenames and set it to null if it's an empty string
-    $img_profile_filename =  $_POST["img-profile-filename"] === "" ? $_POST["img-profile-filename"] : null;
-    $img_payment_filename =  $_POST["img-payment-filename"] === "" ? $_POST["img-payment-filename"] : $img_payment_filename;
-    $img_birthcert_filename =  $_POST["img-birthcert-filename"] === "" ? $_POST["img-birthcert-filename"] : $img_birthcert_filename;
-    $img_form137_filename =  $_POST["img-form137-filename"] === "" ? $_POST["img-form137-filename"] : $img_form137_filename;
-    $img_form138_filename =  $_POST["img-form138-filename"] === "" ? $_POST["img-form138-filename"] : $img_form138_filename;
-    $img_goodmoral_filename =  $_POST["img-goodmoral-filename"] === "" ? $_POST["img-goodmoral-filename"] : $img_goodmoral_filename;
-    $img_brgyclear_filename =  $_POST["img-brgyclear-filename"] === "" ? $_POST["img-brgyclear-filename"] : $img_brgyclear_filename;
-    $img_transfercert_filename =  $_POST["img-transfercert-filename"] === "" ? $_POST["img-transfercert-filename"] : $img_transfercert_filename;
+    $img_profile_filename = $img_profile !== null ? $_FILES["img-profile"]["name"] : null;
+    $img_payment_filename = $img_payment !== null ? $_FILES["img-transfercert"]["name"] : null;
+    $img_birthcert_filename = $img_birthcert !== null ? $_FILES["img-brgyclearance"]["name"] : null;
+    $img_form137_filename = $img_form137 !== null ? $_FILES["img-goodmoral"]["name"] : null;
+    $img_form138_filename = $img_form138 !== null ? $_FILES["img-form138"]["name"] : null;
+    $img_goodmoral_filename = $img_goodmoral !== null ? $_FILES["img-form137"]["name"] : null;
+    $img_brgyclear_filename = $img_brgyclear !== null ? $_FILES["img-birthcert"]["name"] : null;
+    $img_transfercert_filename = $img_transfercert !== null ? $_FILES["img-payment"]["name"] : null;
 
     // image validation
     foreach ($_FILES as $file) {
@@ -131,6 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($file["tmp_name"] !== "" && !validateImg($file["tmp_name"])) {
             $msg_type = "danger";
             $msg_content = "Please replace `{$file["name"]}` with either a JPEG or PNG file.";
+            $pdo = null;
             header("Location: /dashboard/application?msg_type=$msg_type&msg_content=$msg_content");
             exit();
         }
@@ -155,9 +156,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // execute the prepared statement
     try {
-        if ($stmt->execute()) {
+        if ($completed && $stmt->execute()) {
             $msg_type = "success";
             $msg_content = "Successfully submitted the user's information!";
+        } elseif (!$completed) {
+            $msg_type = "danger";
+            $msg_content = "Please fill out all the required fields";
+        } else {
+            $msg_type = "danger";
+            $msg_content = "An unknown error has occured.";
         }
     } catch (PDOException $e) {
         if ($e->getCode() === "23000") {

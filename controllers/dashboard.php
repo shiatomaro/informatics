@@ -1,5 +1,5 @@
 <?php
-
+ob_start();
 require_once "controllers/credentials.php";
 requireCredentials();
 
@@ -14,9 +14,6 @@ $url = parse_url($_SERVER['REQUEST_URI']);
 $path = substr($url['path'], strlen('dashboard/'));
 $path = $path === '' ? '/' : $path;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    require_once "./utils.php";
-    dd($_POST);
-} else {
-    require_once "views/student_dashboard/dashboard.php";
-}
+require_once "views/student_dashboard/dashboard.php";
+
+ob_end_flush();

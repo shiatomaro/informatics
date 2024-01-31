@@ -1,8 +1,6 @@
 <?php
 require_once "actions/db.php";
 require_once "utils.php";
-require_once "controllers/credentials.php";
-requireCredentials();
 
 $conn = getConn();
 
@@ -21,14 +19,13 @@ $stmt->close();
 
 // get the courses data
 $courses = $conn->query("SELECT id, name FROM courses WHERE status = 'open'")->fetch_all();
-
 $conn->close();
 ?>
 
 <div class="card text-primary bg-light p-3 mb-5">
     <div class="card-body">
         <h4 class="card-title">Informatics Admission Form</h4>
-        <form action="actions/submit_application_action.php" method="post" enctype="multipart/form-data">
+        <form action="actions/<?= $db_fname === null ? "submit_application_action.php" : "update_application_action.php" ?>" method="post" enctype="multipart/form-data">
             <h6>Student Name</h6>
             <div class="row g-3">
                 <div class="mb-3 col-12 col-md-4">
@@ -327,7 +324,7 @@ $conn->close();
                     <h6>1x1 Photo</h6>
                     <small><?= $db_img_profile_filename !== null ? $db_img_profile_filename : "no image uploaded"; ?></small>
                     <input type="text" name="img-profile-filename" value="<?= $db_img_profile_filename ?>" hidden>
-                    <input class="form-control" type="file" name="img-profile" accept="image/*" required>
+                    <input class="form-control" type="file" name="img-profile" accept="image/*" <?= $db_img_profile_filename === null ? "required" : "" ?>>
                 </div>
                 <div class="mb-3 col-12 col-md-4">
                     <h6>Proof of payment</h6>
@@ -374,7 +371,7 @@ $conn->close();
             </div>
 
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary"><?= $db_fname === null ? "Submit" : "Update" ?></button>
             </div>
         </form>
     </div>

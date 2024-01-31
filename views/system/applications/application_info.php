@@ -42,7 +42,7 @@ $img_transfercert = base64_encode($img_transfercert);
 
     <section class="mt-3">
         <h1>Manage Application</h1>
-        <form method="post" action="actions/update_application_action.php">
+        <form method="post" action="actions/update_applicationstatus_action.php">
             <input type="text" value=<?= $user_id ?> name="user-id" hidden>
             <div class="input-group mb-3">
                 <span class="input-group-text">Application Status</span>
