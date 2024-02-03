@@ -24,9 +24,9 @@ $stmt->fetch();
 $stmt->close();
 
 // identity verification
-$stmt = $conn->prepare("SELECT score FROM assessments WHERE user_id = ?;");
+$stmt = $conn->prepare("SELECT verified FROM student_information WHERE user_id = ?;");
 $stmt->bind_param("s", $user_id);
-$stmt->bind_result($exam_score);
+$stmt->bind_result($verified);
 $stmt->execute();
 $stmt->fetch();
 $stmt->close();
@@ -48,11 +48,33 @@ $conn->close();
         <h4 class="card-title">Application Tracker</h4>
 
         <ul class="list-group">
-            <li class="list-group-item">User ID: <b><?= $user_id ?></b></li>
-            <li class="list-group-item">Admission Form: <b><?= $form_completed ? "Completed" : "Incomplete" ?></b></li>
-            <li class="list-group-item">Examination: <b><?= $exam_score !== null ? "Taken" : "Not Taken" ?></b></li>
-            <li class="list-group-item">Examination Score: <b><?= $exam_score !== null ? $exam_score : "Not Taken" ?></b></li>
-            <li class="list-group-item">Application Status: <b><?= $app_status ?></b></li>
+            <li class="list-group-item">
+                <p class="mb-0 text-dark">
+                    User ID: <b><?= $user_id ?></b>
+                </p>
+            </li>
+            <li class="list-group-item">
+                <div>
+                    <strong>Step 1.</strong>
+                    <p class="text-dark mb-0">Admission Form: <b><?= $form_completed ? "Completed" : "Incomplete" ?></b></p>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div>
+                    <strong>Step 2.</strong>
+                    <p class="text-dark mb-0">Examination: <b><?= $exam_score !== null ? "Taken" : "Not Taken" ?></p>
+                    <p class="text-dark mb-0">Examination Score: <b><?= $exam_score !== null ? $exam_score : "Not Taken" ?></b></p>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div>
+                    <strong>Step 3.</strong>
+                    <p class="text-dark mb-0">Verification: <b><?= $verified === 1 ? "Verified" : "Not Verified" ?></p>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <p class="mb-0 text-dark">Application Status: <b><?= ucfirst($app_status); ?></b></p>
+            </li>
         </ul>
     </div>
 </div>

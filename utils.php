@@ -51,3 +51,10 @@ function validateImg($file_path)
         return false;
     }
 }
+
+function getMIMEType($img_data)
+{
+    $finfo = new finfo(FILEINFO_MIME_TYPE);
+    $mime_type = $finfo->buffer($img_data);
+    return $mime_type;
+}

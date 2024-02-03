@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Prepare and bind the SQL statement
     $stmt = $pdo->prepare(
         "UPDATE student_information
-        SET completed = :completed, fname = :fname, mname = :mname, lname = :lname, email = :email, contact_num = :contact_num, address = :address, citizenship = :citizenship, civil_status = :civil_status, rs_status = :rs_status, occupation = :occupation, med_cond = :med_cond, birthdate = :birthdate, sex = :sex, mother_fname = :mother_fname, mother_mname = :mother_mname, mother_lname = :mother_lname, mother_contact = :mother_contact, mother_occupation = :mother_occupation, father_fname = :father_fname, father_mname = :father_mname, father_lname = :father_lname, father_contact = :father_contact, father_occupation = :father_occupation, guardian_fname = :guardian_fname, guardian_mname = :guardian_mname, guardian_lname = :guardian_lname, guardian_contact = :guardian_contact, year_level = :year_level, first_choice_course_id = :first_choice_course_id, second_choice_course_id = :second_choice_course_id, prev_school = :prev_school, img_profile = :img_profile, img_profile_filename = :img_profile_filename, img_payment = :img_payment, img_payment_filename = :img_payment_filename, img_birthcert = :img_birthcert, img_birthcert_filename = :img_birthcert_filename, img_form137 = :img_form137, img_form137_filename = :img_form137_filename, img_form138 = :img_form138, img_form138_filename = :img_form138_filename, img_goodmoral = :img_goodmoral, img_goodmoral_filename = :img_goodmoral_filename, img_brgyclear = :img_brgyclear, img_brgyclear_filename = :img_brgyclear_filename, img_transfercert = :img_transfercert, img_transfercert_filename = :img_transfercert_filename, updated_at = NOW()
+        SET completed = :completed, fname = :fname, mname = :mname, lname = :lname, email = :email, contact_num = :contact_num, address = :address, citizenship = :citizenship, civil_status = :civil_status, rs_status = :rs_status, occupation = :occupation, med_cond = :med_cond, birthdate = :birthdate, sex = :sex, mother_fname = :mother_fname, mother_mname = :mother_mname, mother_lname = :mother_lname, mother_contact = :mother_contact, mother_occupation = :mother_occupation, father_fname = :father_fname, father_mname = :father_mname, father_lname = :father_lname, father_contact = :father_contact, father_occupation = :father_occupation, guardian_fname = :guardian_fname, guardian_mname = :guardian_mname, guardian_lname = :guardian_lname, guardian_contact = :guardian_contact, year_level = :year_level, first_choice_course_id = :first_choice_course_id, second_choice_course_id = :second_choice_course_id, prev_school = :prev_school, img_profile = :img_profile, img_profile_filename = :img_profile_filename, img_payment = :img_payment, img_payment_filename = :img_payment_filename, img_birthcert = :img_birthcert, img_birthcert_filename = :img_birthcert_filename, img_form137 = :img_form137, img_form137_filename = :img_form137_filename, img_form138 = :img_form138, img_form138_filename = :img_form138_filename, img_goodmoral = :img_goodmoral, img_goodmoral_filename = :img_goodmoral_filename, img_brgyclear = :img_brgyclear, img_brgyclear_filename = :img_brgyclear_filename, img_transfercert = :img_transfercert, img_transfercert_filename = :img_transfercert_filename, updated_at = NOW(), verified = :verified
         WHERE user_id = :user_id;
         "
     );
@@ -90,6 +90,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bindParam(':img_brgyclear_filename', $img_brgyclear_filename);
     $stmt->bindParam(':img_transfercert', $img_transfercert);
     $stmt->bindParam(':img_transfercert_filename', $img_transfercert_filename);
+    $stmt->bindParam(':verified', $verified);
+    $verified = false;
 
 
     // fetch the data from the form
@@ -181,7 +183,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         if ($completed && $stmt->execute()) {
             $msg_type = "success";
-            $msg_content = "Successfully updated the user's information!";
+            $msg_content = "Successfully updated the user's information! Note that you need to accomplish Step 3 again since you updated your information.";
         } elseif (!$completed) {
             $msg_type = "danger";
             $msg_content = "Please fill out all the required fields";

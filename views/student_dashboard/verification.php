@@ -23,14 +23,13 @@ $stmt->execute();
 $stmt->fetch();
 $stmt->close();
 
-// application status
-$stmt = $conn->prepare("SELECT status FROM student_applications WHERE user_id = ?;");
+// verification status
+$stmt = $conn->prepare("SELECT verified FROM student_information WHERE user_id = ?;");
 $stmt->bind_param("s", $user_id);
-$stmt->bind_result($app_status);
+$stmt->bind_result($already_verified);
 $stmt->execute();
 $stmt->fetch();
 $stmt->close();
-$already_applied = $app_status !== null;
 
 // getting the image from the database
 if ($form_completed && $exam_score > 0) {
@@ -65,11 +64,11 @@ $conn->close();
     <div class="card-body">
         <h4 class="card-title">Verification</h4>
 
-        <?php if ($already_applied) : ?>
-            <p>You already submitted your application.</p>
+        <?php if ($already_verified) : ?>
+            <p>You already verified your identity.</p>
         <?php elseif ($form_completed && $exam_score > 0) : ?>
             <div class="d-flex justify-content-center">
-                <img src="data:image/jpeg;base64,<?= $base64Img ?>" hidden alt="profile image" id="dbImg">
+                <img src="data:<?= getMIMEType($img_profile); ?>;base64,<?= $base64Img ?>" hidden alt="profile image" id="dbImg">
                 <div id="video-container">
                     <video id="video" playsinline autoplay muted></video>
                 </div>
