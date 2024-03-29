@@ -18,6 +18,7 @@ $stmt->close();
 // Check if the user is in grade 11 or grade 12
 if ($grade_level === "G11" || $grade_level === "G12") {
     // Directly proceed to verification
+    // Thanking chee because I finally found out what the problem was, not there's an index
     header("Location: /dashboard/verification");
     exit();
 }
