@@ -2,9 +2,29 @@
 require_once 'actions/db.php';
 require_once 'utils.php';
 
-// fetch data from the database
+// Fetch data from the database
 $conn = getConn();
 $user_id = $conn->real_escape_string($_SESSION['user_id']);
+$grade_level = ''; // Initialize grade level variable
+
+// Get user's grade level
+$stmt = $conn->prepare("SELECT year_level FROM student_information WHERE user_id = ?;");
+$stmt->bind_param("s", $user_id);
+$stmt->bind_result($grade_level);
+$stmt->execute();
+$stmt->fetch();
+$stmt->close();
+
+// Check if the user is in grade 11 or grade 12
+if ($grade_level === "G11" || $grade_level === "G12") {
+    // Directly proceed to verification
+    header("Location: /dashboard/verification");
+    exit();
+}
+
+// If user is not in grade 11 or grade 12, proceed with examination
+$exam_result = null; // Initialize exam result variable
+
 $sql = "SELECT score FROM assessments WHERE user_id = {$user_id}";
 $exam_result = $conn->query($sql)->fetch_assoc();
 $conn->close();
