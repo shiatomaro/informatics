@@ -23,6 +23,27 @@ $stmt->execute();
 $stmt->fetch();
 $stmt->close();
 
+// Fetch user's grade level
+$stmt = $conn->prepare("SELECT year_level FROM student_information WHERE user_id = ?;");
+$stmt->bind_param("s", $user_id);
+$stmt->bind_result($grade_level);
+$stmt->execute();
+$stmt->fetch();
+$stmt->close();
+
+// Check if the user is in grade 11 or grade 12
+if ($grade_level === "G11" || $grade_level === "G12") {
+    // Set exam score to a non-null value (e.g., 100)
+    $exam_score = 100; // You can set this to any desired value
+} else {
+    // Fetch the actual exam score from the database
+    $stmt = $conn->prepare("SELECT score FROM assessments WHERE user_id = ?;");
+    $stmt->bind_param("s", $user_id);
+    $stmt->bind_result($exam_score);
+    $stmt->execute();
+    $stmt->fetch();
+    $stmt->close();
+}
 // verification status
 $stmt = $conn->prepare("SELECT verified FROM student_information WHERE user_id = ?;");
 $stmt->bind_param("s", $user_id);

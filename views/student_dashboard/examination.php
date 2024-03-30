@@ -23,9 +23,8 @@ if ($grade_level === "G11" || $grade_level === "G12") {
     exit();
 }
 
-// If user is not in grade 11 or grade 12, proceed with examination
+// If user is not in grade 11 or grade 12, proceed with examination;
 $exam_result = null; // Initialize exam result variable
-
 $sql = "SELECT score FROM assessments WHERE user_id = {$user_id}";
 $exam_result = $conn->query($sql)->fetch_assoc();
 $conn->close();

@@ -22,7 +22,7 @@
                     <a href="/dashboard/application" class="nav-link<?= $path == "/application" ? " active" : "" ?>">Step 1: Fill Up Form and Payment</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/dashboard/examination" class="nav-link<?= $path == "/examination" ? " active" : "" ?>">Step 2: Examination</a>
+                    <a href="/dashboard/examination" class="nav-link<?= $path == "/examination" ? " active" : "" ?>">Step 2: Entrace Exam (College Only)</a>
                 </li>
                 <li class="nav-item">
                     <a href="/dashboard/verification" class="nav-link<?= $path == "/verification" ? " active" : "" ?>">Step 3: Identity Verification</a>
