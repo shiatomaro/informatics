@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
 	<?php require_once("views/templates/head.php"); ?>
 	<title>Informatics Admission</title>

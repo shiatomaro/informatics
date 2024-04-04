@@ -1,0 +1,85 @@
+.profile {
+    position: relative;
+    height: 50vw;
+    width: 50vw;
+    border-radius: 5vw;
+    margin-top: 5vw;
+    max-height: 40rem;
+    max-width: 40rem;
+
+    .profile-img {
+        height: 80%;
+        max-height: 45rem;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .dots {
+        position: absolute;
+        width: 2vw;
+        height: 2vw;
+        border-radius: 50%;
+        background-color: blue;
+}
+
+
+@include media-breakpoint-up(sm) {
+    .profile {
+        height: 40vw;
+        width: 40vw;
+        .profile-img {
+            height: 65%;
+        }
+        .dots {
+            width: 1.5vw;
+            height: 1.5vw;
+        }
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .profile {
+        height: 30vw;
+        width: 30vw;
+        .profile-img {
+            height: 55%;
+        }
+    }
+}
+
+
+.feature {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 4rem;
+    width: 4rem;
+    font-size: 2rem;
+    border-radius: 50%;
+    background-color: monotone-color;
+    color: white;
+    margin-right: 1rem;
+}
+
+.contact-list {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-link {
+    text-decoration: none;
+    color: black;
+    
+}.main-wrapper {
+    display: flex;
+    justify-content: center; /* Horizontally center content */
+    align-items: center; /* Vertically center content */
+    height: 100vh; /* Set the height of the container to full viewport height */
+}
+
+.container {
+    max-width: 800px; /* Adjust as needed */
+    text-align: center; /* Center align text within the container */
+}

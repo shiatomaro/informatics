@@ -1,9 +1,7 @@
 <?php
-require_once 'actions/db.php';
 require_once 'utils.php';
-
-$queryParams = getQueryParams();
-if (!isset($queryParams['user_id']) && !isset($queryParams['page'])) {
+require_once 'actions/db.php';
+if (!isset($queryParams['id']) && !isset($queryParams['page'])) {
     header("Location: /system/students?page=1");
     $currentPage = 1;
     exit();
@@ -17,7 +15,7 @@ $offset = ($currentPage - 1) * $recordsPerPage;
 // fetch data from the database
 $conn = getConn();
 $sql = "
-    SELECT si.user_id, si.fname, si.mname, si.lname, fc.name AS first_choice, sc.name AS second_choice, si.year_level 
+    SELECT si.id, si.fname, si.mname, si.lname, fc.name AS first_choice, sc.name AS second_choice, si.year_level 
     FROM student_information si
     LEFT JOIN courses fc ON si.first_choice_course_id = fc.id
     LEFT JOIN courses sc ON si.second_choice_course_id = sc.id
@@ -32,11 +30,12 @@ $totalPages = ceil($totalrecords / $recordsPerPage);
 ?>
 
 <?php if ($result->num_rows > 0) : ?>
+
     <h1>Student Records</h1>
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">User ID</th>
+                <th scope="col">ID</th>
                 <th scope="col">Full Name</th>
                 <th scope="col">Year Level</th>
                 <th scope="col">Second Choice Course</th>
@@ -44,15 +43,17 @@ $totalPages = ceil($totalrecords / $recordsPerPage);
                 <th scope="col">Info</th>
             </tr>
         </thead>
+
         <tbody>
+
             <?php while ($row = $result->fetch_assoc()) : ?>
                 <tr>
-                    <td scope="row"><?= $row['user_id']; ?></td>
+                    <td scope="row"><?= $row['id']; ?></td>
                     <td scope="row"><?= "{$row['fname']} {$row['mname']} {$row['lname']}"; ?></td>
                     <td scope="row"><?= $row['year_level']; ?></td>
                     <td scope="row"><?= $row['first_choice']; ?></td>
                     <td scope="row"><?= $row['second_choice']; ?></td>
-                    <td><a class="btn btn-primary d-inline" href=<?= "/system/students?user_id={$row['user_id']}" ?> role="button">info</a></td>
+                    <td><a class="btn btn-primary d-inline" href=<?= "/system/students?id={$row['id']}" ?> role="button">info</a></td>
                 </tr>
             <?php endwhile ?>
         </tbody>
@@ -81,6 +82,34 @@ $totalPages = ceil($totalrecords / $recordsPerPage);
             </ul>
         </nav>
     </div>
+
 <?php else : ?>
     <h2>No student records found</h2>
 <?php endif ?>
+<div class="container">
+    <div class="row">
+        <div class="span3 hidden-phone"></div>
+        <div class="span6" id="form-login">
+            <form class="form-horizontal well" action="views/system/students/import.php" method="post" name="upload_excel" enctype="multipart/form-data">
+                <fieldset>
+                    <legend>Import CSV/Excel file</legend>
+                    <div class="control-group">
+                        <div class="control-label">
+                            <label>CSV/Excel File:</label>
+                        </div>
+                        <div class="controls">
+                            <input type="file" name="file" id="file" class="input-large">
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <div class="controls">
+                            <button type="submit" id="submit" name="Import" class="btn btn-primary button-loading" data-loading-text="Loading...">Upload</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="span3 hidden-phone"></div>
+    </div>
+</div>
