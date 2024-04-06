@@ -20,13 +20,14 @@ $sql = "
     SELECT a.id, a.user_id, si.fname, si.mname, si.lname, a.status
     FROM student_applications a
     LEFT JOIN student_information si ON a.user_id = si.user_id
+    WHERE si.user_id IS NOT NULL AND si.user_id != ''
     LIMIT $recordsPerPage 
     OFFSET $offset
     ";
 $result = $conn->query($sql);
 
 // Table pagination logic
-$totalrecords = $conn->query("SELECT COUNT(*) as total FROM student_information")->fetch_assoc()['total'];
+$totalrecords = $conn->query("SELECT COUNT(*) as total FROM student_information WHERE user_id IS NOT NULL AND user_id != ''")->fetch_assoc()['total'];
 $totalPages = ceil($totalrecords / $recordsPerPage);
 ?>
 
