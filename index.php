@@ -24,6 +24,8 @@ $routes = [
     '/system/courses/new' => 'controllers/system.php',
     '/system/students' => 'controllers/system.php',
     '/system/users' => 'controllers/system.php',
+    '/system/download'=> 'controllers/system.php',
+    '/system/import'=> 'controllers/system.php',
 ];
 
 if (array_key_exists($path, $routes)) {

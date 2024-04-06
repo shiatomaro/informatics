@@ -52,6 +52,9 @@ ob_start();
                     case '/users':
                         require_once 'views/system/users/users.php';
                         break;
+                    case '/import':
+                        require_once 'views/system/students/import.php';
+                            break;
                     default:
                         require_once 'views/system/dashboard.php';
                         break;

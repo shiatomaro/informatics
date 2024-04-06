@@ -16,6 +16,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/system/users">Users</a>
             </li>
+
         <?php endif ?>
         <li class="nav-item">
             <a class="nav-link" href="actions/logout_action.php">Log out</a>
