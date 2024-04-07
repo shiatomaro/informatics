@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 03, 2024 at 09:07 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Apr 07, 2024 at 07:08 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -65,7 +65,8 @@ INSERT INTO `courses` (`id`, `code`, `name`, `description`, `status`) VALUES
 (7, 'ICT-P', 'ICT Programming', '', 'open'),
 (8, 'GAS', 'SHS: General Academic Strand', '', 'open'),
 (9, 'AMB', 'Accountancy Business Management', '', 'open'),
-(10, 'BSIT', 'B.S. Information Technology', '', 'open');
+(10, 'BSIT', 'B.S. Information Technology', '', 'open'),
+(11, 'BSCS', 'Bachelor of Science in Computer Science', 'Computer Science', 'open');
 
 -- --------------------------------------------------------
 
@@ -88,7 +89,7 @@ CREATE TABLE `student_admin` (
 
 CREATE TABLE `student_applications` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `status` enum('approved','rejected','processing') NOT NULL DEFAULT 'processing',
   `approved_by` varchar(128) DEFAULT NULL,
   `noted_by` varchar(128) DEFAULT NULL,
@@ -101,7 +102,7 @@ CREATE TABLE `student_applications` (
 --
 
 INSERT INTO `student_applications` (`id`, `user_id`, `status`, `approved_by`, `noted_by`, `created_at`, `updated_at`) VALUES
-(1, 17, 'approved', NULL, NULL, '2024-01-24 03:54:16', '2024-01-31 08:40:08');
+(1, 17, 'processing', NULL, NULL, '2024-01-24 03:54:16', '2024-04-06 03:46:26');
 
 -- --------------------------------------------------------
 
@@ -264,7 +265,7 @@ ALTER TABLE `assessments`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `student_admin`
@@ -282,7 +283,7 @@ ALTER TABLE `student_applications`
 -- AUTO_INCREMENT for table `student_information`
 --
 ALTER TABLE `student_information`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1309;
 
 --
 -- AUTO_INCREMENT for table `users`
