@@ -14,11 +14,14 @@ $id = $conn->real_escape_string($queryParams['id']);
 
 // Prepare SQL statement with placeholders
 $sql = "
-    SELECT si.*, fc.name AS first_choice, sc.name AS second_choice, a.score AS exam_score
+    SELECT si.id, si.fname, si.mname, si.lname, si.email, si.contact_num, si.address, si.citizenship, si.civil_status,
+           si.med_cond, si.birthdate, si.sex, si.mother_fname, si.mother_mname, si.mother_lname, si.mother_contact,
+           si.mother_occupation, si.father_fname, si.father_mname, si.father_lname, si.father_contact, si.father_occupation,
+           si.guardian_fname, si.guardian_mname, si.guardian_lname, si.guardian_contact, si.year_level,
+           fc.name AS first_choice_course, sc.name AS second_choice_course, si.prev_school
     FROM student_information si
     LEFT JOIN courses fc ON si.first_choice_course_id = fc.id
     LEFT JOIN courses sc ON si.second_choice_course_id = sc.id
-    LEFT JOIN assessments a ON si.id = a.id
     WHERE si.id = ?
 ";
 
@@ -43,206 +46,63 @@ $stmt->close();
 $conn->close();
 
 // Check if $studInfo is not empty before accessing its keys
-    if (!empty($studInfo)) {
-        // Use isset() to check if the keys exist before accessing them
-        $id = isset($studInfo['id']) ? $studInfo['id'] : '';
-        $fname = isset($studInfo['fname']) ? $studInfo['fname'] : '';
-        $mname = isset($studInfo['mname']) ? $studInfo['mname'] : '';
-        $lname = isset($studInfo['lname']) ? $studInfo['lname'] : '';
-        $email = isset($studInfo['email']) ? $studInfo['email'] : '';
-        $contact_num = isset($studInfo['contact_num']) ? $studInfo['contact_num'] : '';
-        $address = isset($studInfo['address']) ? $studInfo['address'] : '';
-        $citizenship = isset($studInfo['citizenship']) ? $studInfo['citizenship'] : '';
-        $civil_status = isset($studInfo['civil_status']) ? $studInfo['civil_status'] : '';
-        $med_cond = isset($studInfo['med_cond']) ? $studInfo['med_cond'] : '';
-        $birthdate = isset($studInfo['birthdate']) ? $studInfo['birthdate'] : '';
-        $sex = isset($studInfo['sex']) ? $studInfo['sex'] : '';
+if (!empty($studInfo)) {
+    // Use isset() to check if the keys exist before accessing them
+    $id = isset($studInfo['id']) ? $studInfo['id'] : '';
+    $fname = isset($studInfo['fname']) ? $studInfo['fname'] : '';
+    $mname = isset($studInfo['mname']) ? $studInfo['mname'] : '';
+    $lname = isset($studInfo['lname']) ? $studInfo['lname'] : '';
+    $email = isset($studInfo['email']) ? $studInfo['email'] : '';
+    $contact_num = isset($studInfo['contact_num']) ? $studInfo['contact_num'] : '';
+    $address = isset($studInfo['address']) ? $studInfo['address'] : '';
+    $citizenship = isset($studInfo['citizenship']) ? $studInfo['citizenship'] : '';
+    $civil_status = isset($studInfo['civil_status']) ? $studInfo['civil_status'] : '';
+    $med_cond = isset($studInfo['med_cond']) ? $studInfo['med_cond'] : '';
+    $birthdate = isset($studInfo['birthdate']) ? $studInfo['birthdate'] : '';
+    $sex = isset($studInfo['sex']) ? $studInfo['sex'] : '';
     
-        // Mother's Information
-        $mother_fname = isset($studInfo['mother_fname']) ? $studInfo['mother_fname'] : '';
-        $mother_mname = isset($studInfo['mother_mname']) ? $studInfo['mother_mname'] : '';
-        $mother_lname = isset($studInfo['mother_lname']) ? $studInfo['mother_lname'] : '';
-        $mother_contact = isset($studInfo['mother_contact']) ? $studInfo['mother_contact'] : '';
-        $mother_occupation = isset($studInfo['mother_occupation']) ? $studInfo['mother_occupation'] : '';
+    // Mother's Information
+    $mother_fname = isset($studInfo['mother_fname']) ? $studInfo['mother_fname'] : '';
+    $mother_mname = isset($studInfo['mother_mname']) ? $studInfo['mother_mname'] : '';
+    $mother_lname = isset($studInfo['mother_lname']) ? $studInfo['mother_lname'] : '';
+    $mother_contact = isset($studInfo['mother_contact']) ? $studInfo['mother_contact'] : '';
+    $mother_occupation = isset($studInfo['mother_occupation']) ? $studInfo['mother_occupation'] : '';
     
-        // Father's Information
-        $father_fname = isset($studInfo['father_fname']) ? $studInfo['father_fname'] : '';
-        $father_mname = isset($studInfo['father_mname']) ? $studInfo['father_mname'] : '';
-        $father_lname = isset($studInfo['father_lname']) ? $studInfo['father_lname'] : '';
-        $father_contact = isset($studInfo['father_contact']) ? $studInfo['father_contact'] : '';
-        $father_occupation = isset($studInfo['father_occupation']) ? $studInfo['father_occupation'] : '';
+    // Father's Information
+    $father_fname = isset($studInfo['father_fname']) ? $studInfo['father_fname'] : '';
+    $father_mname = isset($studInfo['father_mname']) ? $studInfo['father_mname'] : '';
+    $father_lname = isset($studInfo['father_lname']) ? $studInfo['father_lname'] : '';
+    $father_contact = isset($studInfo['father_contact']) ? $studInfo['father_contact'] : '';
+    $father_occupation = isset($studInfo['father_occupation']) ? $studInfo['father_occupation'] : '';
     
-        // Guardian's Information
-        $guardian_fname = isset($studInfo['guardian_fname']) ? $studInfo['guardian_fname'] : '';
-        $guardian_mname = isset($studInfo['guardian_mname']) ? $studInfo['guardian_mname'] : '';
-        $guardian_lname = isset($studInfo['guardian_lname']) ? $studInfo['guardian_lname'] : '';
-        $guardian_contact = isset($studInfo['guardian_contact']) ? $studInfo['guardian_contact'] : '';
+    // Guardian's Information
+    $guardian_fname = isset($studInfo['guardian_fname']) ? $studInfo['guardian_fname'] : '';
+    $guardian_mname = isset($studInfo['guardian_mname']) ? $studInfo['guardian_mname'] : '';
+    $guardian_lname = isset($studInfo['guardian_lname']) ? $studInfo['guardian_lname'] : '';
+    $guardian_contact = isset($studInfo['guardian_contact']) ? $studInfo['guardian_contact'] : '';
     
-        // Educational Information
-        $year_level = isset($studInfo['year_level']) ? $studInfo['year_level'] : '';
-        $first_choice_course_id = isset($studInfo['first_choice_course_id']) ? $studInfo['first_choice_course_id'] : '';
-        $second_choice_course_id = isset($studInfo['second_choice_course_id']) ? $studInfo['second_choice_course_id'] : '';
-        $prev_school = isset($studInfo['prev_school']) ? $studInfo['prev_school'] : '';
-    }
-    // Code for handling CSV file upload and import goes here
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["file"])) {
-        $filename = $_FILES["file"]["tmp_name"];
+    // Educational Information
+    $year_level = isset($studInfo['year_level']) ? $studInfo['year_level'] : '';
+    $first_choice_course_id = isset($studInfo['first_choice_course']) ? $studInfo['first_choice_course'] : '';
+    $second_choice_course_id = isset($studInfo['second_choice_course']) ? $studInfo['second_choice_course'] : '';
 
-        // Check if file is not empty
-        if ($_FILES["file"]["size"] > 0) {
-            $file = fopen($filename, "r");
-            while (($emapData = fgetcsv($file, 10000, ",")) !== FALSE) {
-                // Fetch data from each row of the CSV file
-                $id = isset($emapData[0]) ? $emapData[0] : null;
-                $fname = isset($emapData[1]) ? $emapData[1] : null;
-                $mname = isset($emapData[2]) ? $emapData[2] : null;
-                $lname = isset($emapData[3]) ? $emapData[3] : null;
-                $first_choice_course_id = isset($emapData[4]) ? $emapData[4] : null;
-                $second_choice_course_id = isset($emapData[5]) ? $emapData[5] : null;
-                $year_level = isset($emapData[6]) ? $emapData[6] : null;
-
-                // Insert data into the student_information table
-                $sql = "INSERT INTO student_information (fname, mname, lname, first_choice_course_id, second_choice_course_id, year_level) 
-                        VALUES ('$fname', '$mname', '$lname', '$first_choice_course_id', '$second_choice_course_id', '$year_level')";
-                $result = $conn->query($sql);
-                if (!$result) {
-                    echo "<script type=\"text/javascript\">
-                            alert(\"Error: Unable to import CSV file.\");
-                            window.location = \"students_table.php\";
-                        </script>";
-                    exit; // Exit script on error
-                }
-            fclose($file);
-            }
-    }
-    header('Content-Type: text/csv');
-header('Content-Disposition: attachment; filename="student_information.csv"');
-
-// Output file pointer
-$output = fopen('php://output', 'w');
-
-// Define column headers
-$columns = array(
-    'User ID',
-    'First Name',
-    'Middle Name',
-    'Last Name',
-    'Email Address',
-    'Contact Number',
-    'Present Address',
-    'Citizenship',
-    'Civil Status',
-    'Medical Conditions',
-    'Date of Birth',
-    'Sex Assigned at Birth',
-    'Mother\'s First Name',
-    'Mother\'s Middle Name',
-    'Mother\'s Last Name',
-    'Mother\'s Contact Number',
-    'Mother\'s Occupation',
-    'Father\'s First Name',
-    'Father\'s Middle Name',
-    'Father\'s Last Name',
-    'Father\'s Contact Number',
-    'Father\'s Occupation',
-    'Guardian\'s First Name',
-    'Guardian\'s Middle Name',
-    'Guardian\'s Last Name',
-    'Guardian\'s Contact Number',
-    'Grade/Year Level Applying For',
-    'First Choice Course/Strand',
-    'Second Choice Course/Strand',
-    'Previous School'
-);
-
-// Write column headers to CSV file
-fputcsv($output, $columns);
-
-// Fetch student information
-$id = $studInfo['id'];
-$fname = $studInfo['fname'];
-$mname = $studInfo['mname'];
-$lname = $studInfo['lname'];
-$email = $studInfo['email'];
-$contact_num = $studInfo['contact_num'];
-$address = $studInfo['address'];
-$citizenship = $studInfo['citizenship'];
-$civil_status = $studInfo['civil_status'];
-$med_cond = $studInfo['med_cond'];
-$birthdate = $studInfo['birthdate'];
-$sex = $studInfo['sex'];
-$mother_fname = $studInfo['mother_fname'];
-$mother_mname = $studInfo['mother_mname'];
-$mother_lname = $studInfo['mother_lname'];
-$mother_contact = $studInfo['mother_contact'];
-$mother_occupation = $studInfo['mother_occupation'];
-$father_fname = $studInfo['father_fname'];
-$father_mname = $studInfo['father_mname'];
-$father_lname = $studInfo['father_lname'];
-$father_contact = $studInfo['father_contact'];
-$father_occupation = $studInfo['father_occupation'];
-$guardian_fname = $studInfo['guardian_fname'];
-$guardian_mname = $studInfo['guardian_mname'];
-$guardian_lname = $studInfo['guardian_lname'];
-$guardian_contact = $studInfo['guardian_contact'];
-$year_level = $studInfo['year_level'];
-$first_choice_course_id = $studInfo['first_choice_course_id'];
-$second_choice_course_id = $studInfo['second_choice_course_id'];
-$prev_school = $studInfo['prev_school'];
-
-// Write student information to CSV file
-$data = array(
-    $id,
-    $fname,
-    $mname,
-    $lname,
-    $email,
-    $contact_num,
-    $address,
-    $citizenship,
-    $civil_status,
-    $med_cond,
-    $birthdate,
-    $sex,
-    $mother_fname,
-    $mother_mname,
-    $mother_lname,
-    $mother_contact,
-    $mother_occupation,
-    $father_fname,
-    $father_mname,
-    $father_lname,
-    $father_contact,
-    $father_occupation,
-    $guardian_fname,
-    $guardian_mname,
-    $guardian_lname,
-    $guardian_contact,
-    $year_level,
-    $first_choice_course_id,
-    $second_choice_course_id,
-    $prev_school
-);
-
-// Write data rows to CSV file
-fputcsv($output, $data);
-
-// Close file pointer
-fclose($output);
+    $prev_school = isset($studInfo['prev_school']) ? $studInfo['prev_school'] : '';
 }
 ?>
     <div class="row">
-        <div class="col">
-            <h1>Student Info</h1>
-        </div>
-        <div class="col-auto">
-            <a class="btn btn-secondary" href="/system/students" role="button">Back</a>
-        </div>
+    <div class="col">
+        <h1>Student Info</h1>
     </div>
+    <div class="col-auto">
+        <a class="btn btn-secondary" href="/system/students" role="button">Back</a>
+    </div>
+    </div>
+
+
     <section>
     <h2>Student Information</h2>
     <ul class="list-group">
-    <li class="list-group-item"><b>User ID</b>: <?= $studInfo['id']; ?></li>
+    <li class="list-group-item"><b>ID</b>: <?= $studInfo['id']; ?></li>
         <li class="list-group-item"><b>First Name</b>: <?= isset($studInfo['fname']) ? $studInfo['fname'] : '' ?></li>
         <li class="list-group-item"><b>Middle Name</b>: <?= isset($studInfo['mname']) ? $studInfo['mname'] : '' ?></li>
         <li class="list-group-item"><b>Last Name</b>: <?= isset($studInfo['lname']) ? $studInfo['lname'] : '' ?></li>
@@ -251,9 +111,7 @@ fclose($output);
         <li class="list-group-item"><b>Present Address</b>: <?= isset($studInfo['address']) ? $studInfo['address'] : '' ?></li>
         <li class="list-group-item"><b>Citizenship</b>: <?= isset($studInfo['citizenship']) ? $studInfo['citizenship'] : '' ?></li>
         <li class="list-group-item"><b>Civil Status</b>: <?= isset($studInfo['civil_status']) ? $studInfo['civil_status'] : '' ?></li>
-        <?php if (isset($studInfo['relationship_status'])): ?>
-            <li class="list-group-item"><b>Relationship Status</b>: <?= $studInfo['relationship_status'] ?></li>
-        <?php endif; ?>
+
         <?php if (isset($studInfo['occupation'])): ?>
             <li class="list-group-item"><b>Occupation</b>: <?= $studInfo['occupation'] ?></li>
         <?php endif; ?>
@@ -279,8 +137,8 @@ fclose($output);
         <li class="list-group-item"><b>Contact Number</b>: <?= $studInfo['guardian_contact'] ?></li>
         <li class="list-group-item"><h3>Educational Information</h3></li>
         <li class="list-group-item"><b>Grade/Year Level Applying For</b>: <?= $studInfo['year_level'] ?></li>
-        <li class="list-group-item"><b>First Choice Course/Strand</b>: <?= $studInfo['first_choice_course_id'] ?></li>
-        <li class="list-group-item"><b>Second Choice Course/Strand</b>: <?= $studInfo['second_choice_course_id'] ?></li>
+        <li class="list-group-item"><b>First Choice Course/Strand</b>: <?= $studInfo['first_choice_course'] ?></li>
+        <li class="list-group-item"><b>Second Choice Course/Strand</b>: <?= $studInfo['second_choice_course'] ?></li>
         <li class="list-group-item"><b>Previous School</b>: <?= $studInfo['prev_school'] ?></li>
     </ul>
 </section>

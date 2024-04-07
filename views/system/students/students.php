@@ -1,4 +1,6 @@
 <?php
+require_once 'utils.php';
+require_once 'actions/db.php';
 $queryParams = getQueryParams();
 ?>
 

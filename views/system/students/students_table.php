@@ -1,6 +1,5 @@
 <?php
-require_once 'utils.php';
-require_once 'actions/db.php';
+
 if (!isset($queryParams['id']) && !isset($queryParams['page'])) {
     header("Location: /system/students?page=1");
     $currentPage = 1;
@@ -15,13 +14,17 @@ $offset = ($currentPage - 1) * $recordsPerPage;
 // fetch data from the database
 $conn = getConn();
 $sql = "
-    SELECT si.id, si.fname, si.mname, si.lname, fc.name AS first_choice, sc.name AS second_choice, si.year_level 
+    SELECT si.id, si.fname, si.mname, si.lname, si.email, si.contact_num, si.address, si.citizenship, si.civil_status,
+           si.med_cond, si.birthdate, si.sex, si.mother_fname, si.mother_mname, si.mother_lname, si.mother_contact,
+           si.mother_occupation, si.father_fname, si.father_mname, si.father_lname, si.father_contact, si.father_occupation,
+           si.guardian_fname, si.guardian_mname, si.guardian_lname, si.guardian_contact, si.year_level,
+           fc.name AS first_choice_course, sc.name AS second_choice_course, si.prev_school
     FROM student_information si
     LEFT JOIN courses fc ON si.first_choice_course_id = fc.id
     LEFT JOIN courses sc ON si.second_choice_course_id = sc.id
-    LIMIT $recordsPerPage 
-    OFFSET $offset
-    ";
+    LIMIT $offset, $recordsPerPage
+";
+
 $result = $conn->query($sql);
 
 // Table pagination logic
@@ -51,8 +54,8 @@ $totalPages = ceil($totalrecords / $recordsPerPage);
                     <td scope="row"><?= $row['id']; ?></td>
                     <td scope="row"><?= "{$row['fname']} {$row['mname']} {$row['lname']}"; ?></td>
                     <td scope="row"><?= $row['year_level']; ?></td>
-                    <td scope="row"><?= $row['first_choice']; ?></td>
-                    <td scope="row"><?= $row['second_choice']; ?></td>
+                    <td scope="row"><?= $row['second_choice_course']; ?></td>
+                    <td scope="row"><?= $row['first_choice_course']; ?></td>
                     <td><a class="btn btn-primary d-inline" href=<?= "/system/students?id={$row['id']}" ?> role="button">info</a></td>
                 </tr>
             <?php endwhile ?>
@@ -69,8 +72,8 @@ $totalPages = ceil($totalrecords / $recordsPerPage);
                     </a>
                 </li>
 
-                <?php for ($i = 1; $i < $totalPages + 1; $i++) : ?>
-                    <li class="page-item"><a class="<?= "page-link" . ($i == $currentPage ? " active" : ""); ?>" href=<?= "/system/students?page=$currentPage"; ?>><?= $i ?></a></li>
+                <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+                    <li class="page-item"><a class="<?= "page-link" . ($i == $currentPage ? " active" : ""); ?>" href=<?= "/system/students?page=$i"; ?>><?= $i ?></a></li>
                 <?php endfor ?>
 
 
