@@ -54,7 +54,10 @@ ob_start();
                         break;
                     case '/import':
                         require_once 'views/system/students/import.php';
-                            break;
+                        break;
+                    case '/users/delete':
+                        require_once 'views/system/users/delete.php';
+                        break;
                     default:
                         require_once 'views/system/dashboard.php';
                         break;

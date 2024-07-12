@@ -26,6 +26,8 @@ $routes = [
     '/system/users' => 'controllers/system.php',
     '/system/download'=> 'controllers/system.php',
     '/system/import'=> 'controllers/system.php',
+    '/system/users/delete' => 'controllers/system.php',
+
 ];
 
 if (array_key_exists($path, $routes)) {
