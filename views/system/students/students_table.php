@@ -43,7 +43,7 @@ $totalPages = ceil($totalrecords / $recordsPerPage);
                 <th scope="col">Year Level</th>
                 <th scope="col">Second Choice Course</th>
                 <th scope="col">First Choice Course</th>
-                <th scope="col">Info</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
 
@@ -56,7 +56,9 @@ $totalPages = ceil($totalrecords / $recordsPerPage);
                     <td scope="row"><?= $row['year_level']; ?></td>
                     <td scope="row"><?= $row['second_choice_course']; ?></td>
                     <td scope="row"><?= $row['first_choice_course']; ?></td>
-                    <td><a class="btn btn-primary d-inline" href=<?= "/system/students?id={$row['id']}" ?> role="button">info</a></td>
+                    <td><a class="btn btn-primary d-inline" href=<?= "/system/students?id={$row['id']}" ?> role="button">info</a>
+                        <a class="btn btn-danger" href="/system/students/delete_students?id=<?= $row['id'] ?>" role="button" onclick="return confirm('Are you sure you want to delete this student?')">Delete</a>
+                    </td>
                 </tr>
             <?php endwhile ?>
         </tbody>

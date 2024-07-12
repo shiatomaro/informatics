@@ -4,5 +4,5 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)$ index.php?route=$1 [QSA,L]
     RewriteRule ^system/users/delete(\?id=\d+)?$ /system/users/delete.php [L,QSA]
-
+    RewriteRule ^system/students/delete/(\d+)$ /system/students/delete.php?id=$1 [L,QSA]
 </IfModule>
