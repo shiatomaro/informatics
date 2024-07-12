@@ -37,7 +37,7 @@ $totalPages = ceil($totalrecords / $recordsPerPage);
                 <th scope="col">Code</th>
                 <th scope="col">Name</th>
                 <th scope="col">Status</th>
-                <th scope="col"></th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -46,7 +46,9 @@ $totalPages = ceil($totalrecords / $recordsPerPage);
                     <td scope="row"><?= $row['code'] ?></td>
                     <td><?= $row['name'] ?></td>
                     <td><?= $row['status'] ?></td>
-                    <td><a class="btn btn-primary d-inline" href=<?= "/system/courses?id={$row['id']}" ?> role="button">Edit</a>
+                    <td>
+                        <a class="btn btn-primary d-inline" href=<?= "/system/courses?id={$row['id']}" ?> role="button">Edit</a>
+                        <a class="btn btn-danger d-inline" href=<?= "/system/courses/delete_course?id={$row['id']}" ?> role="button" onclick="return confirm('Are you sure you want to delete this course?')">Delete</a>
                     </td>
                 </tr>
             <?php endwhile ?>
@@ -64,7 +66,7 @@ $totalPages = ceil($totalrecords / $recordsPerPage);
                 </li>
 
                 <?php for ($i = 1; $i < $totalPages + 1; $i++) : ?>
-                    <li class="page-item"><a class="<?= "page-link" . ($i == $currentPage ? " active" : ""); ?>" href=<?= "/system/courses?page=$currentPage"; ?>><?= $i ?></a></li>
+                    <li class="page-item"><a class="<?= "page-link" . ($i == $currentPage ? " active" : ""); ?>" href=<?= "/system/courses?page=$i"; ?>><?= $i ?></a></li>
                 <?php endfor ?>
 
 

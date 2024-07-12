@@ -5,4 +5,5 @@
     RewriteRule ^(.*)$ index.php?route=$1 [QSA,L]
     RewriteRule ^system/users/delete(\?id=\d+)?$ /system/users/delete.php [L,QSA]
     RewriteRule ^system/students/delete/(\d+)$ /system/students/delete.php?id=$1 [L,QSA]
+    RewriteRule ^system/courses/delete/(\d+)$ /system/courses/delete.php?id=$1 [L,QSA]
 </IfModule>

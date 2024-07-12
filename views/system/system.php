@@ -61,6 +61,9 @@ ob_start();
                     case '/students/delete_students':
                         require_once 'views/system/students/delete_students.php';
                         break;
+                    case '/courses/delete_course':
+                        require_once 'views/system/courses/delete_course.php';
+                        break;
                     default:
                         require_once 'views/system/dashboard.php';
                         break;

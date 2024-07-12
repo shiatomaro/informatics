@@ -28,7 +28,7 @@ $routes = [
     '/system/import'=> 'controllers/system.php',
     '/system/users/delete' => 'controllers/system.php',
     '/system/students/delete_students' => 'controllers/system.php',
-
+    '/system/courses/delete_course' => 'controllers/system.php',
 ];
 
 if (array_key_exists($path, $routes)) {
